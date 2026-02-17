@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSTRABOT 5em1 v5.2 - Apostila Completa para Professores</title>
+    <style>
+        @page { size: A4; margin: 1.5cm; }
+        * { box-sizing: border-box; }
+        :root {
+            --primary: #1a5276;
+            --secondary: #2874a6;
+            --accent: #3498db;
+            --bg-light: #f8f9fa;
+            --border: #dee2e6;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        nav {
+            width: 280px;
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        nav h2 {
+            color: white;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        nav a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            display: block;
+            padding: 8px 10px;
+            margin: 2px 0;
+            border-radius: 5px;
+            font-size: 10pt;
+        }
+        nav a:hover { background: rgba(255,255,255,0.2); }
+        main {
+            margin-left: 300px;
+            padding: 30px 40px;
+            background: white;
+            min-height: 100vh;
+            flex: 1;
+        }
+        h1 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            font-size: 24pt;
+            margin-top: 40px;
+        }
+        h1:first-of-type { margin-top: 0; }
+        h2 {
+            color: var(--secondary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            font-size: 16pt;
+            margin-top: 30px;
+        }
+        h3 {
+            color: var(--accent);
+            font-size: 13pt;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+        tr:nth-child(even) { background: #fafafa; }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+            font-size: 10pt;
+            color: #c7254e;
+        }
+        .box {
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            background: var(--bg-light);
+        }
+        .box-warning {
+            border-color: var(--warning);
+            background: #fff3cd;
+        }
+        .box-danger {
+            border-color: var(--danger);
+            background: #f8d7da;
+        }
+        .box-success {
+            border-color: var(--success);
+            background: #d4edda;
+        }
+        .box-info {
+            border-color: var(--accent);
+            background: #d1ecf1;
+        }
+        .diagram {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+            line-height: 1.3;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .header-banner {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header-banner h1 {
+            color: white;
+            border: none;
+            font-size: 28pt;
+            margin: 0;
+        }
+        .header-banner p {
+            margin: 10px 0 0 0;
+            font-size: 12pt;
+            opacity: 0.9;
+        }
+        .signal-table td:first-child {
+            font-weight: bold;
+            width: 40%;
+        }
+        @media print {
+            nav { display: none; }
+            main { margin-left: 0; }
+            h1 { page-break-before: always; }
+            h1:first-of-type { page-break-before: avoid; }
+            .box, pre { page-break-inside: avoid; }
+        }
+        @media (max-width: 900px) {
+            nav { display: none; }
+            main { margin-left: 0; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2>INDICE</h2>
+    <a href="#intro">1. Introducao</a>
+    <a href="#hardware">2. Hardware</a>
+    <a href="#sinais">3. Sinais LED/Buzzer</a>
+    <a href="#primeiros-passos">4. Primeiros Passos</a>
+    <a href="#movimento">5. Comandos Movimento</a>
+    <a href="#led">6. Comandos LED</a>
+    <a href="#servo">7. Comandos Servo</a>
+    <a href="#buzzer">8. Comando Buzzer</a>
+    <a href="#linha">9. Sensor de Linha</a>
+    <a href="#ultra">10. Sensor Ultrassonico</a>
+    <a href="#controle">11. Estruturas de Controle</a>
+    <a href="#condicoes">12. Condicoes SE</a>
+    <a href="#calibracao">13. Calibracao Motores</a>
+    <a href="#velocidades">14. Velocidades</a>
+    <a href="#personalizado">15. Velocidades EEPROM</a>
+    <a href="#protecoes">16. Protecoes Firmware</a>
+    <a href="#referencia">17. Referencia Rapida</a>
+    <a href="#exemplos">18. Exemplos Praticos</a>
+    <a href="#problemas">19. Resolucao Problemas</a>
+    <a href="#glossario">20. Glossario</a>
+</nav>
+
+<main>
+    <div class="header-banner">
+        <h1>MOSTRABOT 5em1 v5.2 BETA</h1>
+        <p>Apostila Completa para Professores - EJR Robotica Educacional</p>
+        <p style="font-size:10pt; margin-top:20px;">Plataforma Jabuti Edu (PJE) | Fevereiro 2026</p>
+    </div>
+
+    <!-- SECAO 1 -->
+    <h1 id="intro">1. Introducao ao MostraBot</h1>
+
+    <h2>O que e o MostraBot?</h2>
+    <p>O <strong>MostraBot</strong> e um robo educacional desenvolvido pela <strong>EJR Robotica Educacional</strong> especialmente para uso em salas de aula. Ele foi projetado para ensinar programacao e robotica de forma progressiva, do mais simples ao mais complexo.</p>
+
+    <h2>A Plataforma PJE Nuvem</h2>
+    <p>O MostraBot funciona conectado a <strong>Plataforma Jabuti Edu (PJE) Nuvem</strong>:</p>
+    <div class="diagram">
+   PROFESSOR/ALUNO                        MOSTRABOT
+   +--------------+                       +--------------+
+   |   Digita     |    Internet           |   Executa    |
+   |  comandos    | --------------------> |   comandos   |
+   |   na PJE     |                       |  no robo     |
+   +--------------+                       +--------------+
+         |                                     ^
+         v                                     |
+   +--------------+                            |
+   |  PJE NUVEM   |----------------------------+
+   |  (servidor)  |       WiFi
+   +--------------+
+    </div>
+    <p>O professor ou aluno digita comandos no navegador, e o robo executa automaticamente!</p>
+
+    <h2>Progressao Pedagogica</h2>
+    <div class="diagram">
+  INICIANTE          INTERMEDIARIO           AVANCADO
+  (Modulos 1-3)      (Modulo 4 Linha)        (Modulo 4 Ultra)
+
+  +---------+        +-------------+         +--------------+
+  | Controle|  -->   |  Seguidor   |   -->   |  Navegacao   |
+  | Direto  |        |  de Linha   |         |  Autonoma    |
+  +---------+        +-------------+         +--------------+
+
+  "Anda para         "Segue uma             "Explora o
+   frente!"           linha preta"           ambiente sozinho"
+    </div>
+
+    <!-- SECAO 2 -->
+    <h1 id="hardware">2. Conhecendo o Hardware</h1>
+
+    <h2>O Microcontrolador</h2>
+    <p>O MostraBot usa o <strong>Wemos D1 Mini</strong>, uma placa baseada no chip ESP8266 com WiFi integrado.</p>
+
+    <h2>Mapa dos Componentes</h2>
+    <div class="diagram">
+            +--------------------------------------------+
+            |           FRENTE DO ROBO                   |
+            |                                            |
+            |         +----------------+                 |
+            |         |     GARRA      |                 |
+            |         | (Servo1+Servo2)|                 |
+            |         +----------------+                 |
+            |                |                           |
+            |         +------+------+                    |
+            |         |   SENSOR    |                    |
+            |         | ULTRASSONICO|                    |
+            |         |   (Olhos)   |                    |
+            |         +-------------+                    |
+            |                                            |
+            |    LED           LED                       |
+            |  Esquerdo      Direito                     |
+            |    (D8)         (D3)                       |
+            |                                            |
+            +--------------------------------------------+
+            |                                            |
+            |   +-----+              +-----+             |
+            |   |Motor|              |Motor|             |
+            |   |  1  |              |  2  |             |
+            |   |(ESQ)|              |(DIR)|             |
+            |   +-----+              +-----+             |
+            |      |                   |                 |
+            |     ooo                 ooo                |
+            |    RODAS               RODAS               |
+            +--------------------------------------------+
+                        TRASEIRA DO ROBO
+    </div>
+
+    <h2>Tabela de Pinagem Completa</h2>
+    <table>
+        <tr><th>Componente</th><th>Pino</th><th>GPIO</th><th>Funcao</th></tr>
+        <tr><td>Motor 1 Frente</td><td>D0</td><td>GPIO16</td><td>Roda esquerda para frente</td></tr>
+        <tr><td>Motor 1 Re</td><td>D5</td><td>GPIO14</td><td>Roda esquerda para tras</td></tr>
+        <tr><td>Motor 2 Frente</td><td>D1</td><td>GPIO5</td><td>Roda direita para frente</td></tr>
+        <tr><td>Motor 2 Re</td><td>D4</td><td>GPIO2</td><td>Roda direita para tras</td></tr>
+        <tr><td>Servo 1</td><td>D6</td><td>GPIO12</td><td>Garra (servo esquerdo)</td></tr>
+        <tr><td>Servo 2</td><td>D7</td><td>GPIO13</td><td>Garra (servo direito)</td></tr>
+        <tr><td>D3 (Compartilhado)</td><td>D3</td><td>GPIO0</td><td>Ultra TRIG / Linha Dir / LED Dir</td></tr>
+        <tr><td>D8 (Compartilhado)</td><td>D8</td><td>GPIO15</td><td>Ultra ECHO / Linha Esq / LED Esq</td></tr>
+        <tr><td>LED/Buzzer</td><td>D2</td><td>GPIO4</td><td>LED externo e buzina</td></tr>
+    </table>
+
+    <div class="box box-danger">
+        <h3>ATENCAO PROFESSOR!</h3>
+        <p>Os pinos D3 e D8 sao <strong>COMPARTILHADOS</strong> e sao pinos de <strong>BOOT</strong> do ESP8266!</p>
+        <ol>
+            <li>Os sensores devem estar <strong>DESCONECTADOS</strong> ao ligar o robo</li>
+            <li>Conecte os sensores <strong>SOMENTE</strong> depois do robo conectar ao WiFi</li>
+            <li>O robo sempre inicia em modo <strong>SENSOR OFF</strong></li>
+        </ol>
+        <p><strong>Na pratica:</strong> Ligue o robo, espere os 3 bipes, depois conecte os sensores</p>
+    </div>
+
+    <!-- SECAO 3 -->
+    <h1 id="sinais">3. Sinais Visuais e Sonoros do Robo</h1>
+
+    <p>Esta e uma das secoes mais importantes! O robo "fala" com voce atraves de LEDs e sons.</p>
+
+    <h2>Sequencia de Boot</h2>
+    <div class="diagram">
+  PASSO 1: Liga o robo
+           |
+           v
+  PASSO 2: LED pisca alternadamente (conectando WiFi)
+           * o * o * o * o * o * o  (a cada 500ms)
+           |
+           v
+  PASSO 3: Conexao bem-sucedida?
+           |
+     +-----+-----+
+     |           |
+     v           v
+   SIM          NAO
+     |           |
+     v           v
+  LED pisca    LED pisca
+  3 vezes      10 vezes
+  (lento)      (rapido)
+     |
+     v
+  PASSO 4: Sons de confirmacao (3 bipes ascendentes)
+
+  BIPE 1: Tom baixo   (2000 Hz por 200ms)
+  BIPE 2: Tom medio   (2500 Hz por 200ms)
+  BIPE 3: Tom alto    (3000 Hz por 200ms)
+     |
+     v
+  PASSO 5: Robo esta online e pronto!
+    </div>
+
+    <h2>Resumo de Todos os Sinais</h2>
+    <table class="signal-table">
+        <tr><th>SINAL</th><th>SIGNIFICADO</th></tr>
+        <tr><td>LED pisca alternado (500ms)</td><td>Conectando ao WiFi...</td></tr>
+        <tr><td>LED pisca 3x lento</td><td>WiFi conectado com sucesso!</td></tr>
+        <tr><td>LED pisca 10x rapido</td><td>Falha na conexao WiFi</td></tr>
+        <tr><td>3 bipes ascendentes</td><td>Boot completo, pronto!</td></tr>
+        <tr><td>LED pisca 1x a cada 3s</td><td>Heartbeat - robo saudavel</td></tr>
+        <tr><td>LED aceso continuo</td><td>Executando comandos</td></tr>
+        <tr><td>LED pisca rapido (300ms)</td><td>Perdeu conexao, tentando reconectar</td></tr>
+        <tr><td>LED pisca 3x rapido</td><td>Erro ao buscar comandos da PJE</td></tr>
+    </table>
+
+    <div class="box box-info">
+        <h3>LED de Heartbeat (Batimento Cardiaco)</h3>
+        <p>Quando o robo esta conectado e funcionando normalmente, o LED pisca <strong>UMA VEZ</strong> a cada <strong>3 segundos</strong>. Isso indica que o robo esta conectado e saudavel!</p>
+    </div>
+
+    <!-- SECAO 4 -->
+    <h1 id="primeiros-passos">4. Primeiros Passos</h1>
+
+    <h2>Checklist Pre-Operacao</h2>
+    <div class="box">
+        <ul>
+            <li>[ ] Bateria carregada (ou fonte conectada)</li>
+            <li>[ ] Sensores de linha DESCONECTADOS</li>
+            <li>[ ] Sensor ultrassonico DESCONECTADO</li>
+            <li>[ ] Area livre de obstaculos perigosos</li>
+            <li>[ ] Rede WiFi disponivel e funcionando</li>
+            <li>[ ] Acesso a plataforma PJE no navegador</li>
+        </ul>
+    </div>
+
+    <h2>Passo a Passo</h2>
+    <ol>
+        <li><strong>Ligue o robo</strong> - Pressione o botao de energia. Observe o LED comecar a piscar.</li>
+        <li><strong>Aguarde a conexao WiFi</strong> - O LED pisca por ate 15 segundos.</li>
+        <li><strong>Confirme a conexao</strong> - SUCESSO: 3 piscas lentas + 3 bipes. FALHA: 10 piscas rapidas.</li>
+        <li><strong>Conecte os sensores</strong> - SOMENTE apos os 3 bipes.</li>
+        <li><strong>Acesse a PJE</strong> - pje.ejrrobotica.com.br</li>
+        <li><strong>Teste basico</strong> - Digite: <code>pf 500</code></li>
+    </ol>
+
+    <!-- SECAO 5 -->
+    <h1 id="movimento">5. Comandos de Movimento</h1>
+
+    <h2>Os 4 Comandos Basicos</h2>
+    <div class="diagram">
+                          ^
+                          |
+                     +---------+
+                     |   PF    |  PF = Para Frente
+                     | FRENTE  |
+                     +---------+
+
+            &lt;--------------+--------------&gt;
+       +---------+         |         +---------+
+       |   PE    |         |         |   PD    |
+       |ESQUERDA |         |         | DIREITA |
+       +---------+         |         +---------+
+                           |
+                     +---------+
+                     |   PT    |  PT = Para Tras
+                     |  TRAS   |
+                     +---------+
+                           |
+                           v
+    </div>
+
+    <h2>Sintaxe</h2>
+    <pre>COMANDO &lt;tempo_em_milissegundos&gt;</pre>
+
+    <h2>Exemplos</h2>
+    <table>
+        <tr><th>Comando</th><th>Significado</th><th>Duracao</th></tr>
+        <tr><td><code>pf 1000</code></td><td>Anda para frente</td><td>1 segundo</td></tr>
+        <tr><td><code>pf 500</code></td><td>Anda para frente</td><td>0.5 segundos</td></tr>
+        <tr><td><code>pt 1000</code></td><td>Anda para tras</td><td>1 segundo</td></tr>
+        <tr><td><code>pd 200</code></td><td>Gira para direita</td><td>~90 graus</td></tr>
+        <tr><td><code>pe 200</code></td><td>Gira para esquerda</td><td>~90 graus</td></tr>
+        <tr><td><code>pf</code></td><td>Anda para frente</td><td>120ms (padrao)</td></tr>
+    </table>
+
+    <h2>Referencia de Angulos de Giro</h2>
+    <table>
+        <tr><th>Angulo</th><th>Tempo</th><th>Comando</th></tr>
+        <tr><td>45 graus</td><td>~110ms</td><td><code>pd 110</code> ou <code>pe 110</code></td></tr>
+        <tr><td>90 graus</td><td>~200-220ms</td><td><code>pd 200</code> ou <code>pe 200</code></td></tr>
+        <tr><td>180 graus</td><td>~440ms</td><td><code>pd 440</code> ou <code>pe 440</code></td></tr>
+        <tr><td>360 graus</td><td>~880ms</td><td><code>pd 880</code> ou <code>pe 880</code></td></tr>
+    </table>
+
+    <!-- SECAO 6 -->
+    <h1 id="led">6. Comandos de LED (Olhos)</h1>
+
+    <table>
+        <tr><th>Comando</th><th>Descricao</th><th>Pino</th></tr>
+        <tr><td><code>ld &lt;ms&gt;</code></td><td>Pisca LED direito</td><td>D3</td></tr>
+        <tr><td><code>le &lt;ms&gt;</code></td><td>Pisca LED esquerdo</td><td>D8</td></tr>
+        <tr><td><code>lde &lt;ms&gt;</code></td><td>Pisca AMBOS LEDs</td><td>D3+D8</td></tr>
+    </table>
+
+    <div class="box box-warning">
+        <h3>ATENCAO!</h3>
+        <p>Os LEDs D3 e D8 compartilham os pinos com os sensores! Antes de usar comandos de LED, execute: <code>sensor off</code></p>
+    </div>
+
+    <!-- SECAO 7 -->
+    <h1 id="servo">7. Comandos de Servo (Garra)</h1>
+
+    <table>
+        <tr><th>Comando</th><th>Descricao</th><th>Angulo</th></tr>
+        <tr><td><code>bc</code></td><td>Baixar/Fechar garra</td><td>10 graus</td></tr>
+        <tr><td><code>sc</code></td><td>Subir/Abrir garra</td><td>170 graus</td></tr>
+        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Controle fino servo 1</td><td>0-180 graus</td></tr>
+        <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Controle fino servo 2</td><td>0-180 graus</td></tr>
+    </table>
+
+    <h3>Exemplo: Pegar objeto</h3>
+    <pre>sc              # Abre a garra
+pf 500          # Aproxima do objeto
+bc              # Fecha a garra
+pt 500          # Recua com o objeto</pre>
+
+    <!-- SECAO 8 -->
+    <h1 id="buzzer">8. Comando de Buzzer (Som)</h1>
+
+    <pre>bu &lt;tempo_em_ms&gt;</pre>
+    <p>Frequencia: <strong>2000 Hz</strong> | Padrao: <strong>800ms</strong></p>
+
+    <!-- SECAO 9 -->
+    <h1 id="linha">9. Sensor Seguidor de Linha</h1>
+
+    <h2>Como Funciona</h2>
+    <div class="diagram">
+                      SENSORES IR
+                    +-----+-----+
+                    | ESQ | DIR |
+                    | D8  | D3  |
+                    +--+--+--+--+
+                       |     |
+                       v     v
+   ==============+===========+=================
+   BRANCO        |   LINHA   |    BRANCO
+                 |   PRETA   |
+   ==============+===========+=================
+
+   A linha deve passar ENTRE os dois sensores!
+    </div>
+
+    <h2>Ativando</h2>
+    <pre>sensor linha
+repita 50
+  seguir-linha 100
+fim repita
+sensor off</pre>
+
+    <!-- SECAO 10 -->
+    <h1 id="ultra">10. Sensor Ultrassonico</h1>
+
+    <h2>Modos de Navegacao</h2>
+    <table>
+        <tr><th>Comando</th><th>Descricao</th><th>Publico</th></tr>
+        <tr><td><code>seguir-ultra-agil</code></td><td>Modo RAPIDO</td><td>Criancas 5-7 anos</td></tr>
+        <tr><td><code>seguir-ultra-inteligente</code></td><td>Modo COGNITIVO</td><td>Demonstracoes</td></tr>
+        <tr><td><code>seguir-ultra-memoria</code></td><td>Modo com MEMORIA</td><td>Padroes previsiveis</td></tr>
+        <tr><td><code>seguir-ultra-hibrido</code></td><td>Modo HIBRIDO</td><td>Melhor dos dois mundos</td></tr>
+        <tr><td><code>seguir-ultra</code></td><td>Alias para agil</td><td>Compatibilidade</td></tr>
+    </table>
+
+    <h2>Exemplo</h2>
+    <pre>sensor ultra
+repita 10
+  seguir-ultra-agil 3000
+fim repita
+parar-ultra
+sensor off</pre>
+
+    <!-- SECAO 11 -->
+    <h1 id="controle">11. Estruturas de Controle</h1>
+
+    <h2>REPITA (Loop)</h2>
+    <pre>repita &lt;N&gt;
+  &lt;comandos&gt;
+fim repita</pre>
+    <p><strong>Maximo:</strong> 3 niveis de aninhamento</p>
+
+    <h2>SE (Condicional)</h2>
+    <pre>se &lt;condicao&gt;
+  &lt;comandos&gt;
+fim se</pre>
+
+    <!-- SECAO 12 -->
+    <h1 id="condicoes">12. Condicoes para o Comando SE</h1>
+
+    <h2>Condicoes de Linha</h2>
+    <table>
+        <tr><th>Condicao</th><th>Significado</th></tr>
+        <tr><td><code>sensord</code></td><td>Sensor DIREITO na linha (preto)</td></tr>
+        <tr><td><code>nsensord</code></td><td>Sensor DIREITO no branco</td></tr>
+        <tr><td><code>sensore</code></td><td>Sensor ESQUERDO na linha (preto)</td></tr>
+        <tr><td><code>nsensore</code></td><td>Sensor ESQUERDO no branco</td></tr>
+        <tr><td><code>linhaok</code></td><td>AMBOS no branco (centralizado)</td></tr>
+        <tr><td><code>perdeu</code></td><td>AMBOS na linha (cruzamento)</td></tr>
+    </table>
+
+    <h2>Condicoes de Ultrassom</h2>
+    <table>
+        <tr><th>Condicao</th><th>Significado</th></tr>
+        <tr><td><code>dist X</code></td><td>Distancia &lt;= X cm (obstaculo proximo)</td></tr>
+        <tr><td><code>distm X</code></td><td>Distancia &gt;= X cm (caminho livre)</td></tr>
+    </table>
+
+    <!-- SECAO 13 -->
+    <h1 id="calibracao">13. Calibracao dos Motores</h1>
+
+    <div class="box box-info">
+        <h3>Por que Calibrar?</h3>
+        <p>Cada motor tem caracteristicas ligeiramente diferentes. Sem calibracao, o robo pode desviar para um lado ao andar em linha reta.</p>
+    </div>
+
+    <h2>Comandos</h2>
+    <table>
+        <tr><th>Comando</th><th>Descricao</th></tr>
+        <tr><td><code>atrasar_mote &lt;valor&gt;</code></td><td>Reduz forca do motor ESQUERDO</td></tr>
+        <tr><td><code>atrasar_motd &lt;valor&gt;</code></td><td>Reduz forca do motor DIREITO</td></tr>
+    </table>
+
+    <h2>Procedimento</h2>
+    <ol>
+        <li>Execute <code>pf 3000</code> e observe para qual lado desvia</li>
+        <li>Se desvia para <strong>DIREITA</strong>: use <code>atrasar_mote 30</code></li>
+        <li>Se desvia para <strong>ESQUERDA</strong>: use <code>atrasar_motd 30</code></li>
+        <li>Teste novamente e ajuste o valor (10-100)</li>
+        <li>A calibracao e salva automaticamente na EEPROM!</li>
+    </ol>
+
+    <!-- SECAO 14 -->
+    <h1 id="velocidades">14. Configuracao de Velocidades</h1>
+
+    <h2>Tres Velocidades Independentes</h2>
+    <table>
+        <tr><th>Variavel</th><th>Afeta</th><th>Padrao</th></tr>
+        <tr><td>pwmPadrao</td><td>PF, PT, PD, PE</td><td>750</td></tr>
+        <tr><td>pwmLinha</td><td>seguir-linha</td><td>750</td></tr>
+        <tr><td>pwmUltra</td><td>seguir-ultra-*</td><td>750</td></tr>
+    </table>
+
+    <h2>Comandos Temporarios</h2>
+    <table>
+        <tr><th>Comando</th><th>Descricao</th></tr>
+        <tr><td><code>define_vel &lt;valor&gt;</code></td><td>Define velocidade geral</td></tr>
+        <tr><td><code>define_vel_linha &lt;valor&gt;</code></td><td>Define velocidade linha</td></tr>
+        <tr><td><code>define_vel_ultra &lt;valor&gt;</code></td><td>Define velocidade ultra</td></tr>
+    </table>
+
+    <div class="box">
+        <h3>Escala de Velocidade PWM</h3>
+        <p><strong>280</strong> (MINIMO) --- <strong>500</strong> (LENTO) --- <strong>750</strong> (MEDIO/padrao) --- <strong>900</strong> (RAPIDO) --- <strong>1023</strong> (MAXIMO)</p>
+    </div>
+
+    <!-- SECAO 15 -->
+    <h1 id="personalizado">15. Velocidades Personalizadas (EEPROM)</h1>
+
+    <h2>Comandos Permanentes</h2>
+    <table>
+        <tr><th>Comando</th><th>Descricao</th></tr>
+        <tr><td><code>define_personalizado &lt;valor&gt;</code></td><td>Salva velocidade geral na EEPROM</td></tr>
+        <tr><td><code>define_personalizado_linha &lt;valor&gt;</code></td><td>Salva velocidade linha na EEPROM</td></tr>
+        <tr><td><code>define_personalizado_ultra &lt;valor&gt;</code></td><td>Salva velocidade ultra na EEPROM</td></tr>
+        <tr><td><code>reset_personalizado</code></td><td>Restaura todos os padroes</td></tr>
+    </table>
+
+    <!-- SECAO 16 -->
+    <h1 id="protecoes">16. Protecoes do Firmware</h1>
+
+    <table>
+        <tr><th>#</th><th>Protecao</th><th>Descricao</th></tr>
+        <tr><td>1</td><td>Back EMF Protection</td><td>Delay 100ms apos parar motores</td></tr>
+        <tr><td>2</td><td>Kickstart System</td><td>Pulso PWM 900 por 40ms para vencer inercia</td></tr>
+        <tr><td>3</td><td>PWM Clamping</td><td>Limita PWM entre 280 e 1023</td></tr>
+        <tr><td>4</td><td>Watchdog Feed</td><td>yield() evita reset por timeout</td></tr>
+        <tr><td>5</td><td>Boot Pin Protection</td><td>D3/D8 iniciam como OUTPUT LOW</td></tr>
+        <tr><td>6</td><td>HTTP Timeout</td><td>2 segundos maximo para requisicoes</td></tr>
+        <tr><td>7</td><td>Median Filter</td><td>Mediana de 5-7 amostras do ultrassom</td></tr>
+        <tr><td>8</td><td>EEPROM Validation</td><td>Valida dados antes de usar</td></tr>
+        <tr><td>9</td><td>Shoot-Through Prevention</td><td>Pinos LOW antes de mudar direcao</td></tr>
+        <tr><td>10</td><td>Stack Overflow Prevention</td><td>MAX_REPITAS=3, MAX_COMANDOS=60</td></tr>
+        <tr><td>11</td><td>Default Safe Values</td><td>Valores padrao para todos parametros</td></tr>
+        <tr><td>12</td><td>Obstacle Hysteresis</td><td>3 leituras antes de reagir</td></tr>
+    </table>
+
+    <!-- SECAO 17 -->
+    <h1 id="referencia">17. Tabela de Referencia Rapida</h1>
+
+    <table>
+        <tr><th>Categoria</th><th>Comando</th><th>Descricao</th></tr>
+        <tr><td rowspan="4">Movimento</td><td><code>pf &lt;ms&gt;</code></td><td>Para frente</td></tr>
+        <tr><td><code>pt &lt;ms&gt;</code></td><td>Para tras</td></tr>
+        <tr><td><code>pd &lt;ms&gt;</code></td><td>Gira direita</td></tr>
+        <tr><td><code>pe &lt;ms&gt;</code></td><td>Gira esquerda</td></tr>
+        <tr><td rowspan="3">LEDs</td><td><code>ld &lt;ms&gt;</code></td><td>LED direito</td></tr>
+        <tr><td><code>le &lt;ms&gt;</code></td><td>LED esquerdo</td></tr>
+        <tr><td><code>lde &lt;ms&gt;</code></td><td>Ambos LEDs</td></tr>
+        <tr><td rowspan="4">Garra</td><td><code>bc</code></td><td>Baixar/Fechar</td></tr>
+        <tr><td><code>sc</code></td><td>Subir/Abrir</td></tr>
+        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Servo 1</td></tr>
+        <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Servo 2</td></tr>
+        <tr><td>Som</td><td><code>bu &lt;ms&gt;</code></td><td>Buzzer</td></tr>
+        <tr><td rowspan="3">Sensores</td><td><code>sensor linha</code></td><td>Ativa IR</td></tr>
+        <tr><td><code>sensor ultra</code></td><td>Ativa ultrassom</td></tr>
+        <tr><td><code>sensor off</code></td><td>Desativa</td></tr>
+        <tr><td rowspan="5">Ultra</td><td><code>seguir-ultra-agil</code></td><td>Modo rapido</td></tr>
+        <tr><td><code>seguir-ultra-inteligente</code></td><td>Modo cognitivo</td></tr>
+        <tr><td><code>seguir-ultra-memoria</code></td><td>Modo memoria</td></tr>
+        <tr><td><code>seguir-ultra-hibrido</code></td><td>Modo hibrido</td></tr>
+        <tr><td><code>parar-ultra</code></td><td>Para navegacao</td></tr>
+        <tr><td>Linha</td><td><code>seguir-linha &lt;ms&gt;</code></td><td>Segue linha</td></tr>
+    </table>
+
+    <!-- SECAO 18 -->
+    <h1 id="exemplos">18. Exemplos Praticos Completos</h1>
+
+    <h2>Quadrado com LEDs</h2>
+    <pre>pf 1000
+ld 300
+pd 220
+pf 1000
+le 300
+pd 220
+pf 1000
+ld 300
+pd 220
+pf 1000
+le 300
+pd 220
+bu 1000</pre>
+
+    <h2>Seguidor de Linha</h2>
+    <pre>sensor linha
+repita 300
+  seguir-linha 100
+fim repita
+sensor off
+bu 500</pre>
+
+    <h2>Explorador Ultrassonico</h2>
+    <pre>sensor ultra
+repita 30
+  seguir-ultra-agil 2000
+fim repita
+parar-ultra
+sensor off
+bu 300
+bu 300
+bu 300</pre>
+
+    <h2>Coletor de Objetos</h2>
+    <pre>sc              # Abre garra
+pf 1500         # Aproxima
+bc              # Pega objeto
+pt 1500         # Recua
+sc              # Solta
+bu 500</pre>
+
+    <!-- SECAO 19 -->
+    <h1 id="problemas">19. Resolucao de Problemas</h1>
+
+    <div class="box box-danger">
+        <h3>Robo nao conecta ao WiFi</h3>
+        <p><strong>Sintoma:</strong> LED pisca 10 vezes rapido</p>
+        <p><strong>Solucoes:</strong> Verifique WiFi, alcance, senha no firmware, reinicie</p>
+    </div>
+
+    <div class="box box-warning">
+        <h3>Robo desvia para um lado</h3>
+        <p><strong>Solucao:</strong> Calibracao dos motores</p>
+        <ul>
+            <li>Desvia para DIREITA: <code>atrasar_mote 30</code></li>
+            <li>Desvia para ESQUERDA: <code>atrasar_motd 30</code></li>
+        </ul>
+    </div>
+
+    <div class="box box-warning">
+        <h3>LEDs nao acendem</h3>
+        <p><strong>Solucao:</strong> Execute <code>sensor off</code> antes de usar LD/LE/LDE</p>
+    </div>
+
+    <div class="box box-danger">
+        <h3>Robo reinicia sozinho</h3>
+        <p><strong>Causas:</strong> Bateria fraca, sobrecarga, curto-circuito, sensores conectados durante boot</p>
+    </div>
+
+    <!-- SECAO 20 -->
+    <h1 id="glossario">20. Glossario</h1>
+
+    <table>
+        <tr><th>Termo</th><th>Definicao</th></tr>
+        <tr><td>Back EMF</td><td>Forca contra-eletromotriz dos motores</td></tr>
+        <tr><td>Boot</td><td>Inicializacao quando liga</td></tr>
+        <tr><td>EEPROM</td><td>Memoria que mantem dados apos desligar</td></tr>
+        <tr><td>ESP8266</td><td>Microcontrolador com WiFi</td></tr>
+        <tr><td>Heartbeat</td><td>Pulso periodico do LED</td></tr>
+        <tr><td>Kickstart</td><td>Pulso inicial de alta potencia</td></tr>
+        <tr><td>PWM</td><td>Controle de potencia dos motores</td></tr>
+        <tr><td>Watchdog</td><td>Sistema que reinicia se travar</td></tr>
+        <tr><td>yield()</td><td>Funcao que alimenta o watchdog</td></tr>
+    </table>
+
+    <hr style="margin-top: 50px;">
+    <div style="text-align: center; color: #666; padding: 20px;">
+        <p><strong>EJR Robotica Educacional</strong></p>
+        <p>Email: eloirjr@gmail.com | Plataforma: pje.ejrrobotica.com.br</p>
+        <p style="font-size: 9pt;">Versao do Documento: 2.0 | Firmware: MostraBot 5em1 v5.2 Beta | Fevereiro 2026</p>
+    </div>
+
+</main>
+
+</body>
+</html>
