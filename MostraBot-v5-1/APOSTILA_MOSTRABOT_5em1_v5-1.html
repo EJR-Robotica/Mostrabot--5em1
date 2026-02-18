@@ -4139,6 +4139,13 @@ reset_personalizado</pre>
     return Math.max(0, Math.min(stageOrder.length - 1, missionInfo.order || 0));
   }
 
+  function getSectionIdsByOrder(order) {
+    return Object.keys(missionBySection).filter((id) => {
+      const info = missionBySection[id];
+      return info && typeof info.order === 'number' && info.order === order;
+    });
+  }
+
   function applyPresentationFocus(forcedSectionId) {
     const isPresentation = document.body.classList.contains('mode-apresentacao');
     const activeSection = forcedSectionId || getCurrentSectionId();
@@ -4260,23 +4267,37 @@ reset_personalizado</pre>
       if (unlocked <= 0) return;
       const nextUnlocked = unlocked - 1;
       setUnlockedStage(nextUnlocked);
-      const completed = getCompletedMissions().filter((idx) => idx <= nextUnlocked);
+      const completed = getCompletedMissions().filter((idx) => idx < nextUnlocked);
       setCompletedMissions(completed);
       const progress = getTaskProgress();
       Object.keys(progress).forEach((taskKey) => {
         const sectionId = String(taskKey || '').split('::')[0];
         const info = missionBySection[sectionId];
-        if (info && typeof info.order === 'number' && info.order > nextUnlocked) {
+        if (info && typeof info.order === 'number' && info.order >= nextUnlocked) {
           delete progress[taskKey];
         }
       });
       setTaskProgress(progress);
+      const readMap = getReadOnceProgress();
+      const resetSectionIds = getSectionIdsByOrder(nextUnlocked);
+      Object.keys(readMap).forEach((token) => {
+        const sectionId = String(token || '').split('::')[0];
+        if (resetSectionIds.includes(sectionId)) {
+          delete readMap[token];
+        }
+      });
+      setReadOnceProgress(readMap);
+      const targetSection = stageOrder[nextUnlocked] || 'intro';
+      slideIndexBySection[targetSection] = 0;
+      resetSectionIds.forEach((sectionId) => {
+        slideIndexBySection[sectionId] = 0;
+      });
       applyStudentLocks();
       refreshMissionTaskStates();
       refreshStudentActionButton();
       applyStudentSingleScreen();
       renderStudentSlides();
-      window.location.hash = '#' + (stageOrder[nextUnlocked] || 'intro');
+      window.location.hash = '#' + targetSection;
     });
   }
   if (completeStageBtn) {
