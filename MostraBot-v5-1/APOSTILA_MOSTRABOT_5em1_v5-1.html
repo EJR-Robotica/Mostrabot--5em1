@@ -3581,7 +3581,7 @@ reset_personalizado</pre>
         if (mBtn) {
           const info = missionBySection[sectionId];
           const currentIdx = info ? info.order : 0;
-          progress[taskKey] = progress[taskKey] || { tasks: [], finished: false };
+          progress[taskKey] = progress[taskKey] || { taskMap: {}, finished: false };
           progress[taskKey].finished = true;
           setTaskProgress(progress);
 
@@ -3608,7 +3608,7 @@ reset_personalizado</pre>
     boxes.forEach((box) => {
       const taskKey = box.dataset.taskKey;
       if (!taskKey) return;
-      progress[taskKey] = progress[taskKey] || { tasks: [], finished: false };
+      progress[taskKey] = progress[taskKey] || { taskMap: {}, finished: false };
       renderMissionTaskState(box, taskKey, progress[taskKey]);
     });
   }
@@ -3619,7 +3619,7 @@ reset_personalizado</pre>
     boxes.forEach((box) => {
       const taskKey = box.dataset.taskKey;
       if (!taskKey) return;
-      progress[taskKey] = progress[taskKey] || { tasks: [], finished: false };
+      progress[taskKey] = progress[taskKey] || { taskMap: {}, finished: false };
       renderMissionTaskState(box, taskKey, progress[taskKey]);
     });
   }
@@ -4072,10 +4072,11 @@ reset_personalizado</pre>
       const completed = getCompletedMissions().filter((idx) => idx <= nextUnlocked);
       setCompletedMissions(completed);
       const progress = getTaskProgress();
-      Object.keys(progress).forEach((sectionId) => {
+      Object.keys(progress).forEach((taskKey) => {
+        const sectionId = String(taskKey || '').split('::')[0];
         const info = missionBySection[sectionId];
         if (info && typeof info.order === 'number' && info.order > nextUnlocked) {
-          delete progress[sectionId];
+          delete progress[taskKey];
         }
       });
       setTaskProgress(progress);
