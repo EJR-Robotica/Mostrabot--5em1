@@ -265,6 +265,18 @@
         .didactic-img {
             max-width: 500px;
         }
+        .pje-m4-crop {
+            width: 100%;
+            max-width: 500px;
+            height: 255px;
+            object-fit: cover;
+            object-position: center bottom;
+            display: block;
+            margin: 15px auto;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: #fff;
+        }
         
         .icon-inline {
             width: 54px;
@@ -1659,19 +1671,19 @@
    |  (servidor)  |       WiFi
    +--------------+
     </div>
-    <p>O professor ou aluno digita comandos no navegador, e o robo executa automaticamente!</p>
+    <p>O professor e o aluno programam pela PJE no navegador, e o robo executa os comandos automaticamente.</p>
 
     <h2>Como Funcionam os Modulos da PJE (Visao Rapida)</h2>
     <img class="module-img didactic-img" src="assets_full/02_pje_modulo1.png" alt="Modulo 1 da PJE">
     <div class="module-caption">Modulo 1 (botoes prontos)</div>
     <img class="module-img didactic-img" src="assets_full/02_pje_modulo2.png" alt="Modulo 2 da PJE">
-    <div class="module-caption">Modulo 2 (digitar comandos)</div>
-    <img class="module-img didactic-img" src="assets_full/02_pje_modulo4.png" alt="Modulo 4 da PJE">
+    <div class="module-caption">Modulo 2 (cliques guiados com tempo t e ms)</div>
+    <img class="pje-m4-crop" src="assets_full/02_pje_modulo4.png" alt="Modulo 4 da PJE">
     <div class="module-caption">Modulo 4 (sensores e logica)</div>
     <ul>
-        <li><strong>Modulo 1:</strong> controle por botoes e setas, com tempo escolhido em uma lista (select). Nao ha digitacao manual.</li>
-        <li><strong>Modulo 2 e Modulo 3:</strong> comandos manuais em um campo de texto.</li>
-        <li><strong>Modulo 4:</strong> mesmo campo do Modulo 2, com sensores e logica (<code>sensor</code>, <code>repita</code>, <code>se</code>).</li>
+        <li><strong>Modulo 1:</strong> e o mais automatico. O aluno usa botoes prontos e escolhe o tempo no select.</li>
+        <li><strong>Modulo 2:</strong> ainda e por cliques. O aluno monta comandos semi-prontos no campo, escolhendo <code>t</code> e milissegundos para cada acao. Nas primeiras etapas ele nao precisa digitar no teclado.</li>
+        <li><strong>Modulo 4:</strong> e o mais avancado. Aqui o aluno faz tudo manualmente no campo de texto, sem depender dos cliques do mouse, usando sensores e logica (<code>sensor</code>, <code>repita</code>, <code>se</code>).</li>
     </ul>
     <div class="mission-task">
         <div class="mission-task-title">Fluxo real da PJE (acesso externo em nuvem)</div>
@@ -2005,8 +2017,8 @@
     <div class="module-caption">Botoes PF, PT, PD, PE</div>
     <ul>
         <li><strong>Modulo 1:</strong> botoes verdes (PF, PT, PD, PE, LD, LE, LDE, BU, BC, SC) e <strong>select de tempo</strong> com valores prontos.</li>
-        <li><strong>Modulo 2:</strong> caixa de texto para digitar comandos + teclado azul para tempo.</li>
-        <li><strong>Modulo 4:</strong> mesmo formato do Modulo 2, com sensores e logica.</li>
+        <li><strong>Modulo 2:</strong> comandos semi-prontos por cliques, com selecao de tempo <code>t</code> e milissegundos para cada acao.</li>
+        <li><strong>Modulo 4:</strong> comandos manuais completos no campo de texto, com sensores e logica.</li>
     </ul>
     <img class="module-img" src="modulos.png" alt="Modulos 1, 2 e 4 - PJE">
     <div class="module-caption">Use esta imagem para associar exemplos do manual ao layout real da PJE</div>
