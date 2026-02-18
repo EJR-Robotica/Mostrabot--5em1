@@ -358,9 +358,9 @@
             flex: 1;
         }
         .task-complete-btn {
-            border: 2px solid #2c6fb3;
-            background: #e8f4ff;
-            color: #1a5276;
+            border: 2px solid #ff7f11;
+            background: linear-gradient(180deg, #fff4e8, #ffe2c2);
+            color: #8a2e00;
             border-radius: 8px;
             padding: 5px 10px;
             font-size: 9pt;
@@ -369,9 +369,9 @@
             white-space: nowrap;
         }
         .task-complete-btn.done {
-            border-color: #1c7c4c;
-            background: #eafaf1;
-            color: #1c7c4c;
+            border-color: #00b894;
+            background: linear-gradient(180deg, #e7fff7, #c6ffe8);
+            color: #00664d;
         }
         .mission-finish-wrap {
             margin-top: 10px;
@@ -381,9 +381,9 @@
             align-items: center;
         }
         .mission-finish-btn {
-            border: 2px solid #7f5600;
-            background: #fff7dd;
-            color: #7f5600;
+            border: 2px solid #00b894;
+            background: linear-gradient(180deg, #e9fff8, #c6ffe8);
+            color: #005640;
             border-radius: 10px;
             padding: 7px 12px;
             font-size: 9.5pt;
@@ -393,6 +393,9 @@
         .mission-finish-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+        .mission-finish-btn:not(:disabled) {
+            box-shadow: 0 0 0 3px rgba(0,184,148,0.2);
         }
         .mission-finish-state {
             font-size: 9pt;
@@ -407,9 +410,9 @@
         }
         .cloud-link {
             text-decoration: none;
-            border: 2px solid #7aaad6;
-            background: #f0f6ff;
-            color: #0e3a5b;
+            border: 2px solid #6ac4ff;
+            background: linear-gradient(180deg, #f0fbff, #dff5ff);
+            color: #0e4668;
             font-weight: 700;
             border-radius: 999px;
             padding: 6px 11px;
@@ -417,6 +420,42 @@
         }
         .cloud-link:hover {
             background: #e3f1ff;
+        }
+        .external-hint {
+            margin-top: 8px;
+            font-size: 9pt;
+            color: #8a2e00;
+            font-weight: 700;
+        }
+        .mascot-strip {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 10px;
+        }
+        .mascot-card {
+            border: 2px solid #ffd166;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fffaf0, #fff3de);
+            padding: 10px;
+            text-align: center;
+        }
+        .mascot-card img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #ffb347;
+            background: #fff;
+        }
+        .mascot-title {
+            margin-top: 8px;
+            font-weight: 800;
+            color: #8a2e00;
+        }
+        .mascot-text {
+            font-size: 9.5pt;
+            color: #6a3906;
+            margin-top: 4px;
         }
             .lesson-card {
             border: 2px solid var(--border);
@@ -536,8 +575,9 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.1);
         }
         .mission-card.is-active {
-            border-color: #2ecc71;
-            box-shadow: 0 0 0 3px rgba(46,204,113,0.22);
+            border-color: #ff7f11;
+            box-shadow: 0 0 0 4px rgba(255,127,17,0.25);
+            background: linear-gradient(180deg, #fff9f2, #ffffff);
         }
         .mission-card.is-dimmed {
             opacity: 0.45;
@@ -656,11 +696,15 @@
             flex-wrap: wrap;
             gap: 8px;
             align-items: center;
+            padding: 8px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #fff7dd, #fff0f5);
+            border: 2px solid #ffd166;
         }
         .age-select {
-            border: 2px solid #7aaad6;
-            background: #fff;
-            color: #1a5276;
+            border: 2px solid #ff9f1c;
+            background: #fffaf0;
+            color: #6a3906;
             border-radius: 8px;
             padding: 6px 8px;
             font-size: 9.5pt;
@@ -694,9 +738,9 @@
             font-weight: 700;
         }
         .mode-btn {
-            border: 2px solid #b8d9f5;
-            background: #fff;
-            color: #1a5276;
+            border: 2px solid #ff9f1c;
+            background: linear-gradient(180deg, #fff9e8, #ffe8cc);
+            color: #6a3906;
             border-radius: 999px;
             padding: 7px 12px;
             font-size: 9pt;
@@ -705,9 +749,25 @@
             min-height: 38px;
         }
         .mode-btn.active {
-            border-color: #2ecc71;
-            background: #eafaf1;
-            color: #1c7c4c;
+            border-color: #ff7f11;
+            background: linear-gradient(180deg, #fff1e0, #ffd9b5);
+            color: #8a2e00;
+        }
+        #complete-stage-btn {
+            border-color: #00b894;
+            background: linear-gradient(180deg, #e9fff8, #c6ffe8);
+            color: #005640;
+            box-shadow: 0 0 0 3px rgba(0,184,148,0.22);
+        }
+        #back-stage-btn {
+            border-color: #6ac4ff;
+            background: linear-gradient(180deg, #f0fbff, #dff5ff);
+            color: #0e4668;
+        }
+        #reset-progress-btn {
+            border-color: #ff6b6b;
+            background: linear-gradient(180deg, #fff2f2, #ffdede);
+            color: #8a1f1f;
         }
         .module-focus {
             margin: 10px 0 12px 0;
@@ -716,9 +776,9 @@
             gap: 8px;
         }
         .focus-chip {
-            border: 2px solid #b8d9f5;
-            background: #fff;
-            color: #1a5276;
+            border: 2px solid #6ac4ff;
+            background: linear-gradient(180deg, #f0fbff, #def6ff);
+            color: #0e4668;
             font-weight: 700;
             border-radius: 999px;
             padding: 7px 12px;
@@ -726,9 +786,10 @@
             min-height: 38px;
         }
         .focus-chip.active {
-            border-color: #2ecc71;
-            background: #eafaf1;
-            color: #1c7c4c;
+            border-color: #00b894;
+            background: linear-gradient(180deg, #e7fff7, #c6ffe8);
+            color: #005640;
+            box-shadow: 0 0 0 3px rgba(0,184,148,0.2);
         }
         .hidden-by-focus {
             display: none !important;
@@ -1113,6 +1174,23 @@
         <div class="quest-title">Regra do Jogo</div>
         <p>Somente avance quando a turma concluir a missão anterior. Isso evita confusão.</p>
     </div>
+    <div class="mascot-strip">
+        <div class="mascot-card">
+            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot sorrindo">
+            <div class="mascot-title">MostraBot Feliz :)</div>
+            <div class="mascot-text">"Vamos com calma. Voce consegue!"</div>
+        </div>
+        <div class="mascot-card">
+            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot em desafio">
+            <div class="mascot-title">MostraBot Desafio !</div>
+            <div class="mascot-text">"Hora da tarefa: um passo por vez."</div>
+        </div>
+        <div class="mascot-card">
+            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot conquista">
+            <div class="mascot-title">MostraBot Vitoria *</div>
+            <div class="mascot-text">"Missao concluida! Novo selo desbloqueado."</div>
+        </div>
+    </div>
     <div class="box box-info">
         <h3>Sinalizacoes de tranquilidade</h3>
         <p><strong>Verde:</strong> pode seguir. <strong>Amarelo:</strong> revisar com calma. <strong>Azul:</strong> dica de apoio. O foco e aprender com confianca, passo a passo.</p>
@@ -1275,6 +1353,7 @@
             <a class="cloud-link" href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer">Modulo 2</a>
             <a class="cloud-link" href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer">Modulo 4</a>
         </div>
+        <p class="external-hint">Os links da PJE abrem em nova aba para voce nao perder esta trilha.</p>
     </div>
     <p><strong>Regra didatica simples:</strong> no Modulo 1 voce clica. A partir do Modulo 2 voce digita.</p>
     <img class="module-img" src="modulos.png" alt="Layout dos Modulos 1, 2 e 4 da PJE">
@@ -2921,6 +3000,20 @@ reset_personalizado</pre>
     });
   }
 
+  function enforceExternalPjeLinks() {
+    const links = Array.from(document.querySelectorAll('a[href^="https://pje.ejrrobotica.com.br"]'));
+    links.forEach((link) => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+      if (link.dataset.pjeBound === '1') return;
+      link.dataset.pjeBound = '1';
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.open(link.href, '_blank', 'noopener,noreferrer');
+      });
+    });
+  }
+
   function getSectionIdFromMissionTask(taskBox) {
     const content = taskBox.closest('.lesson-content');
     if (!content) return null;
@@ -3446,6 +3539,7 @@ reset_personalizado</pre>
   loadGameConfig();
   sortMissionCardsByOrder();
   enhanceMissionTasks();
+  enforceExternalPjeLinks();
   enhanceCodeExamples();
   setUnlockedStage(getUnlockedStage());
   setCompletedMissions(getCompletedMissions());
