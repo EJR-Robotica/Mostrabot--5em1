@@ -289,7 +289,19 @@
             border-radius: 8px;
             font-weight: 700;
         }
-        .mission-task {
+        
+        .lesson-toggle { cursor: pointer; }
+        .lesson-toggle::after {
+            content: '▼';
+            float: right;
+            font-size: 12pt;
+            color: #1a5276;
+        }
+        .lesson-toggle.collapsed::after { content: '▶'; }
+        .lesson-content { margin-bottom: 24px; }
+        .lesson-content.collapsed { display: none; }
+        .lesson-hint { font-size: 9pt; color: #555; }
+            .mission-task {
             border: 2px dashed #b8d9f5;
             background: #f7f9fb;
             border-radius: 12px;
@@ -1969,6 +1981,63 @@ reset_personalizado</pre>
     </div>
 
 </main>
+
+
+<script>
+(function() {
+  const main = document.querySelector('main');
+  if (!main) return;
+  const headers = Array.from(main.querySelectorAll('h1'));
+  const skipIds = new Set(['mapa-jogo']);
+
+  headers.forEach((h1) => {
+    if (skipIds.has(h1.id)) return;
+    if (h1.classList.contains('lesson-toggle')) return;
+
+    h1.classList.add('lesson-toggle');
+
+    // Collect nodes until next h1
+    const content = document.createElement('div');
+    content.className = 'lesson-content';
+    let node = h1.nextElementSibling;
+    while (node && node.tagName !== 'H1') {
+      const next = node.nextElementSibling;
+      content.appendChild(node);
+      node = next;
+    }
+    h1.insertAdjacentElement('afterend', content);
+  });
+
+  // Add hint after map
+  const map = document.getElementById('mapa-jogo');
+  if (map && !document.getElementById('lesson-hint')) {
+    const hint = document.createElement('div');
+    hint.id = 'lesson-hint';
+    hint.className = 'lesson-hint';
+    hint.textContent = 'Clique no título de cada aula para abrir e fechar.';
+    map.insertAdjacentElement('afterend', hint);
+  }
+
+  // Collapse all except map and intro
+  headers.forEach((h1) => {
+    if (h1.id === 'mapa-jogo' || h1.id === 'intro') return;
+    const content = h1.nextElementSibling;
+    if (content && content.classList.contains('lesson-content')) {
+      content.classList.add('collapsed');
+      h1.classList.add('collapsed');
+    }
+  });
+
+  main.addEventListener('click', (e) => {
+    const h1 = e.target.closest('.lesson-toggle');
+    if (!h1) return;
+    const content = h1.nextElementSibling;
+    if (!content || !content.classList.contains('lesson-content')) return;
+    const isCollapsed = content.classList.toggle('collapsed');
+    h1.classList.toggle('collapsed', isCollapsed);
+  });
+})();
+</script>
 
 </body>
 </html>
