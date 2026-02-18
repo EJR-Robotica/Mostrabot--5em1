@@ -1048,13 +1048,12 @@
         <li><strong>Modulo 4:</strong> mesmo campo do Modulo 2, com sensores e logica (<code>sensor</code>, <code>repita</code>, <code>se</code>).</li>
     </ul>
     <div class="mission-task">
-        <div class="mission-task-title">Fluxo real da PJE (principal -> modulos 1, 2 e 4)</div>
+        <div class="mission-task-title">Fluxo real da PJE (acesso externo em nuvem)</div>
         <ol>
-            <li>Entrar na tela principal de login, preencher <strong>ID</strong> e <strong>Senha</strong>.</li>
-            <li>Selecionar o modulo no campo de selecao (<strong>id_modulo</strong>).</li>
-            <li>No <strong>Modulo 1</strong>, usar botoes prontos e tempo por selecao.</li>
-            <li>No <strong>Modulo 2</strong>, digitar comandos simples por linha.</li>
-            <li>No <strong>Modulo 4</strong>, manter texto por linha e adicionar sensores/logica.</li>
+            <li>Clique em <strong>Programar</strong> no menu do topo da PJE.</li>
+            <li>No login, use o <strong>ID da fita amarela da bateria</strong> e senha <strong>123</strong>.</li>
+            <li>Na caixa de selecao, escolha o <strong>modulo da missao</strong> (1, 2 ou 4).</li>
+            <li>Execute a tarefa da missao no modulo correto e valide no robo.</li>
         </ol>
         <table>
             <tr><th>Modulo</th><th>Como o aluno interage</th><th>Foco pedagogico</th></tr>
@@ -1062,8 +1061,13 @@
             <tr><td>Modulo 2</td><td>Digita comandos no campo de texto</td><td>Sequencia e previsao</td></tr>
             <tr><td>Modulo 4</td><td>Texto + sensores + condicoes</td><td>Autonomia e tomada de decisao</td></tr>
         </table>
+        <img class="module-img didactic-img" src="assets_lessons/11_pje_menu_programar.svg" alt="Menu da PJE com botao Programar">
+        <div class="module-caption">Passo 1: clicar em Programar no menu superior da PJE</div>
+        <img class="module-img didactic-img" src="assets_lessons/12_pje_login_id_senha.svg" alt="Login PJE com ID, senha e selecao de modulo">
+        <div class="module-caption">Passo 2: login com ID da fita amarela, senha 123 e selecao do modulo da missao</div>
+        <img class="module-img didactic-img" src="assets_lessons/13_pje_modulo_missao.svg" alt="Tela do modulo com tarefa da missao">
+        <div class="module-caption">Passo 3: executar tarefa no modulo da missao e validar no robo</div>
         <p><strong>Acesso externo (PJE online):</strong> <a href="https://pje.ejrrobotica.com.br/index.php" target="_blank" rel="noopener noreferrer">login</a> | <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer">modulo1</a> | <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer">modulo2</a> | <a href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer">modulo4</a>.</p>
-        <p><strong>Referencia local (backup):</strong> <a href="referencia_pje/index.php.html" target="_blank">login</a> | <a href="referencia_pje/modulo1.php.html" target="_blank">modulo1</a> | <a href="referencia_pje/modulo4.php.html" target="_blank">modulo4</a> | <a href="referencia_pje/index.js" target="_blank">script de acesso</a> | <a href="referencia_pje/README.md" target="_blank">observacoes</a>.</p>
     </div>
     <p><strong>Regra didatica simples:</strong> no Modulo 1 voce clica. A partir do Modulo 2 voce digita.</p>
     <img class="module-img" src="modulos.png" alt="Layout dos Modulos 1, 2 e 4 da PJE">
@@ -1310,12 +1314,29 @@
 
     <h2>Entrando na PJE <img class="icon-inline" src="assets_external/wifi_ext.svg" alt="WiFi"></h2>
     <ol>
-        <li>Abra o navegador.</li>
-        <li>Digite: <strong>pje.ejrrobotica.com.br</strong></li>
-        <li>Digite o ID (4 digitos).</li>
-        <li>Senha padrao: <strong>123</strong></li>
+        <li>Acesse <a href="https://pje.ejrrobotica.com.br/index.php" target="_blank" rel="noopener noreferrer"><strong>pje.ejrrobotica.com.br</strong></a>.</li>
+        <li>No menu superior, clique em <strong>Programar</strong>.</li>
+        <li>Digite o <strong>ID da fita amarela da bateria</strong> (4 digitos).</li>
+        <li>Senha padrao: <strong>123</strong>.</li>
+        <li>Na caixa de selecao, escolha <strong>Modulo 1</strong> para a missao inicial.</li>
         <li>Clique em <strong>Entrar</strong>.</li>
     </ol>
+    <img class="module-img didactic-img" src="assets_lessons/11_pje_menu_programar.svg" alt="Clique em Programar no topo da PJE">
+    <div class="module-caption">Acesso: menu Programar no topo da pagina da PJE</div>
+    <img class="module-img didactic-img" src="assets_lessons/12_pje_login_id_senha.svg" alt="Login da PJE com ID, senha e modulo">
+    <div class="module-caption">Login: ID da fita amarela, senha 123 e selecao de modulo</div>
+
+    <div class="mission-task">
+        <div class="mission-task-title">Tarefa da Missao 0 (conclusao rapida)</div>
+        <ol>
+            <li>Entrar na PJE no <strong>Modulo 1</strong>.</li>
+            <li>Selecionar tempo <strong>500</strong>.</li>
+            <li>Clicar em <strong>LD</strong> e depois em <strong>ENVIAR</strong>.</li>
+            <li>Confirmar que o LED piscou no robo.</li>
+        </ol>
+        <p><strong>Missao concluida:</strong> robo piscou LED no teste inicial.</p>
+        <p><strong>Link direto do modulo:</strong> <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer">Modulo 1 (PJE Nuvem)</a>.</p>
+    </div>
 
     <!-- SECAO 5 -->
     <h1 id="movimento">5. Comandos de Movimento <img class="icon-inline" src="assets_icons/dc_motor.svg" alt="Motor"></h1>
@@ -1326,6 +1347,16 @@
             <div class="mission-reward">Selo: Direcao</div>
         </div>
         <div class="mission-badges"><span class="mission-badge">Movimento</span></div>
+    </div>
+    <div class="mission-task">
+        <div class="mission-task-title">Tarefa da Missao 1 (Modulo 1)</div>
+        <ol>
+            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 1</strong></a>.</li>
+            <li>Escolha tempo 1000 no select.</li>
+            <li>Clique em PF e ENVIAR.</li>
+            <li>Repita com PD (200) para virar.</li>
+        </ol>
+        <p><strong>Missao concluida:</strong> robo andou e virou no modulo correto.</p>
     </div>
 
     <h2>Layout dos Modulos (M1, M2 e M4)</h2>
@@ -1468,6 +1499,16 @@ pd 120</pre></div>
         </div>
         <div class="mission-badges"><span class="mission-badge">LED</span></div>
     </div>
+    <div class="mission-task">
+        <div class="mission-task-title">Tarefa da Missao 2 (Modulo 1)</div>
+        <ol>
+            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 1</strong></a>.</li>
+            <li>Escolha tempo 500.</li>
+            <li>Clique em LD e ENVIAR.</li>
+            <li>Depois LE e ENVIAR.</li>
+        </ol>
+        <p><strong>Missao concluida:</strong> os dois olhos piscaram conforme o comando.</p>
+    </div>
     <img class="module-img" src="assets_full/06_led_botoes.png" alt="Botoes de LED na PJE">
     <div class="module-caption">Use LD, LE e LDE para os olhos</div>
 
@@ -1494,6 +1535,16 @@ pd 120</pre></div>
             <div class="mission-reward">Selo: Garra</div>
         </div>
         <div class="mission-badges"><span class="mission-badge">Garra</span></div>
+    </div>
+    <div class="mission-task">
+        <div class="mission-task-title">Tarefa da Missao 3 (Modulo 2)</div>
+        <ol>
+            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 2</strong></a>.</li>
+            <li>Digite: <code>sc</code>, <code>t 100</code>, <code>bc</code>.</li>
+            <li>Clique em ENVIAR.</li>
+            <li>Observe a garra abrir e fechar.</li>
+        </ol>
+        <p><strong>Missao concluida:</strong> garra respondeu ao programa digitado.</p>
     </div>
     <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Botoes da garra na PJE">
     <div class="module-caption">BC = baixa a garra, SC = sobe a garra</div>
@@ -1529,6 +1580,15 @@ pt 500          # Recua com o objeto</pre></div>
         </div>
         <div class="mission-badges"><span class="mission-badge">Som</span></div>
     </div>
+    <div class="mission-task">
+        <div class="mission-task-title">Tarefa extra (Modulo 2)</div>
+        <ol>
+            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 2</strong></a>.</li>
+            <li>Digite <code>bu 300</code> e envie.</li>
+            <li>Repita com <code>bu 100</code>.</li>
+        </ol>
+        <p><strong>Concluido:</strong> aluno percebeu relacao entre tempo e duracao do som.</p>
+    </div>
     <img class="module-img" src="assets_full/08_buzzer_botao.png" alt="Botao BU na PJE">
     <div class="module-caption">BU faz o bip do robo</div>
 
@@ -1553,6 +1613,16 @@ bu              # Bipe de 800ms (padrao)</pre></div>
             <div class="mission-reward">Selo: Trilho</div>
         </div>
         <div class="mission-badges"><span class="mission-badge">Sensor</span></div>
+    </div>
+    <div class="mission-task">
+        <div class="mission-task-title">Tarefa da Missao 4 (Modulo 4)</div>
+        <ol>
+            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 4</strong></a>.</li>
+            <li>Digite o bloco: <code>sensor linha</code> + <code>seguir-linha</code>.</li>
+            <li>Envie e observe o robo seguir a faixa.</li>
+            <li>Finalize com <code>sensor off</code>.</li>
+        </ol>
+        <p><strong>Missao concluida:</strong> robo seguiu a pista com sensor de linha.</p>
     </div>
     <img class="module-img didactic-img" src="assets_full/09_linha_sensor.png" alt="Sensor de linha">
     <div class="module-caption">O robo segue a linha no chao</div>
@@ -1618,6 +1688,16 @@ bu 500</pre></div>
             <div class="mission-reward">Selo: Desvio</div>
         </div>
         <div class="mission-badges"><span class="mission-badge">Sensor</span></div>
+    </div>
+    <div class="mission-task">
+        <div class="mission-task-title">Tarefa da Missao 5 (Modulo 4)</div>
+        <ol>
+            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 4</strong></a>.</li>
+            <li>Digite: <code>sensor ultra</code> e depois <code>seguir-ultra 2000</code>.</li>
+            <li>Envie e coloque um obstaculo na frente.</li>
+            <li>Verifique o desvio automatico e finalize com <code>sensor off</code>.</li>
+        </ol>
+        <p><strong>Missao concluida:</strong> robo detectou e desviou do obstaculo.</p>
     </div>
     <img class="module-img didactic-img" src="assets_full/10_ultra_sensor.png" alt="Sensor ultrassonico (sensor de distancia)">
     <div class="module-caption">Desvia de obstaculos automaticamente</div>
@@ -1717,6 +1797,16 @@ t 500</pre></div>
             <div class="mission-reward">Selo: Mestre</div>
         </div>
         <div class="mission-badges"><span class="mission-badge">Logica</span></div>
+    </div>
+    <div class="mission-task">
+        <div class="mission-task-title">Tarefa da Missao 6 (Modulo 4)</div>
+        <ol>
+            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 4</strong></a>.</li>
+            <li>Monte um programa com <code>repita</code> e <code>se</code>.</li>
+            <li>Envie e observe se o robo reage a condicao.</li>
+            <li>Ajuste tempo ate o comportamento ficar estavel.</li>
+        </ol>
+        <p><strong>Missao concluida:</strong> aluno criou comportamento com repeticao e decisao.</p>
     </div>
 
     <h2>REPITA (Loop)</h2>

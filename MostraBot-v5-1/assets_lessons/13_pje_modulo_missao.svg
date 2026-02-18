@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="Tela de trabalho da missao em modulo PJE">
+  <rect width="1200" height="700" fill="#f5fbff"/>
+  <rect x="70" y="70" width="1060" height="560" rx="16" fill="#ffffff" stroke="#bfd8f3" stroke-width="3"/>
+  <rect x="100" y="110" width="280" height="52" rx="10" fill="#e8f4ff" stroke="#7aaad6" stroke-width="2"/>
+  <text x="125" y="145" fill="#1a5276" font-size="26" font-family="Arial" font-weight="700">Modulo da Missao</text>
+
+  <rect x="100" y="190" width="420" height="390" rx="12" fill="#f7fbff" stroke="#b8d9f5" stroke-width="2"/>
+  <text x="125" y="232" fill="#1a5276" font-size="26" font-family="Arial" font-weight="700">Comandos / Botoes</text>
+  <rect x="125" y="260" width="110" height="52" rx="10" fill="#2ecc71"/><text x="165" y="295" fill="#08321d" font-size="28" font-family="Arial" font-weight="700">PF</text>
+  <rect x="250" y="260" width="110" height="52" rx="10" fill="#2ecc71"/><text x="290" y="295" fill="#08321d" font-size="28" font-family="Arial" font-weight="700">PD</text>
+  <rect x="375" y="260" width="110" height="52" rx="10" fill="#2ecc71"/><text x="415" y="295" fill="#08321d" font-size="28" font-family="Arial" font-weight="700">LD</text>
+
+  <rect x="560" y="190" width="520" height="390" rx="12" fill="#f7fbff" stroke="#b8d9f5" stroke-width="2"/>
+  <text x="590" y="232" fill="#1a5276" font-size="26" font-family="Arial" font-weight="700">Passos da Tarefa da Missao</text>
+  <text x="590" y="285" fill="#1c7c4c" font-size="28" font-family="Arial" font-weight="700">1) Escolha o modulo certo no login</text>
+  <text x="590" y="330" fill="#1c7c4c" font-size="28" font-family="Arial" font-weight="700">2) Execute o teste da missao</text>
+  <text x="590" y="375" fill="#1c7c4c" font-size="28" font-family="Arial" font-weight="700">3) Validar resultado visual no robo</text>
+  <rect x="590" y="430" width="420" height="60" rx="12" fill="#2ecc71"/>
+  <text x="660" y="470" fill="#08321d" font-size="30" font-family="Arial" font-weight="700">Missao Concluida</text>
+</svg>

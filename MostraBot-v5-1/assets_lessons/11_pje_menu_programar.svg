@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="Fluxo de acesso na PJE com menu Programar">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0f7ff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="70" y="70" width="1060" height="80" rx="14" fill="#0f4e79"/>
+  <text x="110" y="120" fill="#fff" font-size="34" font-family="Arial" font-weight="700">PJE Nuvem</text>
+  <text x="350" y="120" fill="#d9ecff" font-size="28" font-family="Arial">Home</text>
+  <text x="470" y="120" fill="#d9ecff" font-size="28" font-family="Arial">Produtos</text>
+  <rect x="620" y="86" width="180" height="48" rx="10" fill="#2ecc71"/>
+  <text x="658" y="118" fill="#08321d" font-size="28" font-family="Arial" font-weight="700">Programar</text>
+  <text x="830" y="120" fill="#d9ecff" font-size="28" font-family="Arial">Sobre</text>
+  <text x="930" y="120" fill="#d9ecff" font-size="28" font-family="Arial">Contato</text>
+
+  <rect x="120" y="200" width="960" height="420" rx="16" fill="#ffffff" stroke="#bfd8f3" stroke-width="3"/>
+  <text x="160" y="250" fill="#1a5276" font-size="34" font-family="Arial" font-weight="700">Missao de Acesso</text>
+
+  <rect x="160" y="290" width="880" height="90" rx="12" fill="#eafaf1" stroke="#2ecc71" stroke-width="2"/>
+  <text x="190" y="345" fill="#1c7c4c" font-size="30" font-family="Arial" font-weight="700">1) Clique em "Programar" no menu do topo</text>
+
+  <rect x="160" y="400" width="880" height="90" rx="12" fill="#f0f6ff" stroke="#7aaad6" stroke-width="2"/>
+  <text x="190" y="455" fill="#0e3a5b" font-size="30" font-family="Arial" font-weight="700">2) Acesse a tela de login da PJE</text>
+
+  <rect x="160" y="510" width="880" height="90" rx="12" fill="#fff7dd" stroke="#f1c40f" stroke-width="2"/>
+  <text x="190" y="565" fill="#7f5600" font-size="30" font-family="Arial" font-weight="700">3) Selecione o modulo da missao antes de entrar</text>
+</svg>
