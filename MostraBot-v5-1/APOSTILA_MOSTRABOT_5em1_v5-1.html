@@ -3210,6 +3210,9 @@ reset_personalizado</pre>
       localStorage.setItem(getTaskProgressKey(), JSON.stringify(progress || {}));
     } catch (error) {}
   }
+  function toSafeId(value) {
+    return String(value || '').replace(/[^a-zA-Z0-9_-]/g, '-');
+  }
 
   function getReadOnceProgress() {
     try {
@@ -3446,11 +3449,21 @@ reset_personalizado</pre>
 
   function renderMissionTaskState(taskBox, taskKey, taskState) {
     const items = Array.from(taskBox.querySelectorAll('.task-row'));
-    const firstPending = items.findIndex((_, idx) => !Boolean(taskState.tasks && taskState.tasks[idx]));
+    if (!taskState || typeof taskState !== 'object') taskState = {};
+    taskState.taskMap = taskState.taskMap && typeof taskState.taskMap === 'object' ? taskState.taskMap : {};
+    if (Array.isArray(taskState.tasks)) {
+      items.forEach((row, idx) => {
+        if (!taskState.tasks[idx]) return;
+        const legacyId = row.dataset.taskId || ('legacy-' + String(idx));
+        taskState.taskMap[legacyId] = true;
+      });
+    }
+    const firstPending = items.findIndex((row) => !Boolean(taskState.taskMap[row.dataset.taskId || '']));
     const activeIndex = firstPending === -1 ? -1 : firstPending;
 
     items.forEach((row, idx) => {
-      const done = Boolean(taskState.tasks && taskState.tasks[idx]);
+      const taskId = row.dataset.taskId || '';
+      const done = Boolean(taskState.taskMap[taskId]);
       const visible = activeIndex === -1 ? true : done || idx === activeIndex;
       row.classList.toggle('task-row-hidden', !visible);
       row.classList.toggle('done', done);
@@ -3463,7 +3476,7 @@ reset_personalizado</pre>
 
     const finishBtn = taskBox.querySelector('.mission-finish-btn');
     const finishState = taskBox.querySelector('.mission-finish-state');
-    const allDone = items.length > 0 && items.every((_, idx) => Boolean(taskState.tasks && taskState.tasks[idx]));
+    const allDone = items.length > 0 && items.every((row) => Boolean(taskState.taskMap[row.dataset.taskId || '']));
     if (finishBtn) finishBtn.disabled = !allDone;
     if (finishState) {
       if (taskState.finished) finishState.textContent = 'Missao finalizada! Historia concluida.';
@@ -3494,10 +3507,11 @@ reset_personalizado</pre>
         const synthetic = document.createElement('div');
         synthetic.className = 'task-row';
         synthetic.innerHTML = '<span class="task-text">Ler e entender esta etapa.</span><span class="task-help">Clique no botao abaixo para prosseguir na historia.</span>';
-        synthetic.dataset.taskIndex = '0';
+        synthetic.dataset.taskId = taskKey + '::task::0';
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'task-complete-btn';
+        btn.id = 'task-btn-' + toSafeId(taskKey) + '-0';
         btn.textContent = 'Clique para prosseguir';
         synthetic.appendChild(btn);
         box.appendChild(synthetic);
@@ -3514,12 +3528,13 @@ reset_personalizado</pre>
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'task-complete-btn';
+          btn.id = 'task-btn-' + toSafeId(taskKey) + '-' + String(idx);
           btn.textContent = 'Clique para prosseguir';
           row.appendChild(text);
           row.appendChild(help);
           row.appendChild(btn);
           li.replaceWith(row);
-          row.dataset.taskIndex = String(idx);
+          row.dataset.taskId = taskKey + '::task::' + String(idx);
         });
       }
 
@@ -3528,6 +3543,7 @@ reset_personalizado</pre>
       const finishBtn = document.createElement('button');
       finishBtn.type = 'button';
       finishBtn.className = 'mission-finish-btn';
+      finishBtn.id = 'finish-btn-' + toSafeId(taskKey);
       finishBtn.textContent = 'Finalizar missao e continuar';
       finishBtn.disabled = true;
       const finishState = document.createElement('span');
@@ -3540,9 +3556,12 @@ reset_personalizado</pre>
         const taskBtn = event.target.closest('.task-complete-btn');
         if (taskBtn) {
           const row = taskBtn.closest('.task-row');
-          const idx = Number(row ? row.dataset.taskIndex || '0' : '0');
-          progress[taskKey] = progress[taskKey] || { tasks: [], finished: false };
-          progress[taskKey].tasks[idx] = true;
+          const taskId = row ? row.dataset.taskId || '' : '';
+          progress[taskKey] = progress[taskKey] || { taskMap: {}, finished: false };
+          progress[taskKey].taskMap = progress[taskKey].taskMap && typeof progress[taskKey].taskMap === 'object'
+            ? progress[taskKey].taskMap
+            : {};
+          if (taskId) progress[taskKey].taskMap[taskId] = true;
           setTaskProgress(progress);
           renderMissionTaskState(box, taskKey, progress[taskKey]);
           return;
