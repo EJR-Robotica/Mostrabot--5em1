@@ -1,0 +1,8 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'>
+  <path d='M64 16 v70' stroke='#34495e' stroke-width='8' stroke-linecap='round'/>
+  <circle cx='64' cy='92' r='10' fill='#34495e'/>
+  <path d='M64 36 l-16 -12' stroke='#34495e' stroke-width='8' stroke-linecap='round'/>
+  <rect x='40' y='16' width='12' height='12' fill='#34495e'/>
+  <path d='M64 52 l16 -12' stroke='#34495e' stroke-width='8' stroke-linecap='round'/>
+  <polygon points='80,40 92,40 86,28' fill='#34495e'/>
+</svg>

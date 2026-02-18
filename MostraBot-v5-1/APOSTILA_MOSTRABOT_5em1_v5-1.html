@@ -235,6 +235,13 @@
         .didactic-img {
             max-width: 500px;
         }
+        
+        .icon-inline {
+            width: 18px;
+            height: 18px;
+            vertical-align: -3px;
+            margin-right: 6px;
+        }
         .module-caption {
             text-align: center;
             font-size: 10pt;
@@ -374,8 +381,12 @@
     <p>O professor ou aluno digita comandos no navegador, e o robo executa automaticamente!</p>
 
     <h2>Como Funcionam os Modulos da PJE (Visao Rapida)</h2>
-    <img class="module-img" src="assets_full/02_pje_modulos.png" alt="Modulos da PJE">
-    <div class="module-caption">Modulos 1, 2 e 4 da PJE</div>
+    <img class="module-img didactic-img" src="assets_full/02_pje_modulo1.png" alt="Modulo 1 da PJE">
+    <div class="module-caption">Modulo 1 (botoes prontos)</div>
+    <img class="module-img didactic-img" src="assets_full/02_pje_modulo2.png" alt="Modulo 2 da PJE">
+    <div class="module-caption">Modulo 2 (digitar comandos)</div>
+    <img class="module-img didactic-img" src="assets_full/02_pje_modulo4.png" alt="Modulo 4 da PJE">
+    <div class="module-caption">Modulo 4 (sensores e logica)</div>
     <ul>
         <li><strong>Modulo 1:</strong> controle por botoes e setas, com tempo escolhido em uma lista (select). Nao ha digitacao manual.</li>
         <li><strong>Modulo 2 e Modulo 3:</strong> comandos manuais em um campo de texto.</li>
@@ -467,7 +478,7 @@
     </div>
 
     <!-- SECAO 3 -->
-    <h1 id="sinais">3. Sinais Visuais do Robo</h1>
+    <h1 id="sinais">3. Sinais Visuais do Robo <img class="icon-inline" src="assets_external/led_symbol_ext.svg" alt="LED"></h1>
 
     <p>Esta e uma das secoes mais importantes! O robo "fala" com voce atraves de LEDs. Aprenda a interpretar esses sinais.</p>
 
@@ -562,14 +573,14 @@
     <img class="module-img mvp-img" src="assets_mvp/01_id.png" alt="Onde encontrar o ID de 4 digitos na bateria">
     <div class="module-caption">Exemplo de ID na fita amarela (4 digitos)</div>
 
-    <h2>PASSO 2: Conecte o cabo branco na bateria</h2>
+    <h2>PASSO 2: Conecte o cabo branco na bateria <img class="icon-inline" src="assets_icons/battery.svg" alt="Bateria"></h2>
     <p>O cabo branco ja vem soldado no robo. Conecte ele na bateria externa. <strong>Ao conectar, o robo liga automaticamente.</strong></p>
     <img class="module-img mvp-img" src="assets_mvp/02_cabo_branco.png" alt="Cabo branco ja vem soldado no robo">
     <div class="module-caption">O cabo branco ja vem pronto no robo</div>
     <img class="module-img mvp-img" src="assets_mvp/03_ligar_na_bateria.png" alt="Conectar cabo branco na bateria para ligar">
     <div class="module-caption">Conectar na bateria = robo ligado</div>
 
-    <h2>PASSO 3: Veja o LED</h2>
+    <h2>PASSO 3: Veja o LED <img class="icon-inline" src="assets_icons/led.svg" alt="LED"></h2>
     <ul>
         <li><strong>Pisca rapido</strong> = conectando no Wi-Fi</li>
         <li><strong>Duas piscadas lentas</strong> = pronto para usar</li>
@@ -577,7 +588,7 @@
     <img class="module-img mvp-img" src="assets_mvp/04_led_status.png" alt="LED mostra o status do robo">
     <div class="module-caption">LED indica quando o robo esta pronto</div>
 
-    <h2>O que NAO fazer</h2>
+    <h2>O que NAO fazer <img class="icon-inline" src="assets_external/usb_ext.svg" alt="USB"></h2>
     <ul>
         <li>NAO usar a USB da Wemos para ligar o robo.</li>
         <li>A USB da Wemos e apenas para atualizar o programa do robo (firmware).</li>
@@ -586,7 +597,7 @@
     <img class="module-img mvp-img" src="assets_mvp/05_nao_usb_wemos.png" alt="Nao ligar o robo pela USB da Wemos">
     <div class="module-caption">USB da Wemos so para atualizar o programa</div>
 
-    <h2>Entrando na PJE</h2>
+    <h2>Entrando na PJE <img class="icon-inline" src="assets_external/wifi_ext.svg" alt="WiFi"></h2>
     <ol>
         <li>Abra o navegador.</li>
         <li>Digite: <strong>pje.ejrrobotica.com.br</strong></li>
@@ -596,7 +607,7 @@
     </ol>
 
     <!-- SECAO 5 -->
-    <h1 id="movimento">5. Comandos de Movimento</h1>
+    <h1 id="movimento">5. Comandos de Movimento <img class="icon-inline" src="assets_icons/dc_motor.svg" alt="Motor"></h1>
 
     <h2>Layout dos Modulos (M1, M2 e M4)</h2>
     <img class="module-img" src="assets_full/05_movimento_botoes.png" alt="Botoes de movimento na PJE">
@@ -729,7 +740,7 @@ pd 120</pre></div>
     </div>
 
     <!-- SECAO 6 -->
-    <h1 id="led">6. Comandos de LED (Olhos)</h1>
+    <h1 id="led">6. Comandos de LED (Olhos) <img class="icon-inline" src="assets_icons/led.svg" alt="LED"></h1>
     <img class="module-img" src="assets_full/06_led_botoes.png" alt="Botoes de LED na PJE">
     <div class="module-caption">Use LD, LE e LDE para os olhos</div>
 
@@ -748,7 +759,7 @@ pd 120</pre></div>
     </div>
 
     <!-- SECAO 7 -->
-    <h1 id="servo">7. Comandos de Servo (Garra)</h1>
+    <h1 id="servo">7. Comandos de Servo (Garra) <img class="icon-inline" src="assets_icons/servo.svg" alt="Servo"></h1>
     <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Botoes da garra na PJE">
     <div class="module-caption">BC = baixa a garra, SC = sobe a garra</div>
 
@@ -774,7 +785,7 @@ pt 500          # Recua com o objeto</pre></div>
     </div>
 
     <!-- SECAO 8 -->
-    <h1 id="buzzer">8. Comando de Buzzer (Som)</h1>
+    <h1 id="buzzer">8. Comando de Buzzer (Som) <img class="icon-inline" src="assets_icons/buzzer.svg" alt="Buzzer"></h1>
     <img class="module-img" src="assets_full/08_buzzer_botao.png" alt="Botao BU na PJE">
     <div class="module-caption">BU faz o bip do robo</div>
 
@@ -791,7 +802,7 @@ bu              # Bipe de 800ms (padrao)</pre></div>
     </div>
 
     <!-- SECAO 9 -->
-    <h1 id="linha">9. Sensor Seguidor de Linha</h1>
+    <h1 id="linha">9. Sensor Seguidor de Linha <img class="icon-inline" src="assets_icons/check.svg" alt="Linha"></h1>
     <img class="module-img didactic-img" src="assets_full/09_linha_sensor.png" alt="Sensor de linha">
     <div class="module-caption">O robo segue a linha no chao</div>
 
@@ -848,7 +859,7 @@ bu 500</pre></div>
     </div>
 
     <!-- SECAO 10 -->
-    <h1 id="ultra">10. Sensor Ultrassonico</h1>
+    <h1 id="ultra">10. Sensor Ultrassonico <img class="icon-inline" src="assets_icons/warning.svg" alt="Ultrassom"></h1>
     <img class="module-img didactic-img" src="assets_full/10_ultra_sensor.png" alt="Sensor ultrassonico">
     <div class="module-caption">Desvia de obstaculos automaticamente</div>
 
