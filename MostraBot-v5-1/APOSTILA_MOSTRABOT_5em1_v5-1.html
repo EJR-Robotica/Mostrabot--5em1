@@ -690,6 +690,9 @@
         .presentation-hidden {
             display: none !important;
         }
+        .student-single-hidden {
+            display: none !important;
+        }
         body.mode-professor .sparkle,
         body.mode-professor .progress-track,
         body.mode-professor .badge-row,
@@ -2875,7 +2878,7 @@ reset_personalizado</pre>
 
     missionCards.forEach((card) => {
       const order = Number(card.dataset.order || '0');
-      const locked = isAluno && order > unlocked;
+      const locked = isAluno && order !== unlocked;
       const complete = completed.includes(order);
       card.classList.toggle('is-locked', locked);
       card.classList.toggle('is-complete', complete);
@@ -2894,9 +2897,39 @@ reset_personalizado</pre>
     navLinks.forEach((link) => {
       const id = (link.getAttribute('href') || '').replace('#', '');
       const info = missionBySection[id];
-      const locked = isAluno && info && typeof info.order === 'number' && info.order > unlocked;
+      const locked = isAluno && info && typeof info.order === 'number' && id !== 'mapa-jogo' && info.order !== unlocked;
       link.classList.toggle('nav-link-locked', Boolean(locked));
     });
+  }
+
+  function applyStudentSingleScreen() {
+    const isAluno = document.body.classList.contains('mode-aluno');
+    const targetId = stageOrder[getUnlockedStage()] || 'intro';
+
+    headers.forEach((h1) => {
+      const content = h1.nextElementSibling;
+      const keep = !isAluno || h1.id === 'mapa-jogo' || h1.id === targetId;
+      h1.classList.toggle('student-single-hidden', !keep);
+      if (content && content.classList.contains('lesson-content')) {
+        content.classList.toggle('student-single-hidden', !keep);
+      }
+    });
+
+    if (isAluno) {
+      if (window.location.hash.replace('#', '') !== targetId) {
+        window.location.hash = '#' + targetId;
+      } else {
+        setActiveSection(targetId);
+      }
+    }
+  }
+
+  function refreshStudentActionButton() {
+    if (!completeStageBtn) return;
+    const unlocked = getUnlockedStage();
+    completeStageBtn.textContent = unlocked >= stageOrder.length - 1
+      ? 'Finalizar missao'
+      : 'Completar tarefa e liberar proxima';
   }
 
   function updateSectionFromScroll() {
@@ -3003,6 +3036,8 @@ reset_personalizado</pre>
       studentControls.style.display = finalMode === 'aluno' ? 'flex' : 'none';
     }
     applyStudentLocks();
+    refreshStudentActionButton();
+    applyStudentSingleScreen();
     applyPresentationFocus();
     updateLessonFromScroll();
     updateSectionFromScroll();
@@ -3047,6 +3082,8 @@ reset_personalizado</pre>
         localStorage.setItem('mostrabot_age', currentAge);
       } catch (error) {}
       applyStudentLocks();
+      refreshStudentActionButton();
+      applyStudentSingleScreen();
       syncHashTarget();
     });
   }
@@ -3063,8 +3100,10 @@ reset_personalizado</pre>
       }
       if (currentIdx <= unlocked && unlocked < stageOrder.length - 1) {
         setUnlockedStage(unlocked + 1);
-        applyStudentLocks();
       }
+      applyStudentLocks();
+      refreshStudentActionButton();
+      applyStudentSingleScreen();
     });
   }
   if (exitPresentationBtn) {
@@ -3091,7 +3130,7 @@ reset_personalizado</pre>
     if (!targetId) return;
     if (document.body.classList.contains('mode-aluno')) {
       const info = missionBySection[targetId];
-      if (info && typeof info.order === 'number' && info.order > getUnlockedStage()) {
+      if (info && typeof info.order === 'number' && info.order !== getUnlockedStage()) {
         const fallbackId = stageOrder[getUnlockedStage()] || 'intro';
         window.location.hash = '#' + fallbackId;
         return;
@@ -3106,6 +3145,10 @@ reset_personalizado</pre>
 
   window.addEventListener('hashchange', syncHashTarget);
   window.addEventListener('scroll', () => {
+    if (document.body.classList.contains('mode-aluno')) {
+      applyStudentSingleScreen();
+      return;
+    }
     updateSectionFromScroll();
     updateLessonFromScroll();
     applyPresentationFocus();
@@ -3132,11 +3175,13 @@ reset_personalizado</pre>
   enhanceCodeExamples();
   setUnlockedStage(getUnlockedStage());
   setCompletedMissions(getCompletedMissions());
+  refreshStudentActionButton();
   applyFocus('all');
   applyMode(savedMode);
   syncHashTarget();
   updateSectionFromScroll();
   updateLessonFromScroll();
+  applyStudentSingleScreen();
   applyPresentationFocus();
 })();
 </script>
