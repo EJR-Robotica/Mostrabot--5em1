@@ -1073,9 +1073,14 @@
         }
         .student-step-nav {
             display: none;
-            position: static;
-            z-index: 4;
-            width: 100%;
+            position: fixed;
+            left: calc(var(--layout-sidebar-offset) + ((100% - var(--layout-sidebar-offset)) * 0.5));
+            transform: translateX(-50%);
+            bottom: 12px;
+            z-index: 96;
+            width: fit-content;
+            min-width: 230px;
+            max-width: 100%;
             border: 2px solid #6ac4ff;
             border-radius: 14px;
             background: linear-gradient(180deg, #f8feff, #e8f8ff);
@@ -1083,7 +1088,6 @@
             padding: 10px;
             align-items: center;
             justify-content: center;
-            margin-top: 12px;
         }
         .student-step-nav .step-btn {
             border: 2px solid #6ac4ff;
@@ -1122,6 +1126,9 @@
         }
         body.mode-aluno .student-step-nav {
             display: flex;
+        }
+        body.mode-aluno main {
+            padding-bottom: 96px;
         }
         body.mode-professor .student-step-nav,
         body.mode-apresentacao .student-step-nav {
@@ -1295,9 +1302,11 @@
             }
             .student-step-nav {
                 width: 100%;
-                max-width: 100%;
+                max-width: calc(100% - 14px);
+                left: 50%;
                 padding: 8px;
                 gap: 6px;
+                bottom: 6px;
             }
             .student-step-nav .step-btn {
                 min-width: 88px;
@@ -3767,12 +3776,14 @@ reset_personalizado</pre>
     const state = getCurrentStudentSlideState();
     if (!state.groups.length) return;
     if (hasReadCurrentSlide(state)) return;
-    if (!studentStepNav) return;
 
-    const viewport = window.innerHeight || document.documentElement.clientHeight || 0;
-    const rect = studentStepNav.getBoundingClientRect();
-    const footerVisible = rect.top <= (viewport - 24) && rect.bottom >= 0;
-    if (!footerVisible) return;
+    const doc = document.documentElement;
+    const viewport = window.innerHeight || doc.clientHeight || 0;
+    const scrollTop = window.scrollY || doc.scrollTop || 0;
+    const fullHeight = Math.max(doc.scrollHeight, document.body ? document.body.scrollHeight : 0);
+    const reachedBottom = scrollTop + viewport >= fullHeight - 26;
+    const noScrollNeeded = fullHeight <= viewport + 26;
+    if (!reachedBottom && !noScrollNeeded) return;
 
     const readMap = getReadOnceProgress();
     readMap[getReadToken(state.sectionId, state.current)] = true;
@@ -3804,9 +3815,6 @@ reset_personalizado</pre>
     updateStudentFlowAnchor(groups, current);
 
     const currentElement = groups[current];
-    if (studentStepNav && currentElement && studentStepNav.parentElement !== currentElement) {
-      currentElement.appendChild(studentStepNav);
-    }
     const isTaskStep = Boolean(currentElement && currentElement.querySelector('.mission-task'));
     const taskProgress = getTaskProgress();
     const sectionTaskState = taskProgress[sectionId] || { finished: false };
@@ -3836,7 +3844,6 @@ reset_personalizado</pre>
         studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
       }
     }
-    updateReadGateByScroll();
   }
 
   function changeStudentSlide(delta) {
