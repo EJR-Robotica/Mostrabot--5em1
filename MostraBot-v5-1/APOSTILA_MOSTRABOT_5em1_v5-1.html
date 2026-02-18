@@ -583,29 +583,17 @@
         }
         .mod1-hit {
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 34px;
+            height: 34px;
             border-radius: 999px;
             border: 3px solid #ff4d4d;
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.35);
             box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.2);
+            pointer-events: none;
         }
-        .mod1-hit.hit-bu { top: 52%; left: 64%; border-color: #ff9f1a; box-shadow: 0 0 0 3px rgba(255,159,26,0.24); }
-        .mod1-hit.hit-pf { top: 41%; left: 41%; border-color: #2ecc71; box-shadow: 0 0 0 3px rgba(46,204,113,0.24); }
-        .mod1-hit.hit-lde { top: 52%; left: 55%; border-color: #3498db; box-shadow: 0 0 0 3px rgba(52,152,219,0.24); }
-        .mod1-tag {
-            position: absolute;
-            padding: 3px 7px;
-            border-radius: 8px;
-            font-size: 8.5pt;
-            font-weight: 800;
-            color: #083a56;
-            background: #e8f6ff;
-            border: 1px solid #7ec9f5;
-        }
-        .mod1-tag.tag-bu { top: 56%; left: 70%; }
-        .mod1-tag.tag-pf { top: 33%; left: 32%; }
-        .mod1-tag.tag-lde { top: 56%; left: 46%; }
+        .mod1-hit.hit-bu { top: 19%; left: 57.5%; border-color: #ff9f1a; box-shadow: 0 0 0 3px rgba(255,159,26,0.24); }
+        .mod1-hit.hit-pf { top: 39%; left: 24.5%; border-color: #2ecc71; box-shadow: 0 0 0 3px rgba(46,204,113,0.24); }
+        .mod1-hit.hit-lde { top: 30%; left: 68.5%; border-color: #3498db; box-shadow: 0 0 0 3px rgba(52,152,219,0.24); }
         .mascot-strip {
             margin-top: 10px;
             display: grid;
@@ -2343,16 +2331,13 @@ pd 120</pre></div>
             <li>Agora execute o exercicio da tarefa 4 nesta ordem (no Modulo 1, o efeito acontece ao clicar):
                 <br>1) clique em <strong>BU</strong> (som do buzzer)
                 <br>2) clique em <strong>PF</strong> (andar para frente)
-                <br>3) clique em <strong>LDE</strong> para piscar os dois LEDs
-                <br>4) repita o passo do <strong>LDE</strong> ate completar <strong>3 piscadas</strong>
+                <br>3) clique em <strong>LD</strong> e depois em <strong>LE</strong> para piscar os dois LEDs
+                <br>4) repita o passo de <strong>LD + LE</strong> ate completar <strong>3 piscadas</strong>
                 <div class="task-visual mod1-hotspots">
-                    <img src="mod1.png" alt="Modulo 1 com destaque visual nos botoes BU, PF e LDE">
+                    <img src="mod1.png" alt="Modulo 1 com destaque visual nos botoes BU, PF, LD e LE">
                     <span class="mod1-hit hit-bu" aria-hidden="true"></span>
                     <span class="mod1-hit hit-pf" aria-hidden="true"></span>
                     <span class="mod1-hit hit-lde" aria-hidden="true"></span>
-                    <span class="mod1-tag tag-bu">BU</span>
-                    <span class="mod1-tag tag-pf">PF</span>
-                    <span class="mod1-tag tag-lde">LDE</span>
                 </div>
             </li>
         </ol>
