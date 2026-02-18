@@ -243,7 +243,64 @@
             margin-right: 6px;
         }
         
-        .lesson-card {
+        
+        .mission-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+            border: 2px solid #b8d9f5;
+            background: #f7fbff;
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin: 12px 0 18px 0;
+        }
+        .mission-name {
+            font-weight: 800;
+            color: #1a5276;
+            font-size: 12pt;
+        }
+        .mission-goal {
+            font-size: 10pt;
+            color: #333;
+            margin-top: 4px;
+        }
+        .mission-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .mission-badge {
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: #e8f4ff;
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 9pt;
+        }
+        .mission-reward {
+            margin-top: 6px;
+            font-size: 9pt;
+            color: #7f5600;
+            background: #f1c40f;
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+        .mission-task {
+            border: 2px dashed #b8d9f5;
+            background: #f7f9fb;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin: 12px 0;
+        }
+        .mission-task-title {
+            font-weight: 800;
+            color: #2c6fb3;
+        }
+            .lesson-card {
             border: 2px solid var(--border);
             border-radius: 12px;
             padding: 18px;
@@ -299,6 +356,125 @@
         .indice-list a:hover {
             text-decoration: underline;
         }
+        
+        body {
+            background: radial-gradient(1200px 600px at 10% 0%, #e8f4ff, #f5f5f5);
+        }
+        .game-hero {
+            background: linear-gradient(135deg, #1a5276, #2c6fb3 50%, #5fc99a);
+            color: white;
+            padding: 28px;
+            border-radius: 16px;
+            margin: 10px 0 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-hero h2 {
+            color: white;
+            border: none;
+            margin: 0 0 8px 0;
+        }
+        .game-hero p { margin: 6px 0; }
+        .game-hero .sparkle {
+            position: absolute;
+            right: -30px;
+            top: -30px;
+            width: 140px;
+            height: 140px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        .progress-track {
+            background: rgba(255,255,255,0.25);
+            border-radius: 999px;
+            overflow: hidden;
+            height: 12px;
+            margin: 10px 0 0 0;
+        }
+        .progress-fill {
+            width: 35%;
+            height: 100%;
+            background: #f1c40f;
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin: 14px 0 24px 0;
+        }
+        .mission-card {
+            border: 2px solid #b8d9f5;
+            border-radius: 14px;
+            padding: 14px;
+            background: #ffffff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transform: translateY(0);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .mission-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .mission-title {
+            font-weight: 800;
+            color: #1a5276;
+            margin-bottom: 6px;
+        }
+        .mission-tag {
+            display: inline-block;
+            font-size: 9pt;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: #e8f4ff;
+            color: #1a5276;
+            font-weight: 700;
+        }
+        .badge-row { margin-top: 8px; }
+        .badge {
+            display: inline-block;
+            margin-right: 6px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            background: #f1c40f;
+            color: #7f5600;
+            font-weight: 700;
+            font-size: 9pt;
+        }
+        .cta-button {
+            display: inline-block;
+            margin-top: 8px;
+            background: #2ecc71;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 10pt;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .quest-box {
+            border: 2px dashed #b8d9f5;
+            background: #f7f9fb;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        .quest-title {
+            font-weight: 800;
+            color: #2c6fb3;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.03); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.95; }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+            100% { transform: translateY(0); }
+        }
+    
         @media print {
             nav { display: none; }
             main { margin-left: 0; }
@@ -316,7 +492,8 @@
 
 <nav>
     <h2>INDICE</h2>
-        <a href="#aulas">0. Aulas por Etapas</a>
+            <a href="#mapa-jogo">0. Mapa do Jogo</a>
+<a href="#aulas">0. Aulas por Etapas</a>
 <a href="#intro">1. Introducao</a>
     <a href="#hardware">2. Hardware</a>
     <a href="#sinais">3. Sinais LED</a>
@@ -350,7 +527,8 @@
     <div class="indice-box" id="indice">
         <div class="indice-title">INDICE</div>
         <ul class="indice-list">
-                        <li><a href="#aulas">0. Aulas por Etapas</a></li>
+                                    <li><a href="#mapa-jogo">0. Mapa do Jogo</a></li>
+<li><a href="#aulas">0. Aulas por Etapas</a></li>
 <li><a href="#intro">1. Introducao</a></li>
             <li><a href="#hardware">2. Hardware</a></li>
             <li><a href="#sinais">3. Sinais LED</a></li>
@@ -372,7 +550,68 @@
             <li><a href="#upgrade52">18. Upgrade 5.2</a></li>
             <li><a href="#glossario">19. Glossario</a></li>
         </ul>
+    
+    <h1 id="mapa-jogo">0. Mapa do Jogo (Apostila Gamificada)</h1>
+
+    <div class="game-hero">
+        <div class="sparkle"></div>
+        <h2>Missões do MostraBot</h2>
+        <p>O professor guia as crianças como um jogo por fases. Cada missão tem um objetivo simples.</p>
+        <p><strong>Meta:</strong> completar as missões e ganhar selos.</p>
+        <div class="progress-track"><div class="progress-fill"></div></div>
     </div>
+
+    <div class="mission-grid">
+        <div class="mission-card">
+            <div class="mission-title">Missão 0 — Acordar o Robô</div>
+            <span class="mission-tag">Ligar + PJE</span>
+            <div class="badge-row"><span class="badge">Selo: Energia</span></div>
+            <div class="cta-button">Começar</div>
+        </div>
+        <div class="mission-card">
+            <div class="mission-title">Missão 1 — Caminho Seguro</div>
+            <span class="mission-tag">Movimento</span>
+            <div class="badge-row"><span class="badge">Selo: Direção</span></div>
+            <div class="cta-button">Jogar</div>
+        </div>
+        <div class="mission-card">
+            <div class="mission-title">Missão 2 — Olhos que Piscam</div>
+            <span class="mission-tag">LEDs</span>
+            <div class="badge-row"><span class="badge">Selo: Luz</span></div>
+            <div class="cta-button">Jogar</div>
+        </div>
+        <div class="mission-card">
+            <div class="mission-title">Missão 3 — Garra Colecionadora</div>
+            <span class="mission-tag">Garra + Som</span>
+            <div class="badge-row"><span class="badge">Selo: Garra</span></div>
+            <div class="cta-button">Jogar</div>
+        </div>
+        <div class="mission-card">
+            <div class="mission-title">Missão 4 — Seguir a Linha</div>
+            <span class="mission-tag">Sensor de Linha</span>
+            <div class="badge-row"><span class="badge">Selo: Trilho</span></div>
+            <div class="cta-button">Jogar</div>
+        </div>
+        <div class="mission-card">
+            <div class="mission-title">Missão 5 — Desvio de Obstáculos</div>
+            <span class="mission-tag">Ultrassônico</span>
+            <div class="badge-row"><span class="badge">Selo: Desvio</span></div>
+            <div class="cta-button">Jogar</div>
+        </div>
+        <div class="mission-card">
+            <div class="mission-title">Missão 6 — Desafio Final</div>
+            <span class="mission-tag">REPITA + SE</span>
+            <div class="badge-row"><span class="badge">Selo: Mestre</span></div>
+            <div class="cta-button">Jogar</div>
+        </div>
+    </div>
+
+    <div class="quest-box">
+        <div class="quest-title">Regra do Jogo</div>
+        <p>Somente avance quando a turma concluir a missão anterior. Isso evita confusão.</p>
+    </div>
+
+</div>
 
     <!-- SECAO 1 -->
     
@@ -448,6 +687,14 @@
         <p>Passo a passo será explicado no video. Após assistir, o professor repete o processo com os alunos.</p>
     </div>
 <h1 id="intro">1. Introducao ao MostraBot</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Conhecer o Robo</div>
+            <div class="mission-goal">Objetivo: Saber o que e e para que serve</div>
+            <div class="mission-reward">Selo: Explorador</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Boas-vindas</span></div>
+    </div>
 
     <h2>O que e o MostraBot?</h2>
     <img class="module-img didactic-img" src="assets_full/01_intro_robo.png" alt="Mostrabot - robo educacional">
@@ -504,6 +751,14 @@
 
     <!-- SECAO 2 -->
     <h1 id="hardware">2. Conhecendo o Hardware</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Conhecer as Pecas</div>
+            <div class="mission-goal">Objetivo: Identificar partes principais</div>
+            <div class="mission-reward">Selo: Montagem</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Hardware</span></div>
+    </div>
 
     <h2>O Microcontrolador</h2>
     <p>O MostraBot usa o <strong>Wemos D1 Mini</strong>, uma placa baseada no chip ESP8266 com WiFi integrado.</p>
@@ -571,6 +826,14 @@
 
     <!-- SECAO 3 -->
     <h1 id="sinais">3. Sinais Visuais do Robo <img class="icon-inline" src="assets_external/led_symbol_ext.svg" alt="LED"></h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Entender o LED</div>
+            <div class="mission-goal">Objetivo: Saber quando esta pronto</div>
+            <div class="mission-reward">Selo: Luz</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">LED</span></div>
+    </div>
 
     <p>Esta e uma das secoes mais importantes! O robo "fala" com voce atraves de LEDs. Aprenda a interpretar esses sinais.</p>
 
@@ -623,6 +886,14 @@
 
     <!-- SECAO 4 -->
     <h1 id="primeiros-passos">4. Primeiros Passos</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Primeiros Passos</div>
+            <div class="mission-goal">Objetivo: Checklist inicial</div>
+            <div class="mission-reward">Selo: Pronto</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Preparacao</span></div>
+    </div>
 
     <h2>Checklist Pre-Operacao</h2>
     <div class="box">
@@ -649,6 +920,14 @@
 
     <!-- SECAO 4A -->
     <h1 id="ligar-robo">4A. Como Ligar o Robo (Bateria + ID)</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Acordar o Robo</div>
+            <div class="mission-goal">Objetivo: Ligar e entrar na PJE</div>
+            <div class="mission-reward">Selo: Energia</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Energia</span><span class="mission-badge">WiFi</span></div>
+    </div>
 
     <div class="box box-danger">
         <h3>REGRA MAIS IMPORTANTE</h3>
@@ -700,6 +979,14 @@
 
     <!-- SECAO 5 -->
     <h1 id="movimento">5. Comandos de Movimento <img class="icon-inline" src="assets_icons/dc_motor.svg" alt="Motor"></h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Caminho Seguro</div>
+            <div class="mission-goal">Objetivo: Andar e virar</div>
+            <div class="mission-reward">Selo: Direcao</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Movimento</span></div>
+    </div>
 
     <h2>Layout dos Modulos (M1, M2 e M4)</h2>
     <img class="module-img" src="assets_full/05_movimento_botoes.png" alt="Botoes de movimento na PJE">
@@ -833,6 +1120,14 @@ pd 120</pre></div>
 
     <!-- SECAO 6 -->
     <h1 id="led">6. Comandos de LED (Olhos) <img class="icon-inline" src="assets_icons/led.svg" alt="LED"></h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Olhos que Piscam</div>
+            <div class="mission-goal">Objetivo: Usar LEDs</div>
+            <div class="mission-reward">Selo: Luz</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">LED</span></div>
+    </div>
     <img class="module-img" src="assets_full/06_led_botoes.png" alt="Botoes de LED na PJE">
     <div class="module-caption">Use LD, LE e LDE para os olhos</div>
 
@@ -852,6 +1147,14 @@ pd 120</pre></div>
 
     <!-- SECAO 7 -->
     <h1 id="servo">7. Comandos de Servo (Garra) <img class="icon-inline" src="assets_icons/servo.svg" alt="Servo"></h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Garra Colecionadora</div>
+            <div class="mission-goal">Objetivo: Abrir e fechar</div>
+            <div class="mission-reward">Selo: Garra</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Garra</span></div>
+    </div>
     <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Botoes da garra na PJE">
     <div class="module-caption">BC = baixa a garra, SC = sobe a garra</div>
 
@@ -878,6 +1181,14 @@ pt 500          # Recua com o objeto</pre></div>
 
     <!-- SECAO 8 -->
     <h1 id="buzzer">8. Comando de Buzzer (Som) <img class="icon-inline" src="assets_icons/buzzer.svg" alt="Buzzer"></h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Som do Robo</div>
+            <div class="mission-goal">Objetivo: Usar buzzer</div>
+            <div class="mission-reward">Selo: Som</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Som</span></div>
+    </div>
     <img class="module-img" src="assets_full/08_buzzer_botao.png" alt="Botao BU na PJE">
     <div class="module-caption">BU faz o bip do robo</div>
 
@@ -895,6 +1206,14 @@ bu              # Bipe de 800ms (padrao)</pre></div>
 
     <!-- SECAO 9 -->
     <h1 id="linha">9. Sensor Seguidor de Linha <img class="icon-inline" src="assets_icons/check.svg" alt="Linha"></h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Seguir Trilhos</div>
+            <div class="mission-goal">Objetivo: Seguir a linha</div>
+            <div class="mission-reward">Selo: Trilho</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Sensor</span></div>
+    </div>
     <img class="module-img didactic-img" src="assets_full/09_linha_sensor.png" alt="Sensor de linha">
     <div class="module-caption">O robo segue a linha no chao</div>
 
@@ -952,6 +1271,14 @@ bu 500</pre></div>
 
     <!-- SECAO 10 -->
     <h1 id="ultra">10. Sensor Ultrassonico <img class="icon-inline" src="assets_icons/warning.svg" alt="Ultrassom"></h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Desvio de Obstaculos</div>
+            <div class="mission-goal">Objetivo: Desviar automaticamente</div>
+            <div class="mission-reward">Selo: Desvio</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Sensor</span></div>
+    </div>
     <img class="module-img didactic-img" src="assets_full/10_ultra_sensor.png" alt="Sensor ultrassonico">
     <div class="module-caption">Desvia de obstaculos automaticamente</div>
 
@@ -1043,6 +1370,14 @@ t 500</pre></div>
 
     <!-- SECAO 11 -->
     <h1 id="controle">11. Estruturas de Controle</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Repetir e Reagir</div>
+            <div class="mission-goal">Objetivo: Usar REPITA e SE</div>
+            <div class="mission-reward">Selo: Mestre</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Logica</span></div>
+    </div>
 
     <h2>REPITA (Loop)</h2>
     <img class="module-img didactic-img" src="assets_full/11_repita.png" alt="Exemplo de REPITA">
@@ -1103,6 +1438,14 @@ sensor off</pre></div>
 
     <!-- SECAO 12 -->
     <h1 id="condicoes">12. Condicoes para o Comando SE</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Entender Condicoes</div>
+            <div class="mission-goal">Objetivo: Escolher a condicao certa</div>
+            <div class="mission-reward">Selo: Leitor</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Logica</span></div>
+    </div>
 
     <h2>Condicoes de Linha</h2>
     <img class="module-img didactic-img" src="assets_full/13_condicoes_linha.png" alt="Condicoes do sensor de linha">
@@ -1180,6 +1523,14 @@ sensor off</pre></div>
 
     <!-- SECAO 13 -->
     <h1 id="calibracao">13. Calibracao dos Motores</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Deixar Reto</div>
+            <div class="mission-goal">Objetivo: Calibrar se puxa</div>
+            <div class="mission-reward">Selo: Ajuste</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Ajuste</span></div>
+    </div>
     <img class="module-img didactic-img" src="assets_full/15_calibracao.png" alt="Calibracao dos motores">
     <div class="module-caption">Use quando o robo puxa para um lado</div>
 
@@ -1212,6 +1563,14 @@ sensor off</pre></div>
 
     <!-- SECAO 15 -->
     <h1 id="referencia">15. Tabela de Referencia Rapida</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Consulta Rapida</div>
+            <div class="mission-goal">Objetivo: Usar tabela</div>
+            <div class="mission-reward">Selo: Rapido</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Consulta</span></div>
+    </div>
 
     <table>
         <tr><th>Categoria</th><th>Comando</th><th>Descricao</th></tr>
@@ -1255,6 +1614,14 @@ sensor off</pre></div>
 
     <!-- SECAO 16 -->
     <h1 id="exemplos">16. Exemplos Praticos Completos</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Programas Completos</div>
+            <div class="mission-goal">Objetivo: Fazer um projeto</div>
+            <div class="mission-reward">Selo: Criador</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Projeto</span></div>
+    </div>
 
     <h2>Quadrado com LEDs</h2>
     <div class="pje-example">
@@ -1450,6 +1817,14 @@ bu 500</pre></div>
 
     <!-- SECAO 17 -->
     <h1 id="problemas">17. Resolucao de Problemas</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Resolver</div>
+            <div class="mission-goal">Objetivo: Encontrar o erro</div>
+            <div class="mission-reward">Selo: Socorro</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Ajuda</span></div>
+    </div>
     <img class="module-img didactic-img" src="assets_full/16_problemas.png" alt="Checklist de problemas">
     <div class="module-caption">Checklist rapido para resolver problemas</div>
 
@@ -1502,6 +1877,14 @@ bu 500</pre></div>
 
     <!-- SECAO 18 -->
     <h1 id="upgrade52">18. Upgrade 5.2 - Novas Funcoes (Opcional)</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Recursos Extras</div>
+            <div class="mission-goal">Objetivo: Conhecer upgrade</div>
+            <div class="mission-reward">Selo: Avancado</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Extra</span></div>
+    </div>
 
     <p>A versao 5.1 foi feita para simplicidade e confiabilidade em sala de aula. Para escolas que desejam mais automacao e recursos avancados, existe a versao 5.2 com modos prontos para navegacao em labirintos e maior variedade de comandos.</p>
 
@@ -1545,6 +1928,14 @@ reset_personalizado</pre>
 
     <!-- SECAO 19 -->
     <h1 id="glossario">19. Glossario</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Missao: Palavras Simples</div>
+            <div class="mission-goal">Objetivo: Entender termos</div>
+            <div class="mission-reward">Selo: Vocabulário</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Glossario</span></div>
+    </div>
 
     <table>
         <tr><th>Termo</th><th>Definicao</th></tr>
