@@ -354,10 +354,13 @@
             display: none;
         }
         .task-row.done {
-            opacity: 0.75;
+            opacity: 1;
+            border-color: #35c36e;
+            background: linear-gradient(180deg, #edfff3, #dafbe6);
+            box-shadow: inset 0 0 0 2px rgba(53,195,110,0.22);
         }
         .task-row.done .task-text {
-            text-decoration: line-through;
+            text-decoration: none;
         }
         .task-text {
             display: block;
@@ -371,6 +374,17 @@
             font-size: 9pt;
             font-weight: 700;
             margin-bottom: 8px;
+        }
+        .task-visual {
+            margin: 8px 0 10px 0;
+        }
+        .task-visual img {
+            width: 100%;
+            max-width: 460px;
+            border: 2px solid #b8d9f5;
+            border-radius: 10px;
+            background: #fff;
+            display: block;
         }
         .task-complete-btn {
             border: 2px solid #ff7f11;
@@ -1102,6 +1116,10 @@
         body.mode-aluno .learning-hud {
             position: static;
         }
+        body.mode-professor .learning-hud,
+        body.mode-apresentacao .learning-hud {
+            position: static;
+        }
         body.mode-aluno .student-step-nav {
             display: flex;
         }
@@ -1650,9 +1668,15 @@
     <div class="mission-task">
         <div class="mission-task-title">Fluxo real da PJE (acesso externo em nuvem)</div>
         <ol>
-            <li>Clique em <strong>Programar</strong> no menu do topo da PJE.</li>
-            <li>No login, use o <strong>ID da fita amarela da bateria</strong> e senha <strong>123</strong>.</li>
-            <li>Na caixa de selecao, escolha o <strong>modulo da missao</strong> (1, 2 ou 4).</li>
+            <li>Clique em <strong>Programar</strong> no menu do topo da PJE.
+                <div class="task-visual"><img src="assets_lessons/11_pje_menu_programar.svg" alt="Passo 1 da PJE: clicar em Programar"></div>
+            </li>
+            <li>No login, use o <strong>ID da fita amarela da bateria</strong> e senha <strong>123</strong>.
+                <div class="task-visual"><img src="assets_lessons/12_pje_login_id_senha.svg" alt="Passo 2 da PJE: login com ID e senha"></div>
+            </li>
+            <li>Na caixa de selecao, escolha o <strong>modulo da missao</strong> (1, 2 ou 4).
+                <div class="task-visual"><img src="assets_lessons/13_pje_modulo_missao.svg" alt="Passo 3 da PJE: escolher modulo da missao"></div>
+            </li>
             <li>Execute a tarefa da missao no modulo correto e valide no robo.</li>
         </ol>
         <table>
@@ -1661,12 +1685,6 @@
             <tr><td>Modulo 2</td><td>Digita comandos no campo de texto</td><td>Sequencia e previsao</td></tr>
             <tr><td>Modulo 4</td><td>Texto + sensores + condicoes</td><td>Autonomia e tomada de decisao</td></tr>
         </table>
-        <img class="module-img didactic-img" src="assets_lessons/11_pje_menu_programar.svg" alt="Menu da PJE com botao Programar">
-        <div class="module-caption">Passo 1: clicar em Programar no menu superior da PJE</div>
-        <img class="module-img didactic-img" src="assets_lessons/12_pje_login_id_senha.svg" alt="Login PJE com ID, senha e selecao de modulo">
-        <div class="module-caption">Passo 2: login com ID da fita amarela, senha 123 e selecao do modulo da missao</div>
-        <img class="module-img didactic-img" src="assets_lessons/13_pje_modulo_missao.svg" alt="Tela do modulo com tarefa da missao">
-        <div class="module-caption">Passo 3: executar tarefa no modulo da missao e validar no robo</div>
         <p><strong>Acesso externo (PJE online):</strong></p>
         <div class="cloud-links">
             <a class="cloud-link" href="https://pje.ejrrobotica.com.br/index.php" target="_blank" rel="noopener noreferrer">Login</a>
@@ -1936,9 +1954,13 @@
     <div class="mission-task">
         <div class="mission-task-title">Tarefa da Missao 0 (conclusao rapida)</div>
         <ol>
-            <li>Entrar na PJE no <strong>Modulo 1</strong>.</li>
+            <li>Clique em <strong>Programar</strong> e entre na PJE no <strong>Modulo 1</strong>.
+                <div class="task-visual"><img src="assets_lessons/11_pje_menu_programar.svg" alt="Programar no topo da PJE"></div>
+            </li>
             <li>Selecionar tempo <strong>500</strong>.</li>
-            <li>Clicar em <strong>LD</strong> e depois em <strong>ENVIAR</strong>.</li>
+            <li>Clicar em <strong>LD</strong> e depois em <strong>ENVIAR</strong>.
+                <div class="task-visual"><img src="assets_full/06_led_botoes.png" alt="Botao LD no modulo 1"></div>
+            </li>
             <li>Confirmar que o LED piscou no robo.</li>
         </ol>
         <p><strong>Missao concluida:</strong> robo piscou LED no teste inicial.</p>
@@ -1958,9 +1980,13 @@
     <div class="mission-task">
         <div class="mission-task-title">Tarefa da Missao 1 (Modulo 1)</div>
         <ol>
-            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 1</strong></a>.</li>
+            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 1</strong></a>.
+                <div class="task-visual"><img src="assets_lessons/13_pje_modulo_missao.svg" alt="Escolha e acesso ao modulo da missao"></div>
+            </li>
             <li>Escolha tempo 1000 no select.</li>
-            <li>Clique em PF e ENVIAR.</li>
+            <li>Clique em PF e ENVIAR.
+                <div class="task-visual"><img src="assets_full/05_movimento_botoes.png" alt="Botoes PF e ENVIAR no modulo 1"></div>
+            </li>
             <li>Repita com PD (200) para virar.</li>
         </ol>
         <p><strong>Missao concluida:</strong> robo andou e virou no modulo correto.</p>
@@ -2111,7 +2137,9 @@ pd 120</pre></div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 1</strong></a>.</li>
             <li>Escolha tempo 500.</li>
-            <li>Clique em LD e ENVIAR.</li>
+            <li>Clique em LD e ENVIAR.
+                <div class="task-visual"><img src="assets_full/06_led_botoes.png" alt="Botoes de LED no modulo 1"></div>
+            </li>
             <li>Depois LE e ENVIAR.</li>
         </ol>
         <p><strong>Missao concluida:</strong> os dois olhos piscaram conforme o comando.</p>
@@ -2147,7 +2175,9 @@ pd 120</pre></div>
         <div class="mission-task-title">Tarefa da Missao 3 (Modulo 2)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 2</strong></a>.</li>
-            <li>Digite: <code>sc</code>, <code>t 100</code>, <code>bc</code>.</li>
+            <li>Digite: <code>sc</code>, <code>t 100</code>, <code>bc</code>.
+                <div class="task-visual"><img src="assets_full/07_servo_botoes.png" alt="Comandos de garra no modulo 2"></div>
+            </li>
             <li>Clique em ENVIAR.</li>
             <li>Observe a garra abrir e fechar.</li>
         </ol>
@@ -2191,7 +2221,9 @@ pt 500          # Recua com o objeto</pre></div>
         <div class="mission-task-title">Tarefa extra (Modulo 2)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 2</strong></a>.</li>
-            <li>Digite <code>bu 300</code> e envie.</li>
+            <li>Digite <code>bu 300</code> e envie.
+                <div class="task-visual"><img src="assets_full/08_buzzer_botao.png" alt="Botao de buzzer no modulo 2"></div>
+            </li>
             <li>Repita com <code>bu 100</code>.</li>
         </ol>
         <p><strong>Concluido:</strong> aluno percebeu relacao entre tempo e duracao do som.</p>
@@ -2225,7 +2257,9 @@ bu              # Bipe de 800ms (padrao)</pre></div>
         <div class="mission-task-title">Tarefa da Missao 4 (Modulo 4)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 4</strong></a>.</li>
-            <li>Digite o bloco: <code>sensor linha</code> + <code>seguir-linha</code>.</li>
+            <li>Digite o bloco: <code>sensor linha</code> + <code>seguir-linha</code>.
+                <div class="task-visual"><img src="assets_full/09_linha_sensor.png" alt="Exemplo do sensor de linha no modulo 4"></div>
+            </li>
             <li>Envie e observe o robo seguir a faixa.</li>
             <li>Finalize com <code>sensor off</code>.</li>
         </ol>
@@ -2300,7 +2334,9 @@ bu 500</pre></div>
         <div class="mission-task-title">Tarefa da Missao 5 (Modulo 4)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 4</strong></a>.</li>
-            <li>Digite: <code>sensor ultra</code> e depois <code>seguir-ultra 2000</code>.</li>
+            <li>Digite: <code>sensor ultra</code> e depois <code>seguir-ultra 2000</code>.
+                <div class="task-visual"><img src="assets_full/10_ultra_sensor.png" alt="Exemplo do sensor ultrassonico no modulo 4"></div>
+            </li>
             <li>Envie e coloque um obstaculo na frente.</li>
             <li>Verifique o desvio automatico e finalize com <code>sensor off</code>.</li>
         </ol>
@@ -2409,7 +2445,9 @@ t 500</pre></div>
         <div class="mission-task-title">Tarefa da Missao 6 (Modulo 4)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 4</strong></a>.</li>
-            <li>Monte um programa com <code>repita</code> e <code>se</code>.</li>
+            <li>Monte um programa com <code>repita</code> e <code>se</code>.
+                <div class="task-visual"><img src="assets_full/11_repita.png" alt="Comando repita no modulo 4"></div>
+            </li>
             <li>Envie e observe se o robo reage a condicao.</li>
             <li>Ajuste tempo ate o comportamento ficar estavel.</li>
         </ol>
@@ -3407,7 +3445,7 @@ reset_personalizado</pre>
 
     items.forEach((row, idx) => {
       const done = Boolean(taskState.tasks && taskState.tasks[idx]);
-      const visible = activeIndex === -1 ? done && idx === items.length - 1 : idx === activeIndex;
+      const visible = activeIndex === -1 ? true : done || idx === activeIndex;
       row.classList.toggle('task-row-hidden', !visible);
       row.classList.toggle('done', done);
       const btn = row.querySelector('.task-complete-btn');
