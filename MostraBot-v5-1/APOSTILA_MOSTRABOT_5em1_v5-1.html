@@ -526,6 +526,95 @@
             position: relative;
             overflow: hidden;
         }
+        .start-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin: 0 0 14px 0;
+        }
+        .step-panel {
+            border: 2px solid #9fd4ff;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #f7fcff, #edf8ff);
+            padding: 12px;
+            box-shadow: 0 6px 16px rgba(44,111,179,0.12);
+        }
+        .step-kicker {
+            display: inline-block;
+            border-radius: 999px;
+            padding: 3px 9px;
+            background: #ffe7b8;
+            border: 1px solid #ffbe55;
+            color: #8a4b00;
+            font-size: 8.5pt;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .step-panel h3 {
+            margin: 0 0 6px 0;
+            color: #0e4668;
+            font-size: 12.5pt;
+        }
+        .step-panel p {
+            margin: 0 0 8px 0;
+            color: #0e4668;
+            font-size: 9.8pt;
+        }
+        .robot-guide-btn {
+            width: 100%;
+            border: 2px solid #ff9f1c;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #fff7de, #ffedd0);
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            color: #8a2e00;
+            font-weight: 700;
+        }
+        .robot-hero-img {
+            width: 230px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 8px auto;
+            border-radius: 14px;
+            border: 3px solid #ffb347;
+            background: #fff;
+            animation: float 3s ease-in-out infinite;
+        }
+        .robot-guide-btn:hover {
+            filter: brightness(0.98);
+        }
+        .roadmap-panel {
+            margin: 12px 0 14px 0;
+            border: 2px solid #6ac4ff;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #f4fbff, #e9f8ff);
+            overflow: hidden;
+        }
+        .roadmap-panel > summary {
+            cursor: pointer;
+            list-style: none;
+            font-weight: 800;
+            color: #0e4668;
+            padding: 12px 14px;
+            background: linear-gradient(180deg, #dff5ff, #d0efff);
+            border-bottom: 2px solid #9bd9ff;
+        }
+        .roadmap-panel > summary::-webkit-details-marker {
+            display: none;
+        }
+        .roadmap-panel > summary::after {
+            content: ' +';
+            font-weight: 900;
+            color: #00897b;
+        }
+        .roadmap-panel[open] > summary::after {
+            content: ' -';
+        }
+        .roadmap-content {
+            padding: 10px 12px 12px 12px;
+        }
         .game-hero h2 {
             color: white;
             border: none;
@@ -864,6 +953,8 @@
             color: #1c7c4c;
         }
         body.mode-apresentacao .indice-box,
+        body.mode-apresentacao .start-steps,
+        body.mode-apresentacao .roadmap-panel,
         body.mode-apresentacao .module-focus,
         body.mode-apresentacao #lesson-hint,
         body.mode-apresentacao .quest-box,
@@ -931,6 +1022,42 @@
             font-weight: 800;
             color: #2c6fb3;
         }
+        .robot-dialog-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 38, 59, 0.65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 120;
+            padding: 14px;
+        }
+        .robot-dialog-backdrop[hidden] {
+            display: none;
+        }
+        .robot-dialog {
+            width: min(520px, 100%);
+            border: 3px solid #ffbe55;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #fffdf7, #fff5e5);
+            box-shadow: 0 18px 36px rgba(0,0,0,0.25);
+            padding: 14px;
+        }
+        .robot-dialog h3 {
+            margin: 0 0 8px 0;
+            color: #8a2e00;
+        }
+        .robot-dialog p {
+            margin: 6px 0;
+            color: #5f3000;
+            font-weight: 600;
+        }
+        .robot-dialog-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
         @keyframes pulse {
             0% { transform: scale(1); opacity: 0.95; }
             50% { transform: scale(1.03); opacity: 1; }
@@ -983,6 +1110,9 @@
                 min-height: 40px;
             }
             .mission-grid {
+                grid-template-columns: 1fr;
+            }
+            .start-steps {
                 grid-template-columns: 1fr;
             }
             .indice-list {
@@ -1071,7 +1201,8 @@
             <li><a href="#upgrade52">18. Upgrade 5.2</a></li>
             <li><a href="#glossario">19. Glossario</a></li>
         </ul>
-    
+    </div>
+
     <h1 id="mapa-jogo">0. Mapa do Jogo (Apostila Gamificada)</h1>
 
     <div class="game-hero">
@@ -1087,36 +1218,59 @@
             <span class="hud-pill">Aula atual: <span id="hud-aula">Aula 1</span></span>
             <span class="hud-pill">Modulo atual: <span id="hud-modulo">Modulo 1</span></span>
             <span class="hud-pill">Secao: <span id="hud-secao">Mapa do Jogo</span></span>
+            <span class="hud-pill">Atalhos: A | P | D</span>
         </div>
-        <div class="mode-switch" id="mode-switch">
-            <span class="mode-label">Modo de uso:</span>
-            <button class="mode-btn active" type="button" data-mode="aluno">Modo Aluno</button>
-            <button class="mode-btn" type="button" data-mode="professor">Modo Professor</button>
-            <button class="mode-btn" type="button" data-mode="apresentacao">Modo Apresentacao</button>
-            <span class="hud-pill">Modo atual: <span id="hud-modo">Aluno</span></span>
-            <span class="hud-pill">Atalhos: A Aluno | P Professor | D Apresentacao</span>
-        </div>
-        <div class="student-controls" id="student-controls">
-            <span class="mode-label">Faixa etaria (Aluno):</span>
-            <select class="age-select" id="age-select">
-                <option value="6-8">6-8 anos</option>
-                <option value="9-11" selected>9-11 anos</option>
-                <option value="12-14">12-14 anos</option>
-                <option value="15+">15+ anos</option>
-            </select>
-            <button class="mode-btn" type="button" id="back-stage-btn">Voltar 1 fase</button>
-            <button class="mode-btn" type="button" id="complete-stage-btn">Completar fase atual</button>
-            <button class="mode-btn" type="button" id="reset-progress-btn">Resetar progresso</button>
-            <span class="hud-pill">Fase liberada: <span id="hud-unlock">0</span>/6</span>
-            <span class="hud-pill">Missoes concluidas: <span id="hud-completed">0</span>/7</span>
-        </div>
-        <div class="presentation-controls" id="presentation-controls">
-            <span class="mode-label">Etapas guiadas:</span>
-            <button class="mode-btn" type="button" data-stage-nav="prev">Etapa Anterior</button>
-            <button class="mode-btn" type="button" data-stage-nav="next">Proxima Etapa</button>
-            <span class="hud-pill">Atalho: ← / → para etapas | Esc para sair</span>
+        <div class="start-steps">
+            <section class="step-panel">
+                <span class="step-kicker">Etapa 1</span>
+                <h3>Toque no MostraBot</h3>
+                <p>Clique no robô para abrir orientações curtas e tranquilas.</p>
+                <button class="robot-guide-btn" type="button" id="robot-guide-trigger">
+                    <img class="robot-hero-img" src="assets_lessons/mostrabot-padrao.png" alt="MostraBot guia da missão">
+                    <span>Oi! Clique em mim para receber a dica da fase.</span>
+                </button>
+            </section>
+            <section class="step-panel">
+                <span class="step-kicker">Etapa 2</span>
+                <h3>Escolha o modo</h3>
+                <p>Professor vê tudo. Aluno avança fase por fase.</p>
+                <div class="mode-switch" id="mode-switch">
+                    <button class="mode-btn active" type="button" data-mode="aluno">Modo Aluno</button>
+                    <button class="mode-btn" type="button" data-mode="professor">Modo Professor</button>
+                    <button class="mode-btn" type="button" data-mode="apresentacao">Modo Apresentacao</button>
+                    <span class="hud-pill">Modo atual: <span id="hud-modo">Aluno</span></span>
+                </div>
+            </section>
+            <section class="step-panel">
+                <span class="step-kicker">Etapa 3</span>
+                <h3>Controle de avanço</h3>
+                <p>Complete tarefas para liberar a próxima fase.</p>
+                <div class="student-controls" id="student-controls">
+                    <span class="mode-label">Faixa etaria (Aluno):</span>
+                    <select class="age-select" id="age-select">
+                        <option value="6-8">6-8 anos</option>
+                        <option value="9-11" selected>9-11 anos</option>
+                        <option value="12-14">12-14 anos</option>
+                        <option value="15+">15+ anos</option>
+                    </select>
+                    <button class="mode-btn" type="button" id="back-stage-btn">Voltar 1 fase</button>
+                    <button class="mode-btn" type="button" id="complete-stage-btn">Completar fase atual</button>
+                    <button class="mode-btn" type="button" id="reset-progress-btn">Resetar progresso</button>
+                    <span class="hud-pill">Fase liberada: <span id="hud-unlock">0</span>/6</span>
+                    <span class="hud-pill">Missoes concluidas: <span id="hud-completed">0</span>/7</span>
+                </div>
+                <div class="presentation-controls" id="presentation-controls">
+                    <span class="mode-label">Etapas guiadas:</span>
+                    <button class="mode-btn" type="button" data-stage-nav="prev">Etapa Anterior</button>
+                    <button class="mode-btn" type="button" data-stage-nav="next">Proxima Etapa</button>
+                    <span class="hud-pill">Atalho: ← / → | Esc</span>
+                </div>
+            </section>
         </div>
     </div>
+    <details class="roadmap-panel">
+        <summary>Abrir roadmap de fases</summary>
+        <div class="roadmap-content">
     <div class="module-focus" id="module-focus">
         <button class="focus-chip active" type="button" data-focus="all">Ver Tudo</button>
         <button class="focus-chip" type="button" data-focus="m1">Foco Modulo 1</button>
@@ -1191,13 +1345,12 @@
             <div class="mascot-text">"Missao concluida! Novo selo desbloqueado."</div>
         </div>
     </div>
+        </div>
+    </details>
     <div class="box box-info">
         <h3>Sinalizacoes de tranquilidade</h3>
         <p><strong>Verde:</strong> pode seguir. <strong>Amarelo:</strong> revisar com calma. <strong>Azul:</strong> dica de apoio. O foco e aprender com confianca, passo a passo.</p>
     </div>
-
-</div>
-
     <!-- SECAO 1 -->
     
     <!-- SECAO AULAS -->
@@ -2696,6 +2849,18 @@ reset_personalizado</pre>
     <button class="mode-btn" type="button" id="exit-presentation">Sair da Apresentacao (Esc)</button>
 </div>
 
+<div class="robot-dialog-backdrop" id="robot-dialog" hidden>
+    <div class="robot-dialog" role="dialog" aria-modal="true" aria-labelledby="robot-dialog-title">
+        <h3 id="robot-dialog-title">MostraBot diz:</h3>
+        <p>Respira fundo. Vamos em 3 passos: ligar robo, entrar na PJE, testar 1 comando.</p>
+        <p>Se travar, volte uma fase e tente de novo. Errar faz parte do jogo.</p>
+        <p>Objetivo de agora: concluir a tarefa atual e clicar em "Finalizar missao".</p>
+        <div class="robot-dialog-actions">
+            <button class="mode-btn" type="button" id="robot-dialog-close">Entendi</button>
+        </div>
+    </div>
+</div>
+
 
 <script>
 (function() {
@@ -2718,6 +2883,10 @@ reset_personalizado</pre>
   const modeButtons = Array.from(document.querySelectorAll('.mode-btn[data-mode]'));
   const stageButtons = Array.from(document.querySelectorAll('[data-stage-nav]'));
   const exitPresentationBtn = document.getElementById('exit-presentation');
+  const roadmapPanel = document.querySelector('.roadmap-panel');
+  const robotGuideTrigger = document.getElementById('robot-guide-trigger');
+  const robotDialog = document.getElementById('robot-dialog');
+  const robotDialogClose = document.getElementById('robot-dialog-close');
   const ageSelect = document.getElementById('age-select');
   const backStageBtn = document.getElementById('back-stage-btn');
   const completeStageBtn = document.getElementById('complete-stage-btn');
@@ -3358,6 +3527,9 @@ reset_personalizado</pre>
     if (studentControls) {
       studentControls.style.display = finalMode === 'aluno' ? 'flex' : 'none';
     }
+    if (roadmapPanel) {
+      roadmapPanel.open = finalMode === 'professor';
+    }
     applyStudentLocks();
     refreshStudentActionButton();
     applyStudentSingleScreen();
@@ -3474,6 +3646,19 @@ reset_personalizado</pre>
   if (exitPresentationBtn) {
     exitPresentationBtn.addEventListener('click', () => applyMode('aluno'));
   }
+  if (robotGuideTrigger && robotDialog) {
+    robotGuideTrigger.addEventListener('click', () => {
+      robotDialog.hidden = false;
+    });
+  }
+  if (robotDialog && robotDialogClose) {
+    robotDialogClose.addEventListener('click', () => {
+      robotDialog.hidden = true;
+    });
+    robotDialog.addEventListener('click', (event) => {
+      if (event.target === robotDialog) robotDialog.hidden = true;
+    });
+  }
 
   document.addEventListener('keydown', (event) => {
     const target = event.target;
@@ -3482,6 +3667,10 @@ reset_personalizado</pre>
     if (isTypingField) return;
 
     const key = (event.key || '').toLowerCase();
+    if (event.key === 'Escape' && robotDialog && !robotDialog.hidden) {
+      robotDialog.hidden = true;
+      return;
+    }
     if (key === 'a') applyMode('aluno');
     if (key === 'p') applyMode('professor');
     if (key === 'd') applyMode('apresentacao');
