@@ -228,6 +228,9 @@
             border-radius: 8px;
             background: white;
         }
+        .mvp-img {
+            max-width: 500px;
+        }
         .module-caption {
             text-align: center;
             font-size: 10pt;
@@ -288,6 +291,7 @@
     <a href="#hardware">2. Hardware</a>
     <a href="#sinais">3. Sinais LED</a>
     <a href="#primeiros-passos">4. Primeiros Passos</a>
+    <a href="#ligar-robo">4A. Como Ligar o Robo (Bateria + ID)</a>
     <a href="#movimento">5. Comandos Movimento</a>
     <a href="#led">6. Comandos LED</a>
     <a href="#servo">7. Comandos Servo</a>
@@ -320,6 +324,7 @@
             <li><a href="#hardware">2. Hardware</a></li>
             <li><a href="#sinais">3. Sinais LED</a></li>
             <li><a href="#primeiros-passos">4. Primeiros Passos</a></li>
+            <li><a href="#ligar-robo">4A. Como Ligar o Robo (Bateria + ID)</a></li>
             <li><a href="#movimento">5. Comandos Movimento</a></li>
             <li><a href="#led">6. Comandos LED</a></li>
             <li><a href="#servo">7. Comandos Servo</a></li>
@@ -524,6 +529,58 @@
         <li><strong>Conecte os sensores</strong> - SOMENTE apos as 2 piscadas lentas.</li>
         <li><strong>Acesse a PJE</strong> - pje.ejrrobotica.com.br</li>
         <li><strong>Teste basico</strong> - Digite: <code>pf 500</code></li>
+    </ol>
+
+
+    <!-- SECAO 4A -->
+    <h1 id="ligar-robo">4A. Como Ligar o Robo (Bateria + ID)</h1>
+
+    <div class="box box-danger">
+        <h3>REGRA MAIS IMPORTANTE</h3>
+        <p><strong>O robo NAO liga pela porta USB da Wemos.</strong> O cabo branco (V8) ja vem soldado na placa. Para ligar, conecte esse cabo branco na bateria externa. Ao conectar, o robo liga sozinho.</p>
+        <p><strong>NUNCA</strong> ligue dois USBs ao mesmo tempo (ex.: bateria + Wemos).</p>
+    </div>
+
+    <h2>Passos Rapidos (3 passos)</h2>
+    <img class="module-img mvp-img" src="assets_mvp/00_passos_rapidos.png" alt="Passos rapidos para ligar o robo e entrar na PJE">
+    <div class="module-caption">Resumo visual: ID, bateria e entrada na PJE</div>
+
+    <h2>PASSO 1: Encontre o ID do robo</h2>
+    <p>O ID e um numero de <strong>4 digitos</strong> colado na bateria (fita amarela). Anote esse numero.</p>
+    <img class="module-img mvp-img" src="assets_mvp/01_id.png" alt="Onde encontrar o ID de 4 digitos na bateria">
+    <div class="module-caption">Exemplo de ID na fita amarela (4 digitos)</div>
+
+    <h2>PASSO 2: Conecte o cabo branco na bateria</h2>
+    <p>O cabo branco ja vem soldado no robo. Conecte ele na bateria externa. <strong>Ao conectar, o robo liga automaticamente.</strong></p>
+    <img class="module-img mvp-img" src="assets_mvp/02_cabo_branco.png" alt="Cabo branco ja vem soldado no robo">
+    <div class="module-caption">O cabo branco ja vem pronto no robo</div>
+    <img class="module-img mvp-img" src="assets_mvp/03_ligar_na_bateria.png" alt="Conectar cabo branco na bateria para ligar">
+    <div class="module-caption">Conectar na bateria = robo ligado</div>
+
+    <h2>PASSO 3: Veja o LED</h2>
+    <ul>
+        <li><strong>Pisca rapido</strong> = conectando no Wi-Fi</li>
+        <li><strong>Duas piscadas lentas</strong> = pronto para usar</li>
+    </ul>
+    <img class="module-img mvp-img" src="assets_mvp/04_led_status.png" alt="LED mostra o status do robo">
+    <div class="module-caption">LED indica quando o robo esta pronto</div>
+
+    <h2>O que NAO fazer</h2>
+    <ul>
+        <li>NAO usar a USB da Wemos para ligar o robo.</li>
+        <li>A USB da Wemos e apenas para atualizar o programa do robo (firmware).</li>
+        <li>NAO ligar dois USBs ao mesmo tempo.</li>
+    </ul>
+    <img class="module-img mvp-img" src="assets_mvp/05_nao_usb_wemos.png" alt="Nao ligar o robo pela USB da Wemos">
+    <div class="module-caption">USB da Wemos so para atualizar o programa</div>
+
+    <h2>Entrando na PJE</h2>
+    <ol>
+        <li>Abra o navegador.</li>
+        <li>Digite: <strong>pje.ejrrobotica.com.br</strong></li>
+        <li>Digite o ID (4 digitos).</li>
+        <li>Senha padrao: <strong>123</strong></li>
+        <li>Clique em <strong>Entrar</strong>.</li>
     </ol>
 
     <!-- SECAO 5 -->
