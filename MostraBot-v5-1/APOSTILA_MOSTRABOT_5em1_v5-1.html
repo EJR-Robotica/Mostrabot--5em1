@@ -242,6 +242,24 @@
             vertical-align: -8px;
             margin-right: 6px;
         }
+        
+        .lesson-card {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            margin: 18px 0;
+            background: #f7f9fb;
+        }
+        .lesson-title {
+            font-size: 13pt;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .lesson-goal {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
         .module-caption {
             text-align: center;
             font-size: 10pt;
@@ -355,6 +373,64 @@
     </div>
 
     <!-- SECAO 1 -->
+    
+    <!-- SECAO AULAS -->
+    <h1 id="aulas">Aulas por Etapas (2h cada)</h1>
+    <p>Esta apostila foi organizada para acontecer em varias aulas. Cada etapa tem um objetivo claro e um exercicio visual.</p>
+
+    <div class="lesson-card">
+        <div class="lesson-title">Aula 0 — Ligar, Entrar e Testar</div>
+        <div class="lesson-goal">Objetivo: ligar o robo, entrar na PJE e executar o primeiro comando.</div>
+        <img class="module-img didactic-img" src="assets_lessons/01_ligar_robo.svg" alt="Aula 0 - ligar e entrar">
+        <div class="module-caption">Cabo branco na bateria, LED e entrada na PJE</div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-title">Aula 1 — Movimentos Basicos</div>
+        <div class="lesson-goal">Objetivo: andar para frente, tras e virar.</div>
+        <img class="module-img didactic-img" src="assets_lessons/02_trajeto_quadrado.svg" alt="Exercicio quadrado">
+        <div class="module-caption">Exercicio guiado: quadrado seguro</div>
+        <img class="module-img didactic-img" src="assets_lessons/03_trajeto_zigzag.svg" alt="Exercicio zigue zague">
+        <div class="module-caption">Desafio: zigue-zague com tempos curtos</div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-title">Aula 2 — LEDs (Feedback Visual)</div>
+        <div class="lesson-goal">Objetivo: usar LEDs para mostrar acao do robo.</div>
+        <img class="module-img didactic-img" src="assets_lessons/04_led_feedback.svg" alt="Movimento com LED">
+        <div class="module-caption">Sempre que andar, pisque o LED</div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-title">Aula 3 — Garra e Som</div>
+        <div class="lesson-goal">Objetivo: abrir/fechar garra e usar buzzer.</div>
+        <img class="module-img didactic-img" src="assets_lessons/05_garra_pegar.svg" alt="Pegar objeto">
+        <div class="module-caption">Simulacao de pegar e soltar</div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-title">Aula 4 — Sensor de Linha</div>
+        <div class="lesson-goal">Objetivo: seguir a linha no chao.</div>
+        <img class="module-img didactic-img" src="assets_lessons/06_linha.svg" alt="Seguir linha">
+        <div class="module-caption">Pista simples para seguir</div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-title">Aula 5 — Sensor Ultrassonico</div>
+        <div class="lesson-goal">Objetivo: desviar de obstaculos automaticamente.</div>
+        <img class="module-img didactic-img" src="assets_lessons/07_ultra_desvio.svg" alt="Desvio de obstaculos">
+        <div class="module-caption">Obstaculo na frente, o robo desvia</div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-title">Aula 6 — REPITA e SE</div>
+        <div class="lesson-goal">Objetivo: repetir movimentos e reagir ao sensor.</div>
+        <img class="module-img didactic-img" src="assets_lessons/08_repita_trajeto.svg" alt="Repita voltas">
+        <div class="module-caption">Repita 4 voltas no quadrado</div>
+        <img class="module-img didactic-img" src="assets_lessons/09_se_reacao.svg" alt="Se detectar, pare">
+        <div class="module-caption">Se detectar obstaculo, pare e recua</div>
+    </div>
+
     <h1 id="intro">1. Introducao ao MostraBot</h1>
 
     <h2>O que e o MostraBot?</h2>

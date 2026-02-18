@@ -1,0 +1,9 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='700' height='300' viewBox='0 0 700 300'>
+  <rect width='700' height='300' rx='16' fill='#ffffff' stroke='#dee2e6' stroke-width='3'/>
+  <text x='24' y='36' font-size='22' font-family='Arial' fill='#1a5276'>Exercicio: Pegar Objeto</text>
+  <circle cx='130' cy='190' r='16' fill='#e67e22'/>
+  <text x='170' y='196' font-size='18' font-family='Arial'>Objeto</text>
+  <rect x='360' y='120' width='260' height='120' rx='10' fill='#f7f9fb' stroke='#b8d9f5' stroke-width='3'/>
+  <text x='380' y='160' font-size='18' font-family='Arial'>bc (abre)</text>
+  <text x='380' y='190' font-size='18' font-family='Arial'>sc (fecha)</text>
+</svg>

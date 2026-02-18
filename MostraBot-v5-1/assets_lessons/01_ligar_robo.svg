@@ -1,0 +1,13 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='700' height='320' viewBox='0 0 700 320'>
+  <rect width='700' height='320' rx='16' fill='#f7f9fb' stroke='#dee2e6' stroke-width='3'/>
+  <text x='24' y='40' font-size='22' font-family='Arial' fill='#1a5276'>Aula 0: Ligar e Entrar na PJE</text>
+  <circle cx='90' cy='140' r='34' fill='#2ecc71'/>
+  <text x='78' y='148' font-size='22' font-family='Arial' fill='white'>1</text>
+  <text x='140' y='148' font-size='18' font-family='Arial'>Conecte o cabo branco na bateria</text>
+  <circle cx='90' cy='200' r='34' fill='#f1c40f'/>
+  <text x='78' y='208' font-size='22' font-family='Arial' fill='#7f5600'>2</text>
+  <text x='140' y='208' font-size='18' font-family='Arial'>LED piscando = conectando</text>
+  <circle cx='90' cy='260' r='34' fill='#3498db'/>
+  <text x='78' y='268' font-size='22' font-family='Arial' fill='white'>3</text>
+  <text x='140' y='268' font-size='18' font-family='Arial'>PJE: ID + senha 123</text>
+</svg>
