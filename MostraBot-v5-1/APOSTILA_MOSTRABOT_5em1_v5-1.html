@@ -481,9 +481,9 @@
             display: block;
         }
         .mission-finish-btn {
-            border: 2px solid #00b894;
-            background: linear-gradient(180deg, #e9fff8, #c6ffe8);
-            color: #005640;
+            border: 2px solid #ffbf00;
+            background: linear-gradient(180deg, #fff7d1, #ffe58a);
+            color: #7a4b00;
             border-radius: 12px;
             padding: 12px 14px;
             font-size: 11pt;
@@ -498,6 +498,12 @@
             cursor: not-allowed;
         }
         .mission-finish-btn:not(:disabled) {
+            box-shadow: 0 0 0 3px rgba(255,191,0,0.25);
+        }
+        .mission-finish-btn.done {
+            border-color: #00b894;
+            background: linear-gradient(180deg, #e9fff8, #c6ffe8);
+            color: #005640;
             box-shadow: 0 0 0 3px rgba(0,184,148,0.2);
         }
         .mission-finish-state {
@@ -1790,10 +1796,10 @@
             <a class="cloud-link" href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer">Modulo 4</a>
         </div>
         <p class="external-hint">Os links da PJE abrem em nova aba para voce nao perder esta trilha.</p>
+        <p><strong>Regra didatica simples:</strong> no Modulo 1 voce clica. No Modulo 2 ainda e guiado por cliques/semi-pronto. No Modulo 4 a escrita e manual.</p>
+        <img class="module-img" src="modulos.png" alt="Layout dos Modulos 1, 2 e 4 da PJE">
+        <div class="module-caption">Layout real dos Modulos 1, 2 e 4 na PJE (referencia visual para a pratica)</div>
     </div>
-    <p><strong>Regra didatica simples:</strong> no Modulo 1 voce clica. No Modulo 2 ainda e guiado por cliques/semi-pronto. No Modulo 4 a escrita e manual.</p>
-    <img class="module-img" src="modulos.png" alt="Layout dos Modulos 1, 2 e 4 da PJE">
-    <div class="module-caption">Layout real dos Modulos 1, 2 e 4 na PJE (referencia visual para a pratica)</div>
 
     <h2>Progressao Pedagogica</h2>
     <div class="diagram">
@@ -3219,7 +3225,7 @@ reset_personalizado</pre>
   const profChecklistItems = document.getElementById('prof-checklist-items');
   const stageOrder = ['intro', 'ligar-robo', 'led', 'movimento', 'buzzer', 'servo', 'linha'];
   const slideIndexBySection = {};
-  const TASK_PROGRESS_SCHEMA = 'v3';
+  const TASK_PROGRESS_SCHEMA = 'v4';
   let currentAge = '9-11';
   const defaultGameConfig = {
     version: 1,
@@ -3579,7 +3585,11 @@ reset_personalizado</pre>
     const finishBtn = taskBox.querySelector('.mission-finish-btn');
     const finishState = taskBox.querySelector('.mission-finish-state');
     const allDone = items.length > 0 && items.every((row) => Boolean(taskState.taskMap[row.dataset.taskId || '']));
-    if (finishBtn) finishBtn.disabled = !allDone;
+    if (finishBtn) {
+      finishBtn.disabled = !allDone || Boolean(taskState.finished);
+      finishBtn.classList.toggle('done', Boolean(taskState.finished));
+      finishBtn.textContent = taskState.finished ? 'Missao finalizada' : 'Finalizar missao e continuar';
+    }
     if (finishState) {
       if (taskState.finished) finishState.textContent = 'Missao finalizada! Historia concluida.';
       else if (allDone) finishState.textContent = 'Clique em "Finalizar missao" para liberar a proxima fase.';
