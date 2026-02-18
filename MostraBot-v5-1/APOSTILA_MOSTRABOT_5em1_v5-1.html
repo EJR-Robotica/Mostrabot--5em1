@@ -1105,8 +1105,58 @@
         body.mode-aluno .student-step-nav {
             display: flex;
         }
+        body.mode-aluno main {
+            padding-bottom: 96px;
+        }
         body.mode-professor .student-step-nav,
         body.mode-apresentacao .student-step-nav {
+            display: none !important;
+        }
+        .student-fab-nav {
+            display: none;
+            position: fixed;
+            right: 16px;
+            bottom: 14px;
+            z-index: 98;
+            gap: 10px;
+            align-items: center;
+        }
+        .student-fab-btn {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            border: 3px solid #d0d7de;
+            background: #ffffff;
+            color: #1f2937;
+            font-size: 28px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+            line-height: 1;
+        }
+        .student-fab-prev {
+            border-color: #ff6b6b;
+            background: linear-gradient(180deg, #ffe9e9, #ffd4d4);
+            color: #7f1d1d;
+        }
+        .student-fab-next {
+            border-color: #27ae60;
+            background: linear-gradient(180deg, #e9ffe9, #cbffd6);
+            color: #065f46;
+        }
+        .student-fab-btn:disabled,
+        .student-fab-next.is-read-locked {
+            border-color: #a3a3a3;
+            background: linear-gradient(180deg, #efefef, #d9d9d9);
+            color: #616161;
+            cursor: not-allowed;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+        }
+        body.mode-aluno .student-fab-nav {
+            display: flex;
+        }
+        body.mode-professor .student-fab-nav,
+        body.mode-apresentacao .student-fab-nav {
             display: none !important;
         }
         .quest-title {
@@ -1240,6 +1290,19 @@
             .student-step-label {
                 font-size: 9pt;
                 line-height: 1.25;
+            }
+            .student-fab-nav {
+                right: 10px;
+                bottom: 10px;
+                gap: 8px;
+            }
+            .student-fab-btn {
+                width: 58px;
+                height: 58px;
+                font-size: 24px;
+            }
+            body.mode-aluno main {
+                padding-bottom: 90px;
             }
         }
     </style>
@@ -2960,6 +3023,11 @@ reset_personalizado</pre>
     <button class="step-btn step-btn-next" type="button" id="student-step-next">Proximo ▶</button>
 </div>
 
+<div class="student-fab-nav" id="student-fab-nav">
+    <button class="student-fab-btn student-fab-prev" type="button" id="student-fab-prev" aria-label="Passo anterior">◀</button>
+    <button class="student-fab-btn student-fab-next" type="button" id="student-fab-next" aria-label="Proximo passo">▶</button>
+</div>
+
 <div class="robot-dialog-backdrop" id="robot-dialog" hidden>
     <div class="robot-dialog" role="dialog" aria-modal="true" aria-labelledby="robot-dialog-title">
         <h3 id="robot-dialog-title">MostraBot diz:</h3>
@@ -2994,12 +3062,13 @@ reset_personalizado</pre>
   const modeButtons = Array.from(document.querySelectorAll('.mode-btn[data-mode]'));
   const stageButtons = Array.from(document.querySelectorAll('[data-stage-nav]'));
   const exitPresentationBtn = document.getElementById('exit-presentation');
-  const learningHud = document.getElementById('learning-hud');
   const roadmapPanel = document.querySelector('.roadmap-panel');
   const studentStepNav = document.getElementById('student-step-nav');
   const studentStepPrev = document.getElementById('student-step-prev');
   const studentStepNext = document.getElementById('student-step-next');
   const studentStepLabel = document.getElementById('student-step-label');
+  const studentFabPrev = document.getElementById('student-fab-prev');
+  const studentFabNext = document.getElementById('student-fab-next');
   const robotGuideTrigger = document.getElementById('robot-guide-trigger');
   const robotDialog = document.getElementById('robot-dialog');
   const robotDialogClose = document.getElementById('robot-dialog-close');
@@ -3070,6 +3139,9 @@ reset_personalizado</pre>
   function getTaskProgressKey() {
     return 'mostrabot_task_progress_' + currentAge;
   }
+  function getReadOnceKey() {
+    return 'mostrabot_slide_read_once_' + currentAge;
+  }
 
   function sortMissionCardsByOrder() {
     const grid = document.querySelector('.mission-grid');
@@ -3093,6 +3165,26 @@ reset_personalizado</pre>
     try {
       localStorage.setItem(getTaskProgressKey(), JSON.stringify(progress || {}));
     } catch (error) {}
+  }
+
+  function getReadOnceProgress() {
+    try {
+      const raw = localStorage.getItem(getReadOnceKey());
+      const parsed = raw ? JSON.parse(raw) : {};
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function setReadOnceProgress(progress) {
+    try {
+      localStorage.setItem(getReadOnceKey(), JSON.stringify(progress || {}));
+    } catch (error) {}
+  }
+
+  function getReadToken(sectionId, slideIndex) {
+    return sectionId + '::' + String(slideIndex);
   }
 
   function getUnlockedStage() {
@@ -3616,6 +3708,45 @@ reset_personalizado</pre>
     currentGroup.insertAdjacentElement('afterbegin', anchor);
   }
 
+  function getCurrentStudentSlideState() {
+    const sectionId = stageOrder[getUnlockedStage()] || 'intro';
+    const groups = getStudentSlideGroups(sectionId);
+    if (groups.length === 0) {
+      return { sectionId, groups, current: 0, maxIdx: 0, firstTaskIndex: -1, isTaskStep: false };
+    }
+    const firstTaskIndex = groups.findIndex((group) => group.querySelector('.mission-task'));
+    const maxIdx = firstTaskIndex >= 0 ? firstTaskIndex : groups.length - 1;
+    const current = Math.max(0, Math.min(maxIdx, Number(slideIndexBySection[sectionId] || 0)));
+    const isTaskStep = Boolean(groups[current] && groups[current].querySelector('.mission-task'));
+    return { sectionId, groups, current, maxIdx, firstTaskIndex, isTaskStep };
+  }
+
+  function hasReadCurrentSlide(state) {
+    const readMap = getReadOnceProgress();
+    const token = getReadToken(state.sectionId, state.current);
+    return Boolean(readMap[token]);
+  }
+
+  function updateReadGateByScroll() {
+    if (!document.body.classList.contains('mode-aluno')) return;
+    const state = getCurrentStudentSlideState();
+    if (!state.groups.length) return;
+    if (hasReadCurrentSlide(state)) return;
+
+    const doc = document.documentElement;
+    const viewport = window.innerHeight || doc.clientHeight || 0;
+    const scrollTop = window.scrollY || doc.scrollTop || 0;
+    const fullHeight = Math.max(doc.scrollHeight, document.body ? document.body.scrollHeight : 0);
+    const reachedBottom = scrollTop + viewport >= fullHeight - 26;
+    const noScrollNeeded = fullHeight <= viewport + 26;
+    if (!reachedBottom && !noScrollNeeded) return;
+
+    const readMap = getReadOnceProgress();
+    readMap[getReadToken(state.sectionId, state.current)] = true;
+    setReadOnceProgress(readMap);
+    renderStudentSlides();
+  }
+
   function renderStudentSlides() {
     const isAluno = document.body.classList.contains('mode-aluno');
     const sectionId = stageOrder[getUnlockedStage()] || 'intro';
@@ -3643,22 +3774,30 @@ reset_personalizado</pre>
     const isTaskStep = Boolean(currentElement && currentElement.querySelector('.mission-task'));
     const taskProgress = getTaskProgress();
     const sectionTaskState = taskProgress[sectionId] || { finished: false };
+    const readMap = getReadOnceProgress();
+    const readUnlocked = Boolean(readMap[getReadToken(sectionId, current)]);
+
+    let nextDisabledByFlow = current >= maxIdx;
+    if (isTaskStep && !sectionTaskState.finished) nextDisabledByFlow = true;
+    const nextDisabled = nextDisabledByFlow || !readUnlocked;
 
     if (studentStepPrev) studentStepPrev.disabled = current <= 0;
-    if (studentStepNext) {
-      if (isTaskStep && !sectionTaskState.finished) {
-        studentStepNext.disabled = true;
-      } else {
-        studentStepNext.disabled = current >= maxIdx;
-      }
+    if (studentStepNext) studentStepNext.disabled = nextDisabled;
+    if (studentFabPrev) studentFabPrev.disabled = current <= 0;
+    if (studentFabNext) {
+      studentFabNext.disabled = nextDisabled;
+      studentFabNext.classList.toggle('is-read-locked', !readUnlocked);
     }
     if (studentStepLabel) {
-      if (isTaskStep && !sectionTaskState.finished) {
+      if (!readUnlocked) {
+        studentStepLabel.textContent = 'Leia ate o final desta tela para liberar o Proximo';
+      } else if (isTaskStep && !sectionTaskState.finished) {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Conclua a tarefa abaixo para continuar';
       } else {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Clique em Proximo para continuar';
       }
     }
+    updateReadGateByScroll();
   }
 
   function changeStudentSlide(delta) {
@@ -3669,6 +3808,9 @@ reset_personalizado</pre>
     const firstTaskIndex = groups.findIndex((group) => group.querySelector('.mission-task'));
     const maxIdx = firstTaskIndex >= 0 ? firstTaskIndex : groups.length - 1;
     const current = Math.max(0, Math.min(maxIdx, Number(slideIndexBySection[sectionId] || 0)));
+    const readMap = getReadOnceProgress();
+    const readUnlocked = Boolean(readMap[getReadToken(sectionId, current)]);
+    if (delta > 0 && !readUnlocked) return;
     const next = Math.max(0, Math.min(maxIdx, current + delta));
     slideIndexBySection[sectionId] = next;
     renderStudentSlides();
@@ -3919,6 +4061,12 @@ reset_personalizado</pre>
   if (studentStepNext) {
     studentStepNext.addEventListener('click', () => changeStudentSlide(1));
   }
+  if (studentFabPrev) {
+    studentFabPrev.addEventListener('click', () => changeStudentSlide(-1));
+  }
+  if (studentFabNext) {
+    studentFabNext.addEventListener('click', () => changeStudentSlide(1));
+  }
   if (robotGuideTrigger && robotDialog) {
     robotGuideTrigger.addEventListener('click', () => {
       robotDialog.hidden = false;
@@ -3984,6 +4132,7 @@ reset_personalizado</pre>
     if (document.body.classList.contains('mode-aluno')) {
       applyStudentSingleScreen();
       renderStudentSlides();
+      updateReadGateByScroll();
       return;
     }
     updateSectionFromScroll();
@@ -4009,9 +4158,6 @@ reset_personalizado</pre>
   }
 
   loadGameConfig();
-  if (studentStepNav && learningHud && studentStepNav.parentElement !== learningHud) {
-    learningHud.appendChild(studentStepNav);
-  }
   sortMissionCardsByOrder();
   enhanceMissionTasks();
   enforceExternalPjeLinks();
