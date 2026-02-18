@@ -341,6 +341,64 @@
             font-weight: 800;
             color: #2c6fb3;
         }
+        .task-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: space-between;
+            margin: 6px 0;
+        }
+        .task-row.done {
+            opacity: 0.75;
+        }
+        .task-row.done .task-text {
+            text-decoration: line-through;
+        }
+        .task-text {
+            flex: 1;
+        }
+        .task-complete-btn {
+            border: 2px solid #2c6fb3;
+            background: #e8f4ff;
+            color: #1a5276;
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 9pt;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .task-complete-btn.done {
+            border-color: #1c7c4c;
+            background: #eafaf1;
+            color: #1c7c4c;
+        }
+        .mission-finish-wrap {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .mission-finish-btn {
+            border: 2px solid #7f5600;
+            background: #fff7dd;
+            color: #7f5600;
+            border-radius: 10px;
+            padding: 7px 12px;
+            font-size: 9.5pt;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .mission-finish-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .mission-finish-state {
+            font-size: 9pt;
+            color: #1c7c4c;
+            font-weight: 700;
+        }
         .cloud-links {
             display: flex;
             flex-wrap: wrap;
@@ -985,7 +1043,9 @@
                 <option value="12-14">12-14 anos</option>
                 <option value="15+">15+ anos</option>
             </select>
+            <button class="mode-btn" type="button" id="back-stage-btn">Voltar 1 fase</button>
             <button class="mode-btn" type="button" id="complete-stage-btn">Completar fase atual</button>
+            <button class="mode-btn" type="button" id="reset-progress-btn">Resetar progresso</button>
             <span class="hud-pill">Fase liberada: <span id="hud-unlock">0</span>/6</span>
             <span class="hud-pill">Missoes concluidas: <span id="hud-completed">0</span>/7</span>
         </div>
@@ -2580,7 +2640,9 @@ reset_personalizado</pre>
   const stageButtons = Array.from(document.querySelectorAll('[data-stage-nav]'));
   const exitPresentationBtn = document.getElementById('exit-presentation');
   const ageSelect = document.getElementById('age-select');
+  const backStageBtn = document.getElementById('back-stage-btn');
   const completeStageBtn = document.getElementById('complete-stage-btn');
+  const resetProgressBtn = document.getElementById('reset-progress-btn');
   const profChecklistItems = document.getElementById('prof-checklist-items');
   const stageOrder = ['intro', 'ligar-robo', 'led', 'movimento', 'buzzer', 'servo', 'linha'];
   let currentAge = '9-11';
@@ -2639,6 +2701,33 @@ reset_personalizado</pre>
 
   function getChecklistKey() {
     return 'mostrabot_prof_checklist';
+  }
+  function getTaskProgressKey() {
+    return 'mostrabot_task_progress_' + currentAge;
+  }
+
+  function sortMissionCardsByOrder() {
+    const grid = document.querySelector('.mission-grid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.mission-card[data-order]'));
+    cards.sort((a, b) => Number(a.dataset.order || '0') - Number(b.dataset.order || '0'));
+    cards.forEach((card) => grid.appendChild(card));
+  }
+
+  function getTaskProgress() {
+    try {
+      const raw = localStorage.getItem(getTaskProgressKey());
+      const parsed = raw ? JSON.parse(raw) : {};
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function setTaskProgress(progress) {
+    try {
+      localStorage.setItem(getTaskProgressKey(), JSON.stringify(progress || {}));
+    } catch (error) {}
   }
 
   function getUnlockedStage() {
@@ -2832,12 +2921,152 @@ reset_personalizado</pre>
     });
   }
 
+  function getSectionIdFromMissionTask(taskBox) {
+    const content = taskBox.closest('.lesson-content');
+    if (!content) return null;
+    const h1 = content.previousElementSibling;
+    if (!h1 || h1.tagName !== 'H1') return null;
+    return h1.id || null;
+  }
+
+  function renderMissionTaskState(taskBox, sectionId, taskState) {
+    const items = Array.from(taskBox.querySelectorAll('.task-row'));
+    items.forEach((row, idx) => {
+      const done = Boolean(taskState.tasks && taskState.tasks[idx]);
+      row.classList.toggle('done', done);
+      const btn = row.querySelector('.task-complete-btn');
+      if (btn) {
+        btn.classList.toggle('done', done);
+        btn.textContent = done ? 'Tarefa concluida' : 'Completar tarefa';
+      }
+    });
+
+    const finishBtn = taskBox.querySelector('.mission-finish-btn');
+    const finishState = taskBox.querySelector('.mission-finish-state');
+    const allDone = items.length > 0 && items.every((_, idx) => Boolean(taskState.tasks && taskState.tasks[idx]));
+    if (finishBtn) finishBtn.disabled = !allDone;
+    if (finishState) finishState.textContent = taskState.finished ? 'Missao finalizada!' : '';
+  }
+
+  function enhanceMissionTasks() {
+    const boxes = Array.from(document.querySelectorAll('.mission-task'));
+    const progress = getTaskProgress();
+
+    boxes.forEach((box) => {
+      if (box.dataset.ldified === '1') return;
+      const sectionId = getSectionIdFromMissionTask(box);
+      if (!sectionId) return;
+      box.dataset.ldified = '1';
+      box.dataset.sectionId = sectionId;
+
+      const list = box.querySelector('ol');
+      const liItems = list ? Array.from(list.querySelectorAll('li')) : [];
+      if (liItems.length === 0) {
+        const synthetic = document.createElement('div');
+        synthetic.className = 'task-row';
+        synthetic.innerHTML = '<span class="task-text">Ler e entender esta etapa.</span>';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'task-complete-btn';
+        btn.textContent = 'Completar tarefa';
+        synthetic.appendChild(btn);
+        box.appendChild(synthetic);
+      } else {
+        liItems.forEach((li, idx) => {
+          const row = document.createElement('div');
+          row.className = 'task-row';
+          const text = document.createElement('span');
+          text.className = 'task-text';
+          text.innerHTML = li.innerHTML;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'task-complete-btn';
+          btn.textContent = 'Completar tarefa';
+          row.appendChild(text);
+          row.appendChild(btn);
+          li.replaceWith(row);
+          row.dataset.taskIndex = String(idx);
+        });
+      }
+
+      const finishWrap = document.createElement('div');
+      finishWrap.className = 'mission-finish-wrap';
+      const finishBtn = document.createElement('button');
+      finishBtn.type = 'button';
+      finishBtn.className = 'mission-finish-btn';
+      finishBtn.textContent = 'Finalizar missao';
+      finishBtn.disabled = true;
+      const finishState = document.createElement('span');
+      finishState.className = 'mission-finish-state';
+      finishWrap.appendChild(finishBtn);
+      finishWrap.appendChild(finishState);
+      box.appendChild(finishWrap);
+
+      box.addEventListener('click', (event) => {
+        const taskBtn = event.target.closest('.task-complete-btn');
+        if (taskBtn) {
+          const row = taskBtn.closest('.task-row');
+          const idx = Number(row ? row.dataset.taskIndex || '0' : '0');
+          progress[sectionId] = progress[sectionId] || { tasks: [], finished: false };
+          progress[sectionId].tasks[idx] = true;
+          setTaskProgress(progress);
+          renderMissionTaskState(box, sectionId, progress[sectionId]);
+          return;
+        }
+
+        const mBtn = event.target.closest('.mission-finish-btn');
+        if (mBtn) {
+          const info = missionBySection[sectionId];
+          const currentIdx = info ? info.order : 0;
+          progress[sectionId] = progress[sectionId] || { tasks: [], finished: false };
+          progress[sectionId].finished = true;
+          setTaskProgress(progress);
+
+          const completed = getCompletedMissions();
+          if (!completed.includes(currentIdx)) {
+            completed.push(currentIdx);
+            setCompletedMissions(completed);
+          }
+
+          const unlocked = getUnlockedStage();
+          if (currentIdx <= unlocked && unlocked < stageOrder.length - 1) {
+            const nextUnlocked = unlocked + 1;
+            setUnlockedStage(nextUnlocked);
+            window.location.hash = '#' + (stageOrder[nextUnlocked] || 'intro');
+          }
+          applyStudentLocks();
+          refreshStudentActionButton();
+          applyStudentSingleScreen();
+          renderMissionTaskState(box, sectionId, progress[sectionId]);
+        }
+      });
+    });
+
+    boxes.forEach((box) => {
+      const sid = box.dataset.sectionId;
+      if (!sid) return;
+      progress[sid] = progress[sid] || { tasks: [], finished: false };
+      renderMissionTaskState(box, sid, progress[sid]);
+    });
+  }
+
+  function refreshMissionTaskStates() {
+    const progress = getTaskProgress();
+    const boxes = Array.from(document.querySelectorAll('.mission-task[data-section-id]'));
+    boxes.forEach((box) => {
+      const sid = box.dataset.sectionId;
+      if (!sid) return;
+      progress[sid] = progress[sid] || { tasks: [], finished: false };
+      renderMissionTaskState(box, sid, progress[sid]);
+    });
+  }
+
   missionCards.forEach((card) => {
     const target = card.dataset.target;
     if (!target) return;
     card.addEventListener('click', (event) => {
       const order = Number(card.dataset.order || '0');
-      if (document.body.classList.contains('mode-aluno') && order > getUnlockedStage()) {
+      if (document.body.classList.contains('mode-aluno') && order !== getUnlockedStage()) {
         event.preventDefault();
         return;
       }
@@ -2856,10 +3085,11 @@ reset_personalizado</pre>
 
     const missionInfo = missionBySection[sectionId] || missionBySection['mapa-jogo'];
     const order = missionInfo.order;
+    const isAluno = document.body.classList.contains('mode-aluno');
     missionCards.forEach((card) => {
       const cardOrder = Number(card.dataset.order || '-1');
       card.classList.toggle('is-active', cardOrder === order);
-      card.classList.toggle('is-dimmed', cardOrder > order);
+      card.classList.toggle('is-dimmed', !isAluno && cardOrder > order);
     });
     if (progressFill) {
       progressFill.style.width = (((order + 1) / 7) * 100).toFixed(0) + '%';
@@ -3082,9 +3312,34 @@ reset_personalizado</pre>
         localStorage.setItem('mostrabot_age', currentAge);
       } catch (error) {}
       applyStudentLocks();
+      refreshMissionTaskStates();
       refreshStudentActionButton();
       applyStudentSingleScreen();
       syncHashTarget();
+    });
+  }
+  if (backStageBtn) {
+    backStageBtn.addEventListener('click', () => {
+      if (!document.body.classList.contains('mode-aluno')) return;
+      const unlocked = getUnlockedStage();
+      if (unlocked <= 0) return;
+      const nextUnlocked = unlocked - 1;
+      setUnlockedStage(nextUnlocked);
+      const completed = getCompletedMissions().filter((idx) => idx <= nextUnlocked);
+      setCompletedMissions(completed);
+      const progress = getTaskProgress();
+      Object.keys(progress).forEach((sectionId) => {
+        const info = missionBySection[sectionId];
+        if (info && typeof info.order === 'number' && info.order > nextUnlocked) {
+          delete progress[sectionId];
+        }
+      });
+      setTaskProgress(progress);
+      applyStudentLocks();
+      refreshMissionTaskStates();
+      refreshStudentActionButton();
+      applyStudentSingleScreen();
+      window.location.hash = '#' + (stageOrder[nextUnlocked] || 'intro');
     });
   }
   if (completeStageBtn) {
@@ -3099,11 +3354,28 @@ reset_personalizado</pre>
         setCompletedMissions(completed);
       }
       if (currentIdx <= unlocked && unlocked < stageOrder.length - 1) {
-        setUnlockedStage(unlocked + 1);
+        const nextUnlocked = unlocked + 1;
+        setUnlockedStage(nextUnlocked);
+        window.location.hash = '#' + (stageOrder[nextUnlocked] || 'intro');
       }
       applyStudentLocks();
       refreshStudentActionButton();
       applyStudentSingleScreen();
+    });
+  }
+  if (resetProgressBtn) {
+    resetProgressBtn.addEventListener('click', () => {
+      if (!document.body.classList.contains('mode-aluno')) return;
+      const confirmed = window.confirm('Resetar progresso desta faixa etaria?');
+      if (!confirmed) return;
+      setUnlockedStage(0);
+      setCompletedMissions([]);
+      setTaskProgress({});
+      applyStudentLocks();
+      refreshMissionTaskStates();
+      refreshStudentActionButton();
+      applyStudentSingleScreen();
+      window.location.hash = '#intro';
     });
   }
   if (exitPresentationBtn) {
@@ -3172,9 +3444,12 @@ reset_personalizado</pre>
   }
 
   loadGameConfig();
+  sortMissionCardsByOrder();
+  enhanceMissionTasks();
   enhanceCodeExamples();
   setUnlockedStage(getUnlockedStage());
   setCompletedMissions(getCompletedMissions());
+  refreshMissionTaskStates();
   refreshStudentActionButton();
   applyFocus('all');
   applyMode(savedMode);
