@@ -189,6 +189,31 @@
             font-weight: bold;
             font-size: 10pt;
         }
+        .pje-tools {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .copy-code-btn {
+            border: 2px solid #2c6fb3;
+            background: #e8f4ff;
+            color: #1a5276;
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 9.5pt;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .copy-code-btn:hover {
+            filter: brightness(0.97);
+        }
+        .copy-status {
+            font-size: 9pt;
+            color: #1c7c4c;
+            font-weight: 700;
+        }
         .shape-diagram {
             background: #f7f9fb;
             border: 2px dashed #b8d9f5;
@@ -315,6 +340,25 @@
         .mission-task-title {
             font-weight: 800;
             color: #2c6fb3;
+        }
+        .cloud-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .cloud-link {
+            text-decoration: none;
+            border: 2px solid #7aaad6;
+            background: #f0f6ff;
+            color: #0e3a5b;
+            font-weight: 700;
+            border-radius: 999px;
+            padding: 6px 11px;
+            font-size: 9.5pt;
+        }
+        .cloud-link:hover {
+            background: #e3f1ff;
         }
             .lesson-card {
             border: 2px solid var(--border);
@@ -638,6 +682,14 @@
         body.mode-apresentacao .game-hero {
             display: none !important;
         }
+        body.mode-aluno h1#aulas,
+        body.mode-aluno h1#aulas + .lesson-content {
+            display: none !important;
+        }
+        body.mode-aluno nav a[href="#aulas"],
+        body.mode-aluno .indice-list a[href="#aulas"] {
+            display: none !important;
+        }
         body.mode-apresentacao .presentation-controls {
             display: flex;
         }
@@ -868,47 +920,47 @@
     </div>
 
     <div class="mission-grid">
-        <div class="mission-card" data-target="aulas" data-module="m1" data-order="0" data-mission="Missao 0">
-            <div class="mission-title">Missão 0 — Acordar o Robô</div>
-            <span class="mission-tag">Ligar + PJE</span>
-            <div class="badge-row"><span class="badge">Selo: Energia</span></div>
-            <a class="cta-button" href="#aulas">Comecar</a>
+        <div class="mission-card" data-target="intro" data-module="m1" data-order="0" data-mission="Missao 0">
+            <div class="mission-title">Missão 0 — Quem é o MostraBot</div>
+            <span class="mission-tag">Boas-vindas</span>
+            <div class="badge-row"><span class="badge">Selo: Explorador</span></div>
+            <a class="cta-button" href="#intro">Comecar</a>
         </div>
-        <div class="mission-card" data-target="movimento" data-module="m1 m2" data-order="1" data-mission="Missao 1">
-            <div class="mission-title">Missão 1 — Caminho Seguro</div>
-            <span class="mission-tag">Movimento</span>
-            <div class="badge-row"><span class="badge">Selo: Direção</span></div>
-            <a class="cta-button" href="#movimento">Jogar</a>
+        <div class="mission-card" data-target="ligar-robo" data-module="m1" data-order="1" data-mission="Missao 1">
+            <div class="mission-title">Missão 1 — Ligar e Entrar na PJE</div>
+            <span class="mission-tag">Energia + Login</span>
+            <div class="badge-row"><span class="badge">Selo: Energia</span></div>
+            <a class="cta-button" href="#ligar-robo">Jogar</a>
         </div>
         <div class="mission-card" data-target="led" data-module="m1" data-order="2" data-mission="Missao 2">
-            <div class="mission-title">Missão 2 — Olhos que Piscam</div>
-            <span class="mission-tag">LEDs</span>
+            <div class="mission-title">Missão 2 — Acender LED</div>
+            <span class="mission-tag">Modulo 1</span>
             <div class="badge-row"><span class="badge">Selo: Luz</span></div>
             <a class="cta-button" href="#led">Jogar</a>
         </div>
-        <div class="mission-card" data-target="servo" data-module="m2" data-order="3" data-mission="Missao 3">
-            <div class="mission-title">Missão 3 — Garra Colecionadora</div>
-            <span class="mission-tag">Garra + Som</span>
-            <div class="badge-row"><span class="badge">Selo: Garra</span></div>
+        <div class="mission-card" data-target="movimento" data-module="m1" data-order="3" data-mission="Missao 3">
+            <div class="mission-title">Missão 3 — Ir para Frente</div>
+            <span class="mission-tag">Modulo 1</span>
+            <div class="badge-row"><span class="badge">Selo: Direcao</span></div>
+            <a class="cta-button" href="#movimento">Jogar</a>
+        </div>
+        <div class="mission-card" data-target="buzzer" data-module="m1 m2" data-order="4" data-mission="Missao 4">
+            <div class="mission-title">Missão 4 — Buzinar</div>
+            <span class="mission-tag">Som</span>
+            <div class="badge-row"><span class="badge">Selo: Som</span></div>
+            <a class="cta-button" href="#buzzer">Jogar</a>
+        </div>
+        <div class="mission-card" data-target="servo" data-module="m2" data-order="5" data-mission="Missao 5">
+            <div class="mission-title">Missão 5 — Programar no Modulo 2</div>
+            <span class="mission-tag">Codigo</span>
+            <div class="badge-row"><span class="badge">Selo: Codigo</span></div>
             <a class="cta-button" href="#servo">Jogar</a>
         </div>
-        <div class="mission-card" data-target="linha" data-module="m4" data-order="4" data-mission="Missao 4">
-            <div class="mission-title">Missão 4 — Seguir a Linha</div>
-            <span class="mission-tag">Sensor de Linha</span>
-            <div class="badge-row"><span class="badge">Selo: Trilho</span></div>
-            <a class="cta-button" href="#linha">Jogar</a>
-        </div>
-        <div class="mission-card" data-target="ultra" data-module="m4" data-order="5" data-mission="Missao 5">
-            <div class="mission-title">Missão 5 — Desvio de Obstáculos</div>
-            <span class="mission-tag">Ultrassônico</span>
-            <div class="badge-row"><span class="badge">Selo: Desvio</span></div>
-            <a class="cta-button" href="#ultra">Jogar</a>
-        </div>
-        <div class="mission-card" data-target="controle" data-module="m4" data-order="6" data-mission="Missao 6">
-            <div class="mission-title">Missão 6 — Desafio Final</div>
-            <span class="mission-tag">REPITA + SE</span>
+        <div class="mission-card" data-target="linha" data-module="m4" data-order="6" data-mission="Missao 6">
+            <div class="mission-title">Missão 6 — Sensores e Decisao</div>
+            <span class="mission-tag">Modulo 4</span>
             <div class="badge-row"><span class="badge">Selo: Mestre</span></div>
-            <a class="cta-button" href="#controle">Jogar</a>
+            <a class="cta-button" href="#linha">Jogar</a>
         </div>
     </div>
 
@@ -927,8 +979,8 @@
     
     <!-- SECAO AULAS -->
     
-    <h1 id="aulas">0. Aulas por Etapas (tempo recomendado)</h1>
-    <p>Plano modular, em etapas curtas. O tempo de cada aula e recomendado e pode variar conforme a escola e a turma.</p>
+    <h1 id="aulas">0. Plano do Professor (aulas por etapas)</h1>
+    <p>Visivel no modo Professor. O aluno segue as missoes guiadas; este bloco e para planejamento docente.</p>
 
     <div class="lesson-card" id="aula-1" data-module="m1" data-aula="Aula 1">
         <div class="lesson-title">Módulo 1 — Aula 1: Ligar e Entrar na PJE</div>
@@ -1067,7 +1119,13 @@
         <div class="module-caption">Passo 2: login com ID da fita amarela, senha 123 e selecao do modulo da missao</div>
         <img class="module-img didactic-img" src="assets_lessons/13_pje_modulo_missao.svg" alt="Tela do modulo com tarefa da missao">
         <div class="module-caption">Passo 3: executar tarefa no modulo da missao e validar no robo</div>
-        <p><strong>Acesso externo (PJE online):</strong> <a href="https://pje.ejrrobotica.com.br/index.php" target="_blank" rel="noopener noreferrer">login</a> | <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer">modulo1</a> | <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer">modulo2</a> | <a href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer">modulo4</a>.</p>
+        <p><strong>Acesso externo (PJE online):</strong></p>
+        <div class="cloud-links">
+            <a class="cloud-link" href="https://pje.ejrrobotica.com.br/index.php" target="_blank" rel="noopener noreferrer">Login</a>
+            <a class="cloud-link" href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer">Modulo 1</a>
+            <a class="cloud-link" href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer">Modulo 2</a>
+            <a class="cloud-link" href="https://pje.ejrrobotica.com.br/modulo4.php" target="_blank" rel="noopener noreferrer">Modulo 4</a>
+        </div>
     </div>
     <p><strong>Regra didatica simples:</strong> no Modulo 1 voce clica. A partir do Modulo 2 voce digita.</p>
     <img class="module-img" src="modulos.png" alt="Layout dos Modulos 1, 2 e 4 da PJE">
@@ -2427,10 +2485,10 @@ reset_personalizado</pre>
   const hudSecao = document.getElementById('hud-secao');
   const hudModo = document.getElementById('hud-modo');
   const focusChips = Array.from(document.querySelectorAll('.focus-chip'));
-  const modeButtons = Array.from(document.querySelectorAll('.mode-btn'));
+  const modeButtons = Array.from(document.querySelectorAll('.mode-btn[data-mode]'));
   const stageButtons = Array.from(document.querySelectorAll('[data-stage-nav]'));
   const exitPresentationBtn = document.getElementById('exit-presentation');
-  const stageOrder = ['aulas', 'movimento', 'led', 'servo', 'linha', 'ultra', 'controle'];
+  const stageOrder = ['intro', 'ligar-robo', 'led', 'movimento', 'buzzer', 'servo', 'linha'];
 
   const moduleLabel = {
     m1: 'Modulo 1',
@@ -2442,15 +2500,16 @@ reset_personalizado</pre>
 
   const missionBySection = {
     'mapa-jogo': { name: 'Missao 0', module: 'm1', order: 0 },
-    aulas: { name: 'Missao 0', module: 'm1', order: 0 },
-    'primeiros-passos': { name: 'Missao 0', module: 'm1', order: 0 },
-    'ligar-robo': { name: 'Missao 0', module: 'm1', order: 0 },
-    movimento: { name: 'Missao 1', module: 'm1', order: 1 },
+    intro: { name: 'Missao 0', module: 'm1', order: 0 },
+    aulas: { name: 'Plano do Professor', module: 'support', order: 0 },
+    'primeiros-passos': { name: 'Missao 1', module: 'm1', order: 1 },
+    'ligar-robo': { name: 'Missao 1', module: 'm1', order: 1 },
     led: { name: 'Missao 2', module: 'm1', order: 2 },
-    servo: { name: 'Missao 3', module: 'm2', order: 3 },
-    buzzer: { name: 'Missao 3', module: 'm2', order: 3 },
-    linha: { name: 'Missao 4', module: 'm4', order: 4 },
-    ultra: { name: 'Missao 5', module: 'm4', order: 5 },
+    movimento: { name: 'Missao 3', module: 'm1', order: 3 },
+    buzzer: { name: 'Missao 4', module: 'm1', order: 4 },
+    servo: { name: 'Missao 5', module: 'm2', order: 5 },
+    linha: { name: 'Missao 6', module: 'm4', order: 6 },
+    ultra: { name: 'Missao 6', module: 'm4', order: 6 },
     controle: { name: 'Missao 6', module: 'm4', order: 6 },
     condicoes: { name: 'Missao 6', module: 'm4', order: 6 },
     calibracao: { name: 'Missao 6', module: 'm4', order: 6 },
@@ -2532,6 +2591,46 @@ reset_personalizado</pre>
     const isCollapsed = content.classList.toggle('collapsed');
     h1.classList.toggle('collapsed', isCollapsed);
   });
+
+  function enhanceCodeExamples() {
+    const blocks = Array.from(document.querySelectorAll('.pje-example'));
+    blocks.forEach((block) => {
+      if (block.querySelector('.copy-code-btn')) return;
+      const pre = block.querySelector('.pje-textarea pre');
+      if (!pre) return;
+      const tools = document.createElement('div');
+      tools.className = 'pje-tools';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-code-btn';
+      btn.textContent = 'Copiar codigo';
+      const status = document.createElement('span');
+      status.className = 'copy-status';
+      status.textContent = '';
+
+      btn.addEventListener('click', async () => {
+        const code = pre.textContent || '';
+        try {
+          await navigator.clipboard.writeText(code);
+          status.textContent = 'Copiado!';
+        } catch (error) {
+          status.textContent = 'Nao foi possivel copiar.';
+        }
+        setTimeout(() => {
+          status.textContent = '';
+        }, 1500);
+      });
+
+      tools.appendChild(btn);
+      tools.appendChild(status);
+      const send = block.querySelector('.pje-send');
+      if (send) {
+        send.insertAdjacentElement('beforebegin', tools);
+      } else {
+        block.appendChild(tools);
+      }
+    });
+  }
 
   missionCards.forEach((card) => {
     const target = card.dataset.target;
@@ -2747,6 +2846,7 @@ reset_personalizado</pre>
     savedMode = 'aluno';
   }
 
+  enhanceCodeExamples();
   applyFocus('all');
   applyMode(savedMode);
   syncHashTarget();
