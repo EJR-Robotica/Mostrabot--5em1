@@ -3540,13 +3540,6 @@ reset_personalizado</pre>
           progress[sectionId].tasks[idx] = true;
           setTaskProgress(progress);
           renderMissionTaskState(box, sectionId, progress[sectionId]);
-          const nextVisible = box.querySelector('.task-row:not(.task-row-hidden)');
-          if (nextVisible) {
-            nextVisible.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          } else {
-            const finalBtn = box.querySelector('.mission-finish-btn');
-            if (finalBtn) finalBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
           return;
         }
 
