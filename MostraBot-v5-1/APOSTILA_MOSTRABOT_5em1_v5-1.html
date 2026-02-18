@@ -3552,7 +3552,8 @@ reset_personalizado</pre>
     }
 
     if (studentStepNav) studentStepNav.style.display = 'flex';
-    const maxIdx = elements.length - 1;
+    const firstTaskIndex = elements.findIndex((el) => el.classList.contains('mission-task'));
+    const maxIdx = firstTaskIndex >= 0 ? firstTaskIndex : elements.length - 1;
     const current = Math.max(0, Math.min(maxIdx, Number(slideIndexBySection[sectionId] || 0)));
     slideIndexBySection[sectionId] = current;
 
@@ -3560,10 +3561,25 @@ reset_personalizado</pre>
       el.classList.toggle('student-slide-hidden', idx !== current);
     });
 
+    const currentElement = elements[current];
+    const isTaskStep = Boolean(currentElement && currentElement.classList.contains('mission-task'));
+    const taskProgress = getTaskProgress();
+    const sectionTaskState = taskProgress[sectionId] || { finished: false };
+
     if (studentStepPrev) studentStepPrev.disabled = current <= 0;
-    if (studentStepNext) studentStepNext.disabled = current >= maxIdx;
+    if (studentStepNext) {
+      if (isTaskStep && !sectionTaskState.finished) {
+        studentStepNext.disabled = true;
+      } else {
+        studentStepNext.disabled = current >= maxIdx;
+      }
+    }
     if (studentStepLabel) {
-      studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(elements.length) + ' - Clique em Proximo para continuar';
+      if (isTaskStep && !sectionTaskState.finished) {
+        studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Conclua a tarefa abaixo para continuar';
+      } else {
+        studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Clique em Proximo para continuar';
+      }
     }
   }
 
@@ -3575,11 +3591,16 @@ reset_personalizado</pre>
     if (!content || !content.classList || !content.classList.contains('lesson-content')) return;
     const elements = Array.from(content.children).filter((el) => el && el.tagName && !el.classList.contains('mission-header'));
     if (elements.length === 0) return;
-    const current = Math.max(0, Math.min(elements.length - 1, Number(slideIndexBySection[sectionId] || 0)));
-    const next = Math.max(0, Math.min(elements.length - 1, current + delta));
+    const firstTaskIndex = elements.findIndex((el) => el.classList.contains('mission-task'));
+    const maxIdx = firstTaskIndex >= 0 ? firstTaskIndex : elements.length - 1;
+    const current = Math.max(0, Math.min(maxIdx, Number(slideIndexBySection[sectionId] || 0)));
+    const next = Math.max(0, Math.min(maxIdx, current + delta));
     slideIndexBySection[sectionId] = next;
     renderStudentSlides();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const currentVisible = elements[next];
+    if (currentVisible && typeof currentVisible.scrollIntoView === 'function') {
+      currentVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   function refreshStudentActionButton() {
