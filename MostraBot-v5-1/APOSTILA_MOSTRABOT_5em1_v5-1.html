@@ -523,10 +523,11 @@
             background: #fff;
             color: #1a5276;
             border-radius: 999px;
-            padding: 5px 10px;
+            padding: 7px 12px;
             font-size: 9pt;
             font-weight: 700;
             cursor: pointer;
+            min-height: 38px;
         }
         .mode-btn.active {
             border-color: #2ecc71;
@@ -545,8 +546,9 @@
             color: #1a5276;
             font-weight: 700;
             border-radius: 999px;
-            padding: 6px 10px;
+            padding: 7px 12px;
             cursor: pointer;
+            min-height: 38px;
         }
         .focus-chip.active {
             border-color: #2ecc71;
@@ -589,10 +591,35 @@
         body.mode-apresentacao nav {
             display: none !important;
         }
+        body.mode-apresentacao {
+            background: #ffffff !important;
+            color: #111 !important;
+        }
         body.mode-apresentacao main {
             margin-left: 0;
-            padding: 20px 28px;
+            padding: 20px 28px 34px 28px;
             max-width: 1100px;
+        }
+        body.mode-apresentacao .learning-hud {
+            background: #ffffff;
+            border-color: #1f4f77;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        body.mode-apresentacao .hud-pill {
+            background: #f0f6ff;
+            color: #0e3a5b;
+            border: 1px solid #bfd8f3;
+        }
+        body.mode-apresentacao .mode-btn,
+        body.mode-apresentacao .focus-chip {
+            border-color: #7aaad6;
+            color: #0e3a5b;
+        }
+        body.mode-apresentacao .mode-btn.active,
+        body.mode-apresentacao .focus-chip.active {
+            border-color: #1c7c4c;
+            background: #eafaf1;
+            color: #1c7c4c;
         }
         body.mode-apresentacao .indice-box,
         body.mode-apresentacao .module-focus,
@@ -602,12 +629,28 @@
         }
         body.mode-apresentacao .header-banner {
             padding: 18px 22px;
+            background: linear-gradient(135deg, #0f4e79, #246ea0);
         }
         body.mode-apresentacao .hud-pill {
             font-size: 10.5pt;
         }
         body.mode-apresentacao h1 {
             font-size: 26pt;
+        }
+        body.mode-apresentacao h2 {
+            color: #0f4e79;
+        }
+        body.mode-apresentacao pre,
+        body.mode-apresentacao .diagram {
+            background: #f8fbff;
+            border-color: #7aaad6;
+            color: #0d2233;
+        }
+        body.mode-apresentacao .mission-card.is-active,
+        body.mode-apresentacao .lesson-card.active-lesson {
+            border-color: #1f4f77;
+            box-shadow: 0 0 0 4px rgba(31,79,119,0.18);
+            background: #ffffff;
         }
         .quest-title {
             font-weight: 800;
@@ -623,6 +666,16 @@
             50% { transform: translateY(6px); }
             100% { transform: translateY(0); }
         }
+        @media (prefers-reduced-motion: reduce) {
+            .progress-fill,
+            .cta-button,
+            .game-hero .sparkle {
+                animation: none !important;
+            }
+            .mission-card {
+                transition: none !important;
+            }
+        }
     
         @media print {
             nav { display: none; }
@@ -633,7 +686,43 @@
         }
         @media (max-width: 900px) {
             nav { display: none; }
-            main { margin-left: 0; padding: 20px; }
+            main { margin-left: 0; padding: 14px; }
+            .learning-hud {
+                top: 6px;
+                padding: 10px;
+            }
+            .hud-row,
+            .mode-switch,
+            .module-focus {
+                gap: 6px;
+            }
+            .hud-pill {
+                font-size: 9pt;
+                padding: 4px 8px;
+            }
+            .mode-btn,
+            .focus-chip,
+            .cta-button {
+                width: 100%;
+                text-align: center;
+                min-height: 40px;
+            }
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+            .indice-list {
+                columns: 1;
+            }
+            .game-hero {
+                padding: 18px;
+                margin-bottom: 14px;
+            }
+            body.mode-apresentacao main {
+                padding: 12px;
+            }
+            body.mode-apresentacao .learning-hud {
+                top: 4px;
+            }
         }
     </style>
 </head>
