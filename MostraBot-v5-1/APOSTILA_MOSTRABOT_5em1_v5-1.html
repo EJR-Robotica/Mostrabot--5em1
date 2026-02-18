@@ -484,6 +484,24 @@
         .mission-card.is-dimmed {
             opacity: 0.45;
         }
+        .mission-card.is-locked {
+            opacity: 0.35;
+            filter: grayscale(0.25);
+            position: relative;
+        }
+        .mission-card.is-locked::after {
+            content: 'Fase bloqueada';
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #fff3cd;
+            border: 1px solid #f1c40f;
+            color: #7f5600;
+            font-size: 8.5pt;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 999px;
+        }
         .mission-title {
             font-weight: 800;
             color: #1a5276;
@@ -556,6 +574,23 @@
             flex-wrap: wrap;
             gap: 8px;
             align-items: center;
+        }
+        .student-controls {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .age-select {
+            border: 2px solid #7aaad6;
+            background: #fff;
+            color: #1a5276;
+            border-radius: 8px;
+            padding: 6px 8px;
+            font-size: 9.5pt;
+            font-weight: 700;
+            min-height: 38px;
         }
         .presentation-controls {
             margin-top: 8px;
@@ -689,6 +724,10 @@
         body.mode-aluno nav a[href="#aulas"],
         body.mode-aluno .indice-list a[href="#aulas"] {
             display: none !important;
+        }
+        .nav-link-locked {
+            opacity: 0.45;
+            pointer-events: none;
         }
         body.mode-apresentacao .presentation-controls {
             display: flex;
@@ -903,6 +942,17 @@
             <button class="mode-btn" type="button" data-mode="apresentacao">Modo Apresentacao</button>
             <span class="hud-pill">Modo atual: <span id="hud-modo">Aluno</span></span>
             <span class="hud-pill">Atalhos: A Aluno | P Professor | D Apresentacao</span>
+        </div>
+        <div class="student-controls" id="student-controls">
+            <span class="mode-label">Faixa etaria (Aluno):</span>
+            <select class="age-select" id="age-select">
+                <option value="6-8">6-8 anos</option>
+                <option value="9-11" selected>9-11 anos</option>
+                <option value="12-14">12-14 anos</option>
+                <option value="15+">15+ anos</option>
+            </select>
+            <button class="mode-btn" type="button" id="complete-stage-btn">Completar fase atual</button>
+            <span class="hud-pill">Fase liberada: <span id="hud-unlock">0</span>/6</span>
         </div>
         <div class="presentation-controls" id="presentation-controls">
             <span class="mode-label">Etapas guiadas:</span>
@@ -2484,11 +2534,15 @@ reset_personalizado</pre>
   const hudModulo = document.getElementById('hud-modulo');
   const hudSecao = document.getElementById('hud-secao');
   const hudModo = document.getElementById('hud-modo');
+  const hudUnlock = document.getElementById('hud-unlock');
   const focusChips = Array.from(document.querySelectorAll('.focus-chip'));
   const modeButtons = Array.from(document.querySelectorAll('.mode-btn[data-mode]'));
   const stageButtons = Array.from(document.querySelectorAll('[data-stage-nav]'));
   const exitPresentationBtn = document.getElementById('exit-presentation');
+  const ageSelect = document.getElementById('age-select');
+  const completeStageBtn = document.getElementById('complete-stage-btn');
   const stageOrder = ['intro', 'ligar-robo', 'led', 'movimento', 'buzzer', 'servo', 'linha'];
+  let currentAge = '9-11';
 
   const moduleLabel = {
     m1: 'Modulo 1',
@@ -2520,6 +2574,27 @@ reset_personalizado</pre>
     upgrade52: { name: 'Missao 6', module: 'm4', order: 6 },
     glossario: { name: 'Missao 6', module: 'm4', order: 6 }
   };
+
+  function getUnlockKey() {
+    return 'mostrabot_unlock_' + currentAge;
+  }
+
+  function getUnlockedStage() {
+    try {
+      const raw = localStorage.getItem(getUnlockKey());
+      const val = Number(raw);
+      if (Number.isInteger(val)) return Math.max(0, Math.min(stageOrder.length - 1, val));
+    } catch (error) {}
+    return 0;
+  }
+
+  function setUnlockedStage(nextValue) {
+    const safe = Math.max(0, Math.min(stageOrder.length - 1, Number(nextValue) || 0));
+    try {
+      localStorage.setItem(getUnlockKey(), String(safe));
+    } catch (error) {}
+    if (hudUnlock) hudUnlock.textContent = String(safe);
+  }
 
   function toSectionName(id) {
     const h1 = document.getElementById(id);
@@ -2636,6 +2711,11 @@ reset_personalizado</pre>
     const target = card.dataset.target;
     if (!target) return;
     card.addEventListener('click', (event) => {
+      const order = Number(card.dataset.order || '0');
+      if (document.body.classList.contains('mode-aluno') && order > getUnlockedStage()) {
+        event.preventDefault();
+        return;
+      }
       const anchor = event.target.closest('a');
       if (anchor) return;
       window.location.hash = '#' + target;
@@ -2662,6 +2742,30 @@ reset_personalizado</pre>
     if (hudMission) hudMission.textContent = missionInfo.name;
     if (hudModulo) hudModulo.textContent = moduleLabel[missionInfo.module] || '-';
     if (hudSecao) hudSecao.textContent = toSectionName(sectionId);
+  }
+
+  function applyStudentLocks() {
+    const isAluno = document.body.classList.contains('mode-aluno');
+    const unlocked = getUnlockedStage();
+    if (hudUnlock) hudUnlock.textContent = String(unlocked);
+
+    missionCards.forEach((card) => {
+      const order = Number(card.dataset.order || '0');
+      const locked = isAluno && order > unlocked;
+      card.classList.toggle('is-locked', locked);
+      const cta = card.querySelector('.cta-button');
+      if (cta) {
+        if (locked) cta.setAttribute('tabindex', '-1');
+        else cta.removeAttribute('tabindex');
+      }
+    });
+
+    navLinks.forEach((link) => {
+      const id = (link.getAttribute('href') || '').replace('#', '');
+      const info = missionBySection[id];
+      const locked = isAluno && info && typeof info.order === 'number' && info.order > unlocked;
+      link.classList.toggle('nav-link-locked', Boolean(locked));
+    });
   }
 
   function updateSectionFromScroll() {
@@ -2763,6 +2867,11 @@ reset_personalizado</pre>
       else if (finalMode === 'apresentacao') hudModo.textContent = 'Apresentacao';
       else hudModo.textContent = 'Aluno';
     }
+    const studentControls = document.getElementById('student-controls');
+    if (studentControls) {
+      studentControls.style.display = finalMode === 'aluno' ? 'flex' : 'none';
+    }
+    applyStudentLocks();
     applyPresentationFocus();
     updateLessonFromScroll();
     updateSectionFromScroll();
@@ -2800,6 +2909,28 @@ reset_personalizado</pre>
       goStage(dir);
     });
   });
+  if (ageSelect) {
+    ageSelect.addEventListener('change', () => {
+      currentAge = ageSelect.value || '9-11';
+      try {
+        localStorage.setItem('mostrabot_age', currentAge);
+      } catch (error) {}
+      applyStudentLocks();
+      syncHashTarget();
+    });
+  }
+  if (completeStageBtn) {
+    completeStageBtn.addEventListener('click', () => {
+      if (!document.body.classList.contains('mode-aluno')) return;
+      const currentSection = getCurrentSectionId();
+      const currentIdx = getStageIndexFromSection(currentSection);
+      const unlocked = getUnlockedStage();
+      if (currentIdx <= unlocked && unlocked < stageOrder.length - 1) {
+        setUnlockedStage(unlocked + 1);
+        applyStudentLocks();
+      }
+    });
+  }
   if (exitPresentationBtn) {
     exitPresentationBtn.addEventListener('click', () => applyMode('aluno'));
   }
@@ -2822,6 +2953,14 @@ reset_personalizado</pre>
   function syncHashTarget() {
     const targetId = window.location.hash.replace('#', '');
     if (!targetId) return;
+    if (document.body.classList.contains('mode-aluno')) {
+      const info = missionBySection[targetId];
+      if (info && typeof info.order === 'number' && info.order > getUnlockedStage()) {
+        const fallbackId = stageOrder[getUnlockedStage()] || 'intro';
+        window.location.hash = '#' + fallbackId;
+        return;
+      }
+    }
     const target = document.getElementById(targetId);
     if (!target) return;
     openSectionFromTarget(target);
@@ -2838,6 +2977,13 @@ reset_personalizado</pre>
 
   let savedMode = 'aluno';
   try {
+    const storageAge = localStorage.getItem('mostrabot_age');
+    if (storageAge) currentAge = storageAge;
+  } catch (error) {
+    currentAge = '9-11';
+  }
+  if (ageSelect) ageSelect.value = currentAge;
+  try {
     const storageMode = localStorage.getItem('mostrabot_modo');
     if (storageMode === 'professor' || storageMode === 'aluno' || storageMode === 'apresentacao') {
       savedMode = storageMode;
@@ -2847,6 +2993,7 @@ reset_personalizado</pre>
   }
 
   enhanceCodeExamples();
+  setUnlockedStage(getUnlockedStage());
   applyFocus('all');
   applyMode(savedMode);
   syncHashTarget();
