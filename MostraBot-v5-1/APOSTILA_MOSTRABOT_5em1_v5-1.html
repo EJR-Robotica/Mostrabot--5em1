@@ -3133,6 +3133,7 @@ reset_personalizado</pre>
   const profChecklistItems = document.getElementById('prof-checklist-items');
   const stageOrder = ['intro', 'ligar-robo', 'led', 'movimento', 'buzzer', 'servo', 'linha'];
   const slideIndexBySection = {};
+  const TASK_PROGRESS_SCHEMA = 'v3';
   let currentAge = '9-11';
   const defaultGameConfig = {
     version: 1,
@@ -3191,7 +3192,7 @@ reset_personalizado</pre>
     return 'mostrabot_prof_checklist';
   }
   function getTaskProgressKey() {
-    return 'mostrabot_task_progress_' + currentAge;
+    return 'mostrabot_task_progress_' + TASK_PROGRESS_SCHEMA + '_' + currentAge;
   }
   function getReadOnceKey() {
     return 'mostrabot_slide_read_once_v2_' + currentAge;
