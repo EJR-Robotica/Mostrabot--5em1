@@ -57,6 +57,10 @@
             font-size: 10pt;
         }
         nav a:hover { background: rgba(255,255,255,0.2); }
+        nav a.active-nav {
+            background: rgba(255,255,255,0.28);
+            font-weight: 700;
+        }
         main {
             margin-left: 300px;
             padding: 30px 40px;
@@ -429,6 +433,13 @@
             transform: translateY(-3px);
             box-shadow: 0 12px 24px rgba(0,0,0,0.1);
         }
+        .mission-card.is-active {
+            border-color: #2ecc71;
+            box-shadow: 0 0 0 3px rgba(46,204,113,0.22);
+        }
+        .mission-card.is-dimmed {
+            opacity: 0.45;
+        }
         .mission-title {
             font-weight: 800;
             color: #1a5276;
@@ -465,12 +476,138 @@
             font-size: 10pt;
             animation: pulse 2s ease-in-out infinite;
         }
+        .cta-button:hover {
+            filter: brightness(0.94);
+        }
+        a.cta-button {
+            text-decoration: none;
+        }
+        .learning-hud {
+            position: sticky;
+            top: 10px;
+            z-index: 30;
+            margin: 0 0 14px 0;
+            border: 2px solid #b8d9f5;
+            border-radius: 12px;
+            background: #f7fbff;
+            padding: 10px 12px;
+        }
+        .hud-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .hud-pill {
+            border-radius: 999px;
+            padding: 4px 10px;
+            background: #e8f4ff;
+            color: #1a5276;
+            font-size: 9.5pt;
+            font-weight: 700;
+        }
+        .mode-switch {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .mode-label {
+            font-size: 9.5pt;
+            color: #1a5276;
+            font-weight: 700;
+        }
+        .mode-btn {
+            border: 2px solid #b8d9f5;
+            background: #fff;
+            color: #1a5276;
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 9pt;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .mode-btn.active {
+            border-color: #2ecc71;
+            background: #eafaf1;
+            color: #1c7c4c;
+        }
+        .module-focus {
+            margin: 10px 0 12px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .focus-chip {
+            border: 2px solid #b8d9f5;
+            background: #fff;
+            color: #1a5276;
+            font-weight: 700;
+            border-radius: 999px;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+        .focus-chip.active {
+            border-color: #2ecc71;
+            background: #eafaf1;
+            color: #1c7c4c;
+        }
+        .hidden-by-focus {
+            display: none !important;
+        }
         .quest-box {
             border: 2px dashed #b8d9f5;
             background: #f7f9fb;
             border-radius: 12px;
             padding: 12px;
             margin: 12px 0;
+        }
+        .lesson-card.active-lesson {
+            border-color: #2ecc71;
+            box-shadow: 0 0 0 3px rgba(46,204,113,0.2);
+            background: #f8fff9;
+        }
+        body.mode-professor .sparkle,
+        body.mode-professor .progress-track,
+        body.mode-professor .badge-row,
+        body.mode-professor .module-caption {
+            display: none !important;
+        }
+        body.mode-professor .mission-card:not(.is-active),
+        body.mode-professor .lesson-card:not(.active-lesson),
+        body.mode-apresentacao .mission-card:not(.is-active),
+        body.mode-apresentacao .lesson-card:not(.active-lesson) {
+            display: none !important;
+        }
+        body.mode-professor .mission-card.is-active,
+        body.mode-professor .lesson-card.active-lesson,
+        body.mode-apresentacao .mission-card.is-active,
+        body.mode-apresentacao .lesson-card.active-lesson {
+            display: block !important;
+        }
+        body.mode-apresentacao nav {
+            display: none !important;
+        }
+        body.mode-apresentacao main {
+            margin-left: 0;
+            padding: 20px 28px;
+            max-width: 1100px;
+        }
+        body.mode-apresentacao .indice-box,
+        body.mode-apresentacao .module-focus,
+        body.mode-apresentacao #lesson-hint,
+        body.mode-apresentacao .quest-box {
+            display: none !important;
+        }
+        body.mode-apresentacao .header-banner {
+            padding: 18px 22px;
+        }
+        body.mode-apresentacao .hud-pill {
+            font-size: 10.5pt;
+        }
+        body.mode-apresentacao h1 {
+            font-size: 26pt;
         }
         .quest-title {
             font-weight: 800;
@@ -516,7 +653,7 @@
     <a href="#servo">7. Comandos Servo</a>
     <a href="#buzzer">8. Comando Buzzer</a>
     <a href="#linha">9. Sensor de Linha</a>
-    <a href="#ultra">10. Sensor Ultrassonico</a>
+    <a href="#ultra">10. Sensor Ultrassonico (sensor de distancia)</a>
     <a href="#controle">11. Estruturas de Controle</a>
     <a href="#condicoes">12. Condicoes SE</a>
     <a href="#calibracao">13. Calibracao Motores</a>
@@ -551,7 +688,7 @@
             <li><a href="#servo">7. Comandos Servo</a></li>
             <li><a href="#buzzer">8. Comando Buzzer</a></li>
             <li><a href="#linha">9. Sensor de Linha</a></li>
-            <li><a href="#ultra">10. Sensor Ultrassonico</a></li>
+            <li><a href="#ultra">10. Sensor Ultrassonico (sensor de distancia)</a></li>
             <li><a href="#controle">11. Estruturas de Controle</a></li>
             <li><a href="#condicoes">12. Condicoes SE</a></li>
             <li><a href="#calibracao">13. Calibracao Motores</a></li>
@@ -572,55 +709,82 @@
         <p><strong>Meta:</strong> completar as missões e ganhar selos.</p>
         <div class="progress-track"><div class="progress-fill"></div></div>
     </div>
+    <div class="learning-hud" id="learning-hud">
+        <div class="hud-row">
+            <span class="hud-pill">Missao atual: <span id="hud-missao">Missao 0</span></span>
+            <span class="hud-pill">Aula atual: <span id="hud-aula">Aula 1</span></span>
+            <span class="hud-pill">Modulo atual: <span id="hud-modulo">Modulo 1</span></span>
+            <span class="hud-pill">Secao: <span id="hud-secao">Mapa do Jogo</span></span>
+        </div>
+        <div class="mode-switch" id="mode-switch">
+            <span class="mode-label">Modo de uso:</span>
+            <button class="mode-btn active" type="button" data-mode="aluno">Modo Aluno</button>
+            <button class="mode-btn" type="button" data-mode="professor">Modo Professor</button>
+            <button class="mode-btn" type="button" data-mode="apresentacao">Modo Apresentacao</button>
+            <span class="hud-pill">Modo atual: <span id="hud-modo">Aluno</span></span>
+            <span class="hud-pill">Atalhos: A Aluno | P Professor | D Apresentacao</span>
+        </div>
+    </div>
+    <div class="module-focus" id="module-focus">
+        <button class="focus-chip active" type="button" data-focus="all">Ver Tudo</button>
+        <button class="focus-chip" type="button" data-focus="m1">Foco Modulo 1</button>
+        <button class="focus-chip" type="button" data-focus="m2">Foco Modulo 2</button>
+        <button class="focus-chip" type="button" data-focus="m4">Foco Modulo 4</button>
+        <button class="focus-chip" type="button" data-focus="support">Foco Suporte</button>
+    </div>
 
     <div class="mission-grid">
-        <div class="mission-card">
+        <div class="mission-card" data-target="aulas" data-module="m1" data-order="0" data-mission="Missao 0">
             <div class="mission-title">Missão 0 — Acordar o Robô</div>
             <span class="mission-tag">Ligar + PJE</span>
             <div class="badge-row"><span class="badge">Selo: Energia</span></div>
-            <div class="cta-button">Começar</div>
+            <a class="cta-button" href="#aulas">Comecar</a>
         </div>
-        <div class="mission-card">
+        <div class="mission-card" data-target="movimento" data-module="m1 m2" data-order="1" data-mission="Missao 1">
             <div class="mission-title">Missão 1 — Caminho Seguro</div>
             <span class="mission-tag">Movimento</span>
             <div class="badge-row"><span class="badge">Selo: Direção</span></div>
-            <div class="cta-button">Jogar</div>
+            <a class="cta-button" href="#movimento">Jogar</a>
         </div>
-        <div class="mission-card">
+        <div class="mission-card" data-target="led" data-module="m1" data-order="2" data-mission="Missao 2">
             <div class="mission-title">Missão 2 — Olhos que Piscam</div>
             <span class="mission-tag">LEDs</span>
             <div class="badge-row"><span class="badge">Selo: Luz</span></div>
-            <div class="cta-button">Jogar</div>
+            <a class="cta-button" href="#led">Jogar</a>
         </div>
-        <div class="mission-card">
+        <div class="mission-card" data-target="servo" data-module="m2" data-order="3" data-mission="Missao 3">
             <div class="mission-title">Missão 3 — Garra Colecionadora</div>
             <span class="mission-tag">Garra + Som</span>
             <div class="badge-row"><span class="badge">Selo: Garra</span></div>
-            <div class="cta-button">Jogar</div>
+            <a class="cta-button" href="#servo">Jogar</a>
         </div>
-        <div class="mission-card">
+        <div class="mission-card" data-target="linha" data-module="m4" data-order="4" data-mission="Missao 4">
             <div class="mission-title">Missão 4 — Seguir a Linha</div>
             <span class="mission-tag">Sensor de Linha</span>
             <div class="badge-row"><span class="badge">Selo: Trilho</span></div>
-            <div class="cta-button">Jogar</div>
+            <a class="cta-button" href="#linha">Jogar</a>
         </div>
-        <div class="mission-card">
+        <div class="mission-card" data-target="ultra" data-module="m4" data-order="5" data-mission="Missao 5">
             <div class="mission-title">Missão 5 — Desvio de Obstáculos</div>
             <span class="mission-tag">Ultrassônico</span>
             <div class="badge-row"><span class="badge">Selo: Desvio</span></div>
-            <div class="cta-button">Jogar</div>
+            <a class="cta-button" href="#ultra">Jogar</a>
         </div>
-        <div class="mission-card">
+        <div class="mission-card" data-target="controle" data-module="m4" data-order="6" data-mission="Missao 6">
             <div class="mission-title">Missão 6 — Desafio Final</div>
             <span class="mission-tag">REPITA + SE</span>
             <div class="badge-row"><span class="badge">Selo: Mestre</span></div>
-            <div class="cta-button">Jogar</div>
+            <a class="cta-button" href="#controle">Jogar</a>
         </div>
     </div>
 
     <div class="quest-box">
         <div class="quest-title">Regra do Jogo</div>
         <p>Somente avance quando a turma concluir a missão anterior. Isso evita confusão.</p>
+    </div>
+    <div class="box box-info">
+        <h3>Sinalizacoes de tranquilidade</h3>
+        <p><strong>Verde:</strong> pode seguir. <strong>Amarelo:</strong> revisar com calma. <strong>Azul:</strong> dica de apoio. O foco e aprender com confianca, passo a passo.</p>
     </div>
 
 </div>
@@ -629,45 +793,45 @@
     
     <!-- SECAO AULAS -->
     
-    <h1 id="aulas">0. Aulas por Etapas (2h cada)</h1>
-    <p>Plano modular, em etapas curtas. Cada aula tem objetivo e atividade visual.</p>
+    <h1 id="aulas">0. Aulas por Etapas (tempo recomendado)</h1>
+    <p>Plano modular, em etapas curtas. O tempo de cada aula e recomendado e pode variar conforme a escola e a turma.</p>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-1" data-module="m1" data-aula="Aula 1">
         <div class="lesson-title">Módulo 1 — Aula 1: Ligar e Entrar na PJE</div>
         <div class="lesson-goal">Objetivo: ligar o robô, identificar o ID e entrar na PJE.</div>
         <img class="module-img didactic-img" src="assets_lessons/01_ligar_robo.svg" alt="Ligar e entrar">
         <div class="module-caption">Cabo branco + LED + PJE</div>
     </div>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-2" data-module="m1" data-aula="Aula 2">
         <div class="lesson-title">Módulo 1 — Aula 2: Movimentos Básicos</div>
         <div class="lesson-goal">Objetivo: PF, PT, PD, PE com tempos curtos.</div>
         <img class="module-img didactic-img" src="assets_lessons/02_trajeto_quadrado.svg" alt="Quadrado seguro">
         <div class="module-caption">Exercício guiado: quadrado seguro</div>
     </div>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-3" data-module="m1" data-aula="Aula 3">
         <div class="lesson-title">Módulo 1 — Aula 3: LEDs (Feedback)</div>
         <div class="lesson-goal">Objetivo: usar LEDs como resposta visual.</div>
         <img class="module-img didactic-img" src="assets_lessons/04_led_feedback.svg" alt="Movimento com LED">
         <div class="module-caption">Movimento + LED</div>
     </div>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-4" data-module="m2" data-aula="Aula 4">
         <div class="lesson-title">Módulo 2 — Aula 4: Programação com Texto</div>
         <div class="lesson-goal">Objetivo: digitar comandos no Módulo 2 e testar.</div>
         <img class="module-img didactic-img" src="assets_lessons/03_trajeto_zigzag.svg" alt="Zigue-zague">
         <div class="module-caption">Desafio: zigue-zague com tempos curtos</div>
     </div>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-5" data-module="m2" data-aula="Aula 5">
         <div class="lesson-title">Módulo 2 — Aula 5: Garra e Som</div>
         <div class="lesson-goal">Objetivo: usar garra e buzzer em sequência.</div>
         <img class="module-img didactic-img" src="assets_lessons/05_garra_pegar.svg" alt="Pegar objeto">
         <div class="module-caption">Abrir/fechar garra com som</div>
     </div>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-6" data-module="m4" data-aula="Aula 6">
         <div class="lesson-title">Módulo 4 — Aula 6: REPITA e SE</div>
         <div class="lesson-goal">Objetivo: repetir movimentos e reagir a condições.</div>
         <img class="module-img didactic-img" src="assets_lessons/08_repita_trajeto.svg" alt="Repita voltas">
@@ -676,21 +840,21 @@
         <div class="module-caption">Se detectar obstáculo, reaja</div>
     </div>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-7" data-module="m4" data-aula="Aula 7">
         <div class="lesson-title">Sensor de Linha — Aula 7</div>
         <div class="lesson-goal">Objetivo: seguir a linha no chão.</div>
         <img class="module-img didactic-img" src="assets_lessons/06_linha.svg" alt="Seguir linha">
         <div class="module-caption">Pista simples para seguir</div>
     </div>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-8" data-module="m4" data-aula="Aula 8">
         <div class="lesson-title">Sensor Ultrassônico — Aula 8</div>
         <div class="lesson-goal">Objetivo: desviar de obstáculos automaticamente.</div>
         <img class="module-img didactic-img" src="assets_lessons/07_ultra_desvio.svg" alt="Desvio de obstaculos">
         <div class="module-caption">Obstáculo na frente, o robô desvia</div>
     </div>
 
-    <div class="lesson-card">
+    <div class="lesson-card" id="aula-9" data-module="support" data-aula="Aula 9">
         <div class="lesson-title">Atualizar Firmware — Aula 9</div>
         <div class="lesson-goal">Objetivo: atualizar o programa do robô com segurança.</div>
         <div class="box box-info">
@@ -699,6 +863,12 @@
         <p>Passo a passo será explicado no video. Após assistir, o professor repete o processo com os alunos.</p>
     </div>
 <h1 id="intro">1. Introducao ao MostraBot</h1>
+
+    <div class="box box-success">
+        <h3>Voce consegue!</h3>
+        <p>Esta apostila foi feita para deixar a aula leve. Use as imagens, leia devagar e siga as etapas. O robo foi feito para aprender brincando.</p>
+    </div>
+
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Conhecer o Robo</div>
@@ -763,6 +933,12 @@
 
     <!-- SECAO 2 -->
     <h1 id="hardware">2. Conhecendo o Hardware</h1>
+
+    <div class="box box-info">
+        <h3>Voce nao precisa decorar</h3>
+        <p>Veja as imagens e use esta tabela so quando precisar. O importante e saber onde ligar cada parte.</p>
+    </div>
+
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Conhecer as Pecas</div>
@@ -811,15 +987,15 @@
                         TRASEIRA DO ROBO
     </div>
 
-    <h2>Tabela de Pinagem Completa</h2>
+    <h2>Tabela simples de onde cada coisa liga</h2>
     <table>
         <tr><th>Componente</th><th>Pino</th><th>GPIO</th><th>Funcao</th></tr>
-        <tr><td>Motor 1 Frente</td><td>D0</td><td>GPIO16</td><td>Roda esquerda para frente</td></tr>
+        <tr><td>Roda esquerda (frente)</td><td>D0</td><td>GPIO16</td><td>Roda esquerda para frente</td></tr>
         <tr><td>Motor 1 Re</td><td>D5</td><td>GPIO14</td><td>Roda esquerda para tras</td></tr>
-        <tr><td>Motor 2 Frente</td><td>D1</td><td>GPIO5</td><td>Roda direita para frente</td></tr>
+        <tr><td>Roda direita (frente)</td><td>D1</td><td>GPIO5</td><td>Roda direita para frente</td></tr>
         <tr><td>Motor 2 Re</td><td>D4</td><td>GPIO2</td><td>Roda direita para tras</td></tr>
-        <tr><td>Servo 1</td><td>D6</td><td>GPIO12</td><td>Garra (servo esquerdo)</td></tr>
-        <tr><td>Servo 2</td><td>D7</td><td>GPIO13</td><td>Garra (servo direito)</td></tr>
+        <tr><td>Garra (servo 1)</td><td>D6</td><td>GPIO12</td><td>Garra (servo esquerdo)</td></tr>
+        <tr><td>Braco (servo 2)</td><td>D7</td><td>GPIO13</td><td>Garra (servo direito)</td></tr>
         <tr><td>D3 (Compartilhado)</td><td>D3</td><td>GPIO0</td><td>Ultra TRIG / Linha Dir / LED Dir</td></tr>
         <tr><td>D8 (Compartilhado)</td><td>D8</td><td>GPIO15</td><td>Ultra ECHO / Linha Esq / LED Esq</td></tr>
         <tr><td>LED/Buzzer</td><td>D2</td><td>GPIO4</td><td>LED externo e buzina</td></tr>
@@ -827,7 +1003,7 @@
 
     <div class="box box-danger">
         <h3>ATENCAO PROFESSOR!</h3>
-        <p>Os pinos D3 e D8 sao <strong>compartilhados</strong>. Pense neles como “lugares delicados”: por isso, so conecte os sensores <strong>depois</strong> que o robô estiver pronto.</p>
+        <p>Os pinos D3 e D8 sao <strong>compartilhados</strong>. Pense neles como "lugares delicados": por isso, so conecte os sensores <strong>depois</strong> que o robo estiver pronto.</p>
         <ol>
             <li>Os sensores devem estar <strong>DESCONECTADOS</strong> ao ligar o robo</li>
             <li>Conecte os sensores <strong>SOMENTE</strong> depois do robo conectar ao WiFi</li>
@@ -912,7 +1088,7 @@
         <ul>
             <li>[ ] Bateria carregada (ou fonte conectada)</li>
             <li>[ ] Sensores de linha DESCONECTADOS</li>
-            <li>[ ] Sensor ultrassonico DESCONECTADO</li>
+            <li>[ ] Sensor ultrassonico (sensor de distancia) DESCONECTADO</li>
             <li>[ ] Area livre de obstaculos perigosos</li>
             <li>[ ] Rede WiFi disponivel e funcionando</li>
             <li>[ ] Acesso a plataforma PJE no navegador</li>
@@ -1043,7 +1219,7 @@
     </div>
 
     <h2>Sintaxe</h2>
-    <pre>COMANDO &lt;tempo_em_milissegundos&gt;</pre>
+    <pre>COMANDO &lt;tempo_em_ms&gt;</pre>
 
     <h2>Exemplos</h2>
     <table>
@@ -1217,7 +1393,7 @@ bu              # Bipe de 800ms (padrao)</pre></div>
     </div>
 
     <!-- SECAO 9 -->
-    <h1 id="linha">9. Sensor Seguidor de Linha <img class="icon-inline" src="assets_icons/check.svg" alt="Linha"></h1>
+    <h1 id="linha">9. Sensor de Linha (segue a faixa) <img class="icon-inline" src="assets_icons/check.svg" alt="Linha"></h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Seguir Trilhos</div>
@@ -1282,7 +1458,7 @@ bu 500</pre></div>
     </div>
 
     <!-- SECAO 10 -->
-    <h1 id="ultra">10. Sensor Ultrassonico <img class="icon-inline" src="assets_icons/warning.svg" alt="Ultrassom"></h1>
+    <h1 id="ultra">10. Sensor Ultrassonico (sensor de distancia) <img class="icon-inline" src="assets_icons/warning.svg" alt="Ultrassom"></h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Desvio de Obstaculos</div>
@@ -1291,7 +1467,7 @@ bu 500</pre></div>
         </div>
         <div class="mission-badges"><span class="mission-badge">Sensor</span></div>
     </div>
-    <img class="module-img didactic-img" src="assets_full/10_ultra_sensor.png" alt="Sensor ultrassonico">
+    <img class="module-img didactic-img" src="assets_full/10_ultra_sensor.png" alt="Sensor ultrassonico (sensor de distancia)">
     <div class="module-caption">Desvia de obstaculos automaticamente</div>
 
     <h2>Como Funciona</h2>
@@ -1418,7 +1594,7 @@ fim repita</pre></div>
   &lt;comandos&gt;
 fim se</pre>
 
-    <h3>Exemplo com sensor de linha</h3>
+    <h3>Exemplo com sensor de linha (segue a faixa)</h3>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
@@ -1449,7 +1625,7 @@ sensor off</pre></div>
     </div>
 
     <!-- SECAO 12 -->
-    <h1 id="condicoes">12. Condicoes para o Comando SE</h1>
+    <h1 id="condicoes">12. Condicoes para o SE (escolhas)</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Entender Condicoes</div>
@@ -1460,8 +1636,8 @@ sensor off</pre></div>
     </div>
 
     <h2>Condicoes de Linha</h2>
-    <img class="module-img didactic-img" src="assets_full/13_condicoes_linha.png" alt="Condicoes do sensor de linha">
-    <div class="module-caption">Condições mais usadas no sensor de linha</div>
+    <img class="module-img didactic-img" src="assets_full/13_condicoes_linha.png" alt="Condicoes do sensor de linha (segue a faixa)">
+    <div class="module-caption">Condições mais usadas no sensor de linha (segue a faixa)</div>
     <table>
         <tr><th>Condicao</th><th>Significado</th></tr>
         <tr><td><code>sensord</code></td><td>Sensor DIREITO na linha (preto)</td></tr>
@@ -1595,8 +1771,8 @@ sensor off</pre></div>
         <tr><td><code>lde &lt;ms&gt;</code></td><td>Ambos LEDs</td></tr>
         <tr><td rowspan="4">Garra</td><td><code>bc</code></td><td>Baixar/Fechar</td></tr>
         <tr><td><code>sc</code></td><td>Subir/Abrir</td></tr>
-        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Servo 1</td></tr>
-        <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Servo 2</td></tr>
+        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Garra (servo 1)</td></tr>
+        <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Braco (servo 2)</td></tr>
         <tr><td>Som</td><td><code>bu &lt;ms&gt;</code></td><td>Buzzer</td></tr>
         <tr><td>Pausa</td><td><code>t &lt;ms&gt;</code></td><td>Pausa silenciosa</td></tr>
         <tr><td rowspan="3">Sensores</td><td><code>sensor linha</code></td><td>Ativa IR</td></tr>
@@ -1695,7 +1871,7 @@ sensor off</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
-    <h2>Explorador Ultrassonico</h2>
+    <h2>Explorador Ultrassonico (sensor de distancia)</h2>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
@@ -1829,6 +2005,12 @@ bu 500</pre></div>
 
     <!-- SECAO 17 -->
     <h1 id="problemas">17. Resolucao de Problemas</h1>
+
+    <div class="box box-info">
+        <h3>Calma, isso e normal</h3>
+        <p>Se algo nao funcionar, respire e siga o passo a passo. Quase sempre e cabo, ID ou Wi‑Fi.</p>
+    </div>
+
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Resolver</div>
@@ -1843,7 +2025,7 @@ bu 500</pre></div>
     <div class="box box-danger">
         <h3>Robo nao conecta ao WiFi</h3>
         <p><strong>Sintoma:</strong> LED pisca muito rapido continuamente</p>
-        <p><strong>Solucoes:</strong> Verifique WiFi, alcance, senha no firmware, reinicie</p>
+        <p><strong>Solucoes:</strong> Verifique WiFi, alcance, senha no programa do robo (firmware), reinicie</p>
     </div>
 
     <div class="box box-warning">
@@ -1872,7 +2054,7 @@ bu 500</pre></div>
     </div>
 
     <div class="box box-danger">
-        <h3>Sensor ultrassonico nao detecta</h3>
+        <h3>Sensor ultrassonico (sensor de distancia) nao detecta</h3>
         <p><strong>Solucoes:</strong></p>
         <ul>
             <li>Verifique se ativou: <code>sensor ultra</code></li>
@@ -1902,7 +2084,7 @@ bu 500</pre></div>
 
     <h2>O que muda na versao 5.2?</h2>
     <ul>
-        <li>Modos ultrassonicos avancados para labirintos</li>
+        <li>Modos de sensor de distancia avancados para labirintos</li>
         <li>Comandos prontos para exploracao rapida</li>
         <li>Mais protecoes internas de estabilidade</li>
         <li>Opcoes extras de velocidade personalizada</li>
@@ -1914,7 +2096,7 @@ bu 500</pre></div>
         <tr><th>Comando</th><th>Descricao</th></tr>
         <tr><td><code>define_vel &lt;valor&gt;</code></td><td>Define velocidade geral</td></tr>
         <tr><td><code>define_vel_linha &lt;valor&gt;</code></td><td>Define velocidade do seguidor de linha</td></tr>
-        <tr><td><code>define_vel_ultra &lt;valor&gt;</code></td><td>Define velocidade do ultrassonico</td></tr>
+        <tr><td><code>define_vel_ultra &lt;valor&gt;</code></td><td>Define velocidade do ultrassonico (sensor de distancia)</td></tr>
     </table>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
@@ -1956,7 +2138,7 @@ reset_personalizado</pre>
         <tr><td>EEPROM</td><td>Memoria que mantem dados apos desligar</td></tr>
         <tr><td>ESP8266</td><td>O “cerebro” que tem Wi‑Fi dentro</td></tr>
         <tr><td>GPIO</td><td>Pinos programaveis de entrada/saida</td></tr>
-        <tr><td>HC-SR04</td><td>Modelo do sensor ultrassonico</td></tr>
+        <tr><td>HC-SR04</td><td>Modelo do sensor de distancia (ultrassonico)</td></tr>
         <tr><td>Heartbeat</td><td>Pulso periodico do LED indicando saude</td></tr>
         <tr><td>IR</td><td>Infravermelho - tecnologia dos sensores de linha</td></tr>
         <tr><td>LED</td><td>Light Emitting Diode - os "olhos" do robo</td></tr>
@@ -1964,8 +2146,8 @@ reset_personalizado</pre>
         <tr><td>PWM</td><td>Controle de potencia dos motores</td></tr>
         <tr><td>Rampa</td><td>Sistema de aceleracao/desaceleracao suave</td></tr>
         <tr><td>Servo</td><td>Motor de posicionamento preciso (garra)</td></tr>
-        <tr><td>t (Tempo)</td><td>Comando de pausa silenciosa em milissegundos</td></tr>
-        <tr><td>Ultrassonico</td><td>Sensor que mede distancia por ondas sonoras</td></tr>
+        <tr><td>t (Tempo)</td><td>Comando de pausa silenciosa em milissegundos (ms)</td></tr>
+        <tr><td>Ultrassonico (sensor de distancia)</td><td>Sensor que mede distancia por ondas sonoras</td></tr>
         <tr><td>Watchdog</td><td>Sistema que reinicia se travar</td></tr>
         <tr><td>WiFi</td><td>Conexao sem fio para internet</td></tr>
         <tr><td>Wemos D1 Mini</td><td>A plaquinha do robô onde o “cerebro” mora</td></tr>
@@ -1989,6 +2171,71 @@ reset_personalizado</pre>
   if (!main) return;
   const headers = Array.from(main.querySelectorAll('h1'));
   const skipIds = new Set(['mapa-jogo']);
+  const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+  const missionCards = Array.from(document.querySelectorAll('.mission-card[data-target]'));
+  const lessonCards = Array.from(document.querySelectorAll('.lesson-card[data-aula]'));
+  const progressFill = document.querySelector('.progress-fill');
+  const hudMission = document.getElementById('hud-missao');
+  const hudAula = document.getElementById('hud-aula');
+  const hudModulo = document.getElementById('hud-modulo');
+  const hudSecao = document.getElementById('hud-secao');
+  const hudModo = document.getElementById('hud-modo');
+  const focusChips = Array.from(document.querySelectorAll('.focus-chip'));
+  const modeButtons = Array.from(document.querySelectorAll('.mode-btn'));
+
+  const moduleLabel = {
+    m1: 'Modulo 1',
+    m2: 'Modulo 2',
+    m4: 'Modulo 4',
+    support: 'Suporte',
+    all: 'Todos'
+  };
+
+  const missionBySection = {
+    'mapa-jogo': { name: 'Missao 0', module: 'm1', order: 0 },
+    aulas: { name: 'Missao 0', module: 'm1', order: 0 },
+    'primeiros-passos': { name: 'Missao 0', module: 'm1', order: 0 },
+    'ligar-robo': { name: 'Missao 0', module: 'm1', order: 0 },
+    movimento: { name: 'Missao 1', module: 'm1', order: 1 },
+    led: { name: 'Missao 2', module: 'm1', order: 2 },
+    servo: { name: 'Missao 3', module: 'm2', order: 3 },
+    buzzer: { name: 'Missao 3', module: 'm2', order: 3 },
+    linha: { name: 'Missao 4', module: 'm4', order: 4 },
+    ultra: { name: 'Missao 5', module: 'm4', order: 5 },
+    controle: { name: 'Missao 6', module: 'm4', order: 6 },
+    condicoes: { name: 'Missao 6', module: 'm4', order: 6 },
+    calibracao: { name: 'Missao 6', module: 'm4', order: 6 },
+    velocidades: { name: 'Missao 6', module: 'm4', order: 6 },
+    referencia: { name: 'Missao 6', module: 'm4', order: 6 },
+    exemplos: { name: 'Missao 6', module: 'm4', order: 6 },
+    problemas: { name: 'Missao 6', module: 'm4', order: 6 },
+    upgrade52: { name: 'Missao 6', module: 'm4', order: 6 },
+    glossario: { name: 'Missao 6', module: 'm4', order: 6 }
+  };
+
+  function toSectionName(id) {
+    const h1 = document.getElementById(id);
+    if (!h1) return '-';
+    return h1.textContent.trim();
+  }
+
+  function openSectionFromTarget(targetEl) {
+    if (!targetEl) return;
+    if (targetEl.tagName === 'H1') {
+      const ownContent = targetEl.nextElementSibling;
+      if (ownContent && ownContent.classList.contains('lesson-content')) {
+        ownContent.classList.remove('collapsed');
+        targetEl.classList.remove('collapsed');
+      }
+      return;
+    }
+    const content = targetEl.closest('.lesson-content');
+    if (!content) return;
+    const title = content.previousElementSibling;
+    if (!title || title.tagName !== 'H1') return;
+    content.classList.remove('collapsed');
+    title.classList.remove('collapsed');
+  }
 
   headers.forEach((h1) => {
     if (skipIds.has(h1.id)) return;
@@ -2014,13 +2261,13 @@ reset_personalizado</pre>
     const hint = document.createElement('div');
     hint.id = 'lesson-hint';
     hint.className = 'lesson-hint';
-    hint.textContent = 'Clique no título de cada aula para abrir e fechar.';
+    hint.textContent = 'Clique no titulo de cada secao para abrir e fechar.';
     map.insertAdjacentElement('afterend', hint);
   }
 
-  // Collapse all except map and intro
+  // Collapse all except map, aulas e intro
   headers.forEach((h1) => {
-    if (h1.id === 'mapa-jogo' || h1.id === 'intro') return;
+    if (h1.id === 'mapa-jogo' || h1.id === 'aulas' || h1.id === 'intro') return;
     const content = h1.nextElementSibling;
     if (content && content.classList.contains('lesson-content')) {
       content.classList.add('collapsed');
@@ -2036,6 +2283,158 @@ reset_personalizado</pre>
     const isCollapsed = content.classList.toggle('collapsed');
     h1.classList.toggle('collapsed', isCollapsed);
   });
+
+  missionCards.forEach((card) => {
+    const target = card.dataset.target;
+    if (!target) return;
+    card.addEventListener('click', (event) => {
+      const anchor = event.target.closest('a');
+      if (anchor) return;
+      window.location.hash = '#' + target;
+    });
+  });
+
+  function setActiveSection(sectionId) {
+    if (!sectionId) return;
+    navLinks.forEach((a) => {
+      const isActive = a.getAttribute('href') === '#' + sectionId;
+      a.classList.toggle('active-nav', isActive);
+    });
+
+    const missionInfo = missionBySection[sectionId] || missionBySection['mapa-jogo'];
+    const order = missionInfo.order;
+    missionCards.forEach((card) => {
+      const cardOrder = Number(card.dataset.order || '-1');
+      card.classList.toggle('is-active', cardOrder === order);
+      card.classList.toggle('is-dimmed', cardOrder > order);
+    });
+    if (progressFill) {
+      progressFill.style.width = (((order + 1) / 7) * 100).toFixed(0) + '%';
+    }
+    if (hudMission) hudMission.textContent = missionInfo.name;
+    if (hudModulo) hudModulo.textContent = moduleLabel[missionInfo.module] || '-';
+    if (hudSecao) hudSecao.textContent = toSectionName(sectionId);
+  }
+
+  function updateSectionFromScroll() {
+    let current = null;
+    for (const h1 of headers) {
+      const rect = h1.getBoundingClientRect();
+      if (rect.top <= 140) current = h1;
+    }
+    if (!current) current = headers[0];
+    if (current && current.id) setActiveSection(current.id);
+  }
+
+  function activateLessonCard(card) {
+    lessonCards.forEach((c) => c.classList.toggle('active-lesson', c === card));
+    if (!card) return;
+    if (hudAula) hudAula.textContent = card.dataset.aula || '-';
+    const mod = card.dataset.module || 'all';
+    if (hudModulo) hudModulo.textContent = moduleLabel[mod] || '-';
+  }
+
+  function updateLessonFromScroll() {
+    let active = null;
+    for (const card of lessonCards) {
+      if (card.classList.contains('hidden-by-focus')) continue;
+      const rect = card.getBoundingClientRect();
+      if (rect.top <= 220 && rect.bottom >= 220) {
+        active = card;
+        break;
+      }
+    }
+    if (!active) return;
+    activateLessonCard(active);
+  }
+
+  function applyMode(mode) {
+    const validModes = new Set(['aluno', 'professor', 'apresentacao']);
+    const finalMode = validModes.has(mode) ? mode : 'aluno';
+    document.body.classList.toggle('mode-professor', finalMode === 'professor');
+    document.body.classList.toggle('mode-aluno', finalMode === 'aluno');
+    document.body.classList.toggle('mode-apresentacao', finalMode === 'apresentacao');
+    modeButtons.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.mode === finalMode);
+    });
+    if (hudModo) {
+      if (finalMode === 'professor') hudModo.textContent = 'Professor';
+      else if (finalMode === 'apresentacao') hudModo.textContent = 'Apresentacao';
+      else hudModo.textContent = 'Aluno';
+    }
+    updateLessonFromScroll();
+    updateSectionFromScroll();
+    try {
+      localStorage.setItem('mostrabot_modo', finalMode);
+    } catch (error) {
+      // Silent fallback when storage is unavailable.
+    }
+  }
+
+  function applyFocus(focus) {
+    const focusValue = focus || 'all';
+    const filterables = document.querySelectorAll('.mission-card[data-module], .lesson-card[data-module]');
+    filterables.forEach((el) => {
+      const mods = (el.dataset.module || '').split(/\s+/);
+      const visible = focusValue === 'all' || mods.includes(focusValue);
+      el.classList.toggle('hidden-by-focus', !visible);
+    });
+    focusChips.forEach((chip) => {
+      chip.classList.toggle('active', chip.dataset.focus === focusValue);
+    });
+    if (hudModulo) hudModulo.textContent = moduleLabel[focusValue] || '-';
+    updateLessonFromScroll();
+  }
+
+  focusChips.forEach((chip) => {
+    chip.addEventListener('click', () => applyFocus(chip.dataset.focus));
+  });
+  modeButtons.forEach((btn) => {
+    btn.addEventListener('click', () => applyMode(btn.dataset.mode));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    const target = event.target;
+    const tag = target && target.tagName ? target.tagName.toLowerCase() : '';
+    const isTypingField = tag === 'input' || tag === 'textarea' || (target && target.isContentEditable);
+    if (isTypingField) return;
+
+    const key = (event.key || '').toLowerCase();
+    if (key === 'a') applyMode('aluno');
+    if (key === 'p') applyMode('professor');
+    if (key === 'd') applyMode('apresentacao');
+  });
+
+  function syncHashTarget() {
+    const targetId = window.location.hash.replace('#', '');
+    if (!targetId) return;
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    openSectionFromTarget(target);
+    setActiveSection(targetId);
+  }
+
+  window.addEventListener('hashchange', syncHashTarget);
+  window.addEventListener('scroll', () => {
+    updateSectionFromScroll();
+    updateLessonFromScroll();
+  }, { passive: true });
+
+  let savedMode = 'aluno';
+  try {
+    const storageMode = localStorage.getItem('mostrabot_modo');
+    if (storageMode === 'professor' || storageMode === 'aluno' || storageMode === 'apresentacao') {
+      savedMode = storageMode;
+    }
+  } catch (error) {
+    savedMode = 'aluno';
+  }
+
+  applyFocus('all');
+  applyMode(savedMode);
+  syncHashTarget();
+  updateSectionFromScroll();
+  updateLessonFromScroll();
 })();
 </script>
 
