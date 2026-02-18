@@ -1043,6 +1043,9 @@
         .student-slide-hidden {
             display: none !important;
         }
+        .student-slide-group {
+            margin-bottom: 14px;
+        }
         .student-step-nav {
             display: none;
             position: fixed;
@@ -1090,6 +1093,9 @@
         }
         body.mode-aluno .learning-hud {
             position: static;
+        }
+        body.mode-aluno main {
+            padding-bottom: 110px;
         }
         body.mode-aluno .student-step-nav {
             display: flex;
@@ -1215,6 +1221,27 @@
             }
             .quick-exit .mode-btn {
                 width: 100%;
+            }
+            .student-step-nav {
+                width: calc(100% - 14px);
+                left: 7px;
+                right: 7px;
+                transform: none;
+                bottom: 6px;
+                padding: 8px;
+                gap: 6px;
+            }
+            .student-step-nav .step-btn {
+                min-width: 88px;
+                padding: 9px 8px;
+                font-size: 9.4pt;
+            }
+            .student-step-label {
+                font-size: 9pt;
+                line-height: 1.25;
+            }
+            body.mode-aluno main {
+                padding-bottom: 120px;
             }
         }
     </style>
@@ -3528,12 +3555,45 @@ reset_personalizado</pre>
     }
   }
 
+  function getStudentSlideGroups(sectionId) {
+    const h1 = document.getElementById(sectionId);
+    const content = h1 ? h1.nextElementSibling : null;
+    if (!content || !content.classList || !content.classList.contains('lesson-content')) return [];
+
+    if (content.dataset.slideGrouped !== '1') {
+      const sourceElements = Array.from(content.children).filter((el) => {
+        if (!el || !el.tagName) return false;
+        if (el.classList.contains('mission-header')) return false;
+        return true;
+      });
+
+      let currentGroup = null;
+      sourceElements.forEach((el) => {
+        const startsNewGroup =
+          el.tagName === 'H2' ||
+          el.classList.contains('mission-task') ||
+          el.classList.contains('box') ||
+          el.classList.contains('cloud-links');
+
+        if (!currentGroup || (startsNewGroup && currentGroup.childElementCount > 0)) {
+          currentGroup = document.createElement('div');
+          currentGroup.className = 'student-slide-group';
+          content.appendChild(currentGroup);
+        }
+        currentGroup.appendChild(el);
+      });
+
+      content.dataset.slideGrouped = '1';
+    }
+
+    return Array.from(content.querySelectorAll('.student-slide-group'));
+  }
+
   function renderStudentSlides() {
     const isAluno = document.body.classList.contains('mode-aluno');
     const sectionId = stageOrder[getUnlockedStage()] || 'intro';
-    const h1 = document.getElementById(sectionId);
-    const content = h1 ? h1.nextElementSibling : null;
-    const canSlide = Boolean(isAluno && content && content.classList && content.classList.contains('lesson-content'));
+    const groups = getStudentSlideGroups(sectionId);
+    const canSlide = Boolean(isAluno && groups.length > 0);
 
     if (!canSlide) {
       if (studentStepNav) studentStepNav.style.display = 'none';
@@ -3541,28 +3601,18 @@ reset_personalizado</pre>
       return;
     }
 
-    const elements = Array.from(content.children).filter((el) => {
-      if (!el || !el.tagName) return false;
-      return !el.classList.contains('mission-header');
-    });
-
-    if (elements.length === 0) {
-      if (studentStepNav) studentStepNav.style.display = 'none';
-      return;
-    }
-
     if (studentStepNav) studentStepNav.style.display = 'flex';
-    const firstTaskIndex = elements.findIndex((el) => el.classList.contains('mission-task'));
-    const maxIdx = firstTaskIndex >= 0 ? firstTaskIndex : elements.length - 1;
+    const firstTaskIndex = groups.findIndex((group) => group.querySelector('.mission-task'));
+    const maxIdx = firstTaskIndex >= 0 ? firstTaskIndex : groups.length - 1;
     const current = Math.max(0, Math.min(maxIdx, Number(slideIndexBySection[sectionId] || 0)));
     slideIndexBySection[sectionId] = current;
 
-    elements.forEach((el, idx) => {
-      el.classList.toggle('student-slide-hidden', idx !== current);
+    groups.forEach((group, idx) => {
+      group.classList.toggle('student-slide-hidden', idx !== current);
     });
 
-    const currentElement = elements[current];
-    const isTaskStep = Boolean(currentElement && currentElement.classList.contains('mission-task'));
+    const currentElement = groups[current];
+    const isTaskStep = Boolean(currentElement && currentElement.querySelector('.mission-task'));
     const taskProgress = getTaskProgress();
     const sectionTaskState = taskProgress[sectionId] || { finished: false };
 
@@ -3586,18 +3636,15 @@ reset_personalizado</pre>
   function changeStudentSlide(delta) {
     if (!document.body.classList.contains('mode-aluno')) return;
     const sectionId = stageOrder[getUnlockedStage()] || 'intro';
-    const h1 = document.getElementById(sectionId);
-    const content = h1 ? h1.nextElementSibling : null;
-    if (!content || !content.classList || !content.classList.contains('lesson-content')) return;
-    const elements = Array.from(content.children).filter((el) => el && el.tagName && !el.classList.contains('mission-header'));
-    if (elements.length === 0) return;
-    const firstTaskIndex = elements.findIndex((el) => el.classList.contains('mission-task'));
-    const maxIdx = firstTaskIndex >= 0 ? firstTaskIndex : elements.length - 1;
+    const groups = getStudentSlideGroups(sectionId);
+    if (groups.length === 0) return;
+    const firstTaskIndex = groups.findIndex((group) => group.querySelector('.mission-task'));
+    const maxIdx = firstTaskIndex >= 0 ? firstTaskIndex : groups.length - 1;
     const current = Math.max(0, Math.min(maxIdx, Number(slideIndexBySection[sectionId] || 0)));
     const next = Math.max(0, Math.min(maxIdx, current + delta));
     slideIndexBySection[sectionId] = next;
     renderStudentSlides();
-    const currentVisible = elements[next];
+    const currentVisible = groups[next];
     if (currentVisible && typeof currentVisible.scrollIntoView === 'function') {
       currentVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
