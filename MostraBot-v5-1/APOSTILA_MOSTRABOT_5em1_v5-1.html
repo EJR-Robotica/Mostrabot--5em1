@@ -1074,15 +1074,16 @@
             display: none;
             position: static;
             z-index: 5;
-            width: 100%;
+            width: fit-content;
+            min-width: 230px;
+            max-width: 100%;
             border: 2px solid #6ac4ff;
             border-radius: 14px;
             background: linear-gradient(180deg, #f8feff, #e8f8ff);
             box-shadow: 0 6px 14px rgba(14,70,104,0.14);
             padding: 10px;
-            gap: 8px;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 10px;
         }
         .student-step-nav .step-btn {
@@ -1111,7 +1112,7 @@
             color: #0e4668;
             font-weight: 800;
             text-align: center;
-            flex: 1;
+            display: block;
         }
         body.mode-aluno .learning-hud {
             position: static;
@@ -1455,7 +1456,7 @@
         </div>
     </div>
     <details class="roadmap-panel">
-        <summary>Abrir roadmap de fases</summary>
+        <summary>Abrir MAPA do progresso</summary>
         <div class="roadmap-content">
     <div class="module-focus" id="module-focus">
         <button class="focus-chip active" type="button" data-focus="all">Ver Tudo</button>
@@ -3056,9 +3057,7 @@ reset_personalizado</pre>
 </div>
 
 <div class="student-step-nav" id="student-step-nav">
-    <button class="step-btn" type="button" id="student-step-prev">◀ Anterior</button>
     <span class="student-step-label" id="student-step-label">Passo 1 de 1</span>
-    <button class="step-btn step-btn-next" type="button" id="student-step-next">Proximo ▶</button>
 </div>
 
 <div class="student-fab-nav" id="student-fab-nav">
@@ -3828,11 +3827,11 @@ reset_personalizado</pre>
     }
     if (studentStepLabel) {
       if (!readUnlocked) {
-        studentStepLabel.textContent = 'Leia ate o final desta tela para liberar o Proximo';
+        studentStepLabel.textContent = 'Leia ate o final desta tela para liberar a seta verde ▶';
       } else if (isTaskStep && !sectionTaskState.finished) {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Conclua a tarefa abaixo para continuar';
       } else {
-        studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Clique em Proximo para continuar';
+        studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Use a seta verde ▶ para continuar';
       }
     }
     updateReadGateByScroll();
