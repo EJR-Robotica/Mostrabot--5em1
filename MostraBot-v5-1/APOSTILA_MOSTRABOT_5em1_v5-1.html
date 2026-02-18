@@ -3184,7 +3184,7 @@ reset_personalizado</pre>
     return 'mostrabot_task_progress_' + currentAge;
   }
   function getReadOnceKey() {
-    return 'mostrabot_slide_read_once_' + currentAge;
+    return 'mostrabot_slide_read_once_v2_' + currentAge;
   }
 
   function sortMissionCardsByOrder() {
@@ -3776,14 +3776,14 @@ reset_personalizado</pre>
     const state = getCurrentStudentSlideState();
     if (!state.groups.length) return;
     if (hasReadCurrentSlide(state)) return;
+    const currentGroup = state.groups[state.current];
+    if (!currentGroup) return;
 
-    const doc = document.documentElement;
-    const viewport = window.innerHeight || doc.clientHeight || 0;
-    const scrollTop = window.scrollY || doc.scrollTop || 0;
-    const fullHeight = Math.max(doc.scrollHeight, document.body ? document.body.scrollHeight : 0);
-    const reachedBottom = scrollTop + viewport >= fullHeight - 26;
-    const noScrollNeeded = fullHeight <= viewport + 26;
-    if (!reachedBottom && !noScrollNeeded) return;
+    const viewport = window.innerHeight || document.documentElement.clientHeight || 0;
+    const groupRect = currentGroup.getBoundingClientRect();
+    const reachedEndOfGroup = groupRect.bottom <= (viewport - 20);
+    const fullyVisibleWithoutScroll = groupRect.top >= 0 && groupRect.bottom <= (viewport - 20);
+    if (!reachedEndOfGroup && !fullyVisibleWithoutScroll) return;
 
     const readMap = getReadOnceProgress();
     readMap[getReadToken(state.sectionId, state.current)] = true;
