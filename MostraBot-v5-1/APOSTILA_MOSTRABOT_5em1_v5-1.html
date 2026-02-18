@@ -231,6 +231,10 @@
         .mvp-img {
             max-width: 500px;
         }
+        
+        .didactic-img {
+            max-width: 500px;
+        }
         .module-caption {
             text-align: center;
             font-size: 10pt;
@@ -347,6 +351,8 @@
     <h1 id="intro">1. Introducao ao MostraBot</h1>
 
     <h2>O que e o MostraBot?</h2>
+    <img class="module-img didactic-img" src="assets_full/01_intro_robo.png" alt="Mostrabot - robo educacional">
+    <div class="module-caption">O Mostrabot e um robo educacional para sala de aula</div>
     <p>O <strong>MostraBot</strong> e um robo educacional desenvolvido pela <strong>EJR Robotica Educacional</strong> especialmente para uso em salas de aula. Ele foi projetado para ensinar programacao e robotica de forma progressiva, do mais simples ao mais complexo.</p>
 
     <h2>A Plataforma PJE Nuvem</h2>
@@ -368,6 +374,8 @@
     <p>O professor ou aluno digita comandos no navegador, e o robo executa automaticamente!</p>
 
     <h2>Como Funcionam os Modulos da PJE (Visao Rapida)</h2>
+    <img class="module-img" src="assets_full/02_pje_modulos.png" alt="Modulos da PJE">
+    <div class="module-caption">Modulos 1, 2 e 4 da PJE</div>
     <ul>
         <li><strong>Modulo 1:</strong> controle por botoes e setas, com tempo escolhido em uma lista (select). Nao ha digitacao manual.</li>
         <li><strong>Modulo 2 e Modulo 3:</strong> comandos manuais em um campo de texto.</li>
@@ -398,6 +406,8 @@
     <p>O MostraBot usa o <strong>Wemos D1 Mini</strong>, uma placa baseada no chip ESP8266 com WiFi integrado.</p>
 
     <h2>Mapa dos Componentes</h2>
+    <img class="module-img didactic-img" src="assets_full/03_hardware_componentes.png" alt="Mapa de componentes do robo">
+    <div class="module-caption">Mapa rapido dos principais componentes</div>
     <div class="diagram">
             +--------------------------------------------+
             |           FRENTE DO ROBO                   |
@@ -462,6 +472,8 @@
     <p>Esta e uma das secoes mais importantes! O robo "fala" com voce atraves de LEDs. Aprenda a interpretar esses sinais.</p>
 
     <h2>Sequencia de Boot</h2>
+    <img class="module-img didactic-img" src="assets_full/04_sinais_led.png" alt="LED mostra o status do robo">
+    <div class="module-caption">O LED mostra se o robo esta conectando ou pronto</div>
     <div class="diagram">
   PASSO 1: Liga o robo
            |
@@ -587,6 +599,8 @@
     <h1 id="movimento">5. Comandos de Movimento</h1>
 
     <h2>Layout dos Modulos (M1, M2 e M4)</h2>
+    <img class="module-img" src="assets_full/05_movimento_botoes.png" alt="Botoes de movimento na PJE">
+    <div class="module-caption">Botoes PF, PT, PD, PE</div>
     <ul>
         <li><strong>Modulo 1:</strong> botoes verdes (PF, PT, PD, PE, LD, LE, LDE, BU, BC, SC) e <strong>select de tempo</strong> com valores prontos.</li>
         <li><strong>Modulo 2:</strong> caixa de texto para digitar comandos + teclado azul para tempo.</li>
@@ -716,6 +730,8 @@ pd 120</pre></div>
 
     <!-- SECAO 6 -->
     <h1 id="led">6. Comandos de LED (Olhos)</h1>
+    <img class="module-img" src="assets_full/06_led_botoes.png" alt="Botoes de LED na PJE">
+    <div class="module-caption">Use LD, LE e LDE para os olhos</div>
 
     <table>
         <tr><th>Comando</th><th>Descricao</th><th>Pino</th></tr>
@@ -733,6 +749,8 @@ pd 120</pre></div>
 
     <!-- SECAO 7 -->
     <h1 id="servo">7. Comandos de Servo (Garra)</h1>
+    <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Botoes da garra na PJE">
+    <div class="module-caption">BC = baixa a garra, SC = sobe a garra</div>
 
     <table>
         <tr><th>Comando</th><th>Descricao</th><th>Angulo</th></tr>
@@ -757,6 +775,8 @@ pt 500          # Recua com o objeto</pre></div>
 
     <!-- SECAO 8 -->
     <h1 id="buzzer">8. Comando de Buzzer (Som)</h1>
+    <img class="module-img" src="assets_full/08_buzzer_botao.png" alt="Botao BU na PJE">
+    <div class="module-caption">BU faz o bip do robo</div>
 
     <pre>bu &lt;tempo_em_ms&gt;</pre>
     <p>Frequencia: <strong>2000 Hz</strong> | Padrao: <strong>800ms</strong></p>
@@ -772,6 +792,8 @@ bu              # Bipe de 800ms (padrao)</pre></div>
 
     <!-- SECAO 9 -->
     <h1 id="linha">9. Sensor Seguidor de Linha</h1>
+    <img class="module-img didactic-img" src="assets_full/09_linha_sensor.png" alt="Sensor de linha">
+    <div class="module-caption">O robo segue a linha no chao</div>
 
     <h2>Como Funciona</h2>
     <div class="diagram">
@@ -827,6 +849,8 @@ bu 500</pre></div>
 
     <!-- SECAO 10 -->
     <h1 id="ultra">10. Sensor Ultrassonico</h1>
+    <img class="module-img didactic-img" src="assets_full/10_ultra_sensor.png" alt="Sensor ultrassonico">
+    <div class="module-caption">Desvia de obstaculos automaticamente</div>
 
     <h2>Como Funciona</h2>
     <div class="diagram">
@@ -918,6 +942,8 @@ t 500</pre></div>
     <h1 id="controle">11. Estruturas de Controle</h1>
 
     <h2>REPITA (Loop)</h2>
+    <img class="module-img didactic-img" src="assets_full/11_repita.png" alt="Exemplo de REPITA">
+    <div class="module-caption">Exemplo simples de repeticao</div>
     <pre>repita &lt;N&gt;
   &lt;comandos&gt;
 fim repita</pre>
@@ -936,6 +962,8 @@ fim repita</pre></div>
     </div>
 
     <h2>SE (Condicional)</h2>
+    <img class="module-img didactic-img" src="assets_full/12_se.png" alt="Exemplo de SE">
+    <div class="module-caption">Se a condicao for verdadeira, o robo executa</div>
     <pre>se &lt;condicao&gt;
   &lt;comandos&gt;
 fim se</pre>
@@ -974,6 +1002,8 @@ sensor off</pre></div>
     <h1 id="condicoes">12. Condicoes para o Comando SE</h1>
 
     <h2>Condicoes de Linha</h2>
+    <img class="module-img didactic-img" src="assets_full/13_condicoes_linha.png" alt="Condicoes do sensor de linha">
+    <div class="module-caption">Condições mais usadas no sensor de linha</div>
     <table>
         <tr><th>Condicao</th><th>Significado</th></tr>
         <tr><td><code>sensord</code></td><td>Sensor DIREITO na linha (preto)</td></tr>
@@ -985,6 +1015,8 @@ sensor off</pre></div>
     </table>
 
     <h2>Condicoes de Ultrassom</h2>
+    <img class="module-img didactic-img" src="assets_full/14_condicoes_ultra.png" alt="Condicoes do ultrassom">
+    <div class="module-caption">Condições mais usadas no ultrassom</div>
     <table>
         <tr><th>Condicao</th><th>Significado</th><th>Exemplo</th></tr>
         <tr><td><code>dist X</code></td><td>Distancia &lt;= X cm (obstaculo proximo)</td><td><code>se dist 20</code></td></tr>
@@ -1045,6 +1077,8 @@ sensor off</pre></div>
 
     <!-- SECAO 13 -->
     <h1 id="calibracao">13. Calibracao dos Motores</h1>
+    <img class="module-img didactic-img" src="assets_full/15_calibracao.png" alt="Calibracao dos motores">
+    <div class="module-caption">Use quando o robo puxa para um lado</div>
 
     <div class="box box-info">
         <h3>Por que Calibrar?</h3>
@@ -1313,6 +1347,8 @@ bu 500</pre></div>
 
     <!-- SECAO 17 -->
     <h1 id="problemas">17. Resolucao de Problemas</h1>
+    <img class="module-img didactic-img" src="assets_full/16_problemas.png" alt="Checklist de problemas">
+    <div class="module-caption">Checklist rapido para resolver problemas</div>
 
     <div class="box box-danger">
         <h3>Robo nao conecta ao WiFi</h3>
