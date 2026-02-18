@@ -2,6 +2,12 @@
 
 Este pacote guarda arquivos essenciais baixados da PJE para alinhar a apostila com a interface real.
 
+## Acesso externo (URLs oficiais)
+- `https://pje.ejrrobotica.com.br/index.php`
+- `https://pje.ejrrobotica.com.br/modulo1.php`
+- `https://pje.ejrrobotica.com.br/modulo2.php`
+- `https://pje.ejrrobotica.com.br/modulo4.php`
+
 ## Arquivos
 - `index.html`: pagina principal (publica)
 - `index.php.html`: tela de login (ID, senha e selecao de modulo)
