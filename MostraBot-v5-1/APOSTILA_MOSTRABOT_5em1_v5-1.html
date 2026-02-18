@@ -538,6 +538,45 @@
             color: #8a2e00;
             font-weight: 700;
         }
+        .mission-mini-hud {
+            margin: 8px 0 10px 0;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 2px solid #7ec9f5;
+            background: linear-gradient(180deg, #f2fbff, #dff5ff);
+            color: #0e4668;
+            font-weight: 800;
+            font-size: 9.2pt;
+        }
+        .mission-inline-checklist {
+            margin: 8px 0 10px 0;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 2px dashed #ffd166;
+            background: #fff8e1;
+            font-size: 9.2pt;
+            font-weight: 700;
+            color: #6d4c00;
+        }
+        .mission-inline-checklist ul {
+            margin: 6px 0 0 16px;
+            padding: 0;
+        }
+        .mini-review-link {
+            display: inline-block;
+            margin-top: 6px;
+            font-weight: 800;
+            color: #0e4668;
+        }
+        .ms-box {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #b8d9f5;
+            background: #f7fbff;
+            font-size: 9.4pt;
+            color: #0e4668;
+        }
         .mascot-strip {
             margin-top: 10px;
             display: grid;
@@ -2248,15 +2287,44 @@ pd 120</pre></div>
     </div>
     <div class="mission-task">
         <div class="mission-task-title">Tarefa da Missao 2 (Modulo 1)</div>
+        <div class="mission-mini-hud">Voce esta aqui: Missao 2 > Passo 1 (abrir Programar) | Progresso da missao: 1/4</div>
+        <div class="mission-inline-checklist">
+            Checklist rapido antes de comecar:
+            <ul>
+                <li>Robo ligado e com LED de pronto</li>
+                <li>Internet ativa</li>
+                <li>ID da fita amarela em maos</li>
+            </ul>
+        </div>
         <ol>
-            <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 1</strong></a>.</li>
-            <li>Escolha tempo 500.</li>
-            <li>Clique em LD e ENVIAR.
-                <div class="task-visual"><img src="assets_full/06_led_botoes.png" alt="Botoes de LED no modulo 1"></div>
+            <li>No site da PJE nuvem, clique em <strong>Programar</strong> no menu do topo.
+                <div class="task-visual"><img src="pje-programar.png" alt="Passo 1 da Missao 2: clicar em Programar"></div>
+                <div class="task-visual"><img src="assets_lessons/11_pje_menu_programar.svg" alt="Guia visual do clique em Programar"></div>
+                <a class="mini-review-link" href="#intro">Rever demonstracao rapida deste clique</a>
             </li>
-            <li>Depois LE e ENVIAR.</li>
+            <li>Chegou na tela de login? Se <strong>sim</strong>, continue. Se <strong>nao</strong>, volte e clique em Programar novamente.
+                <br>No login: digite o <strong>ID da fita amarela</strong>, senha <strong>123</strong> e selecione <strong>Modulo 1</strong>.
+                <div class="task-visual"><img src="login_pje.png" alt="Passo 2 da Missao 2: tela de login da PJE"></div>
+                <div class="task-visual"><img src="assets_lessons/12_pje_login_id_senha.svg" alt="Guia visual do login com ID e senha"></div>
+            </li>
+            <li>Clique em <strong>Entrar</strong> e confirme que abriu o Modulo 1.
+                <div class="task-visual"><img src="mod1.png" alt="Passo 3 da Missao 2: tela do Modulo 1"></div>
+                <div class="task-visual"><img src="assets_lessons/13_pje_modulo_missao.svg" alt="Guia visual da selecao do modulo da missao"></div>
+            </li>
+            <li>Agora execute o treino de LED: clique em <strong>LD</strong> e ENVIAR, depois <strong>LE</strong> e ENVIAR.
+                <div class="task-visual"><img src="assets_full/06_led_botoes.png" alt="Botoes de LED no modulo 1"></div>
+                <div class="task-visual"><img src="assets_lessons/04_led_feedback.svg" alt="Feedback visual esperado dos LEDs"></div>
+            </li>
         </ol>
+        <div class="ms-box">
+            <strong>Como ler tempo em ms:</strong> ms significa milissegundos.
+            <br>1 segundo = <strong>1000 ms</strong>.
+            <br>Se for menor que 1 segundo, use decimal:
+            <br><strong>0.5 s = 500 ms</strong>, <strong>0.2 s = 200 ms</strong>, <strong>0.1 s = 100 ms</strong>.
+            <br>Regra rapida: <strong>x segundos -> x * 1000 = ms</strong>.
+        </div>
         <p><strong>Missao concluida:</strong> os dois olhos piscaram conforme o comando.</p>
+        <p><strong>Feedback:</strong> boa. Voce concluiu a base visual da Missao 2 com seguranca.</p>
     </div>
     <img class="module-img" src="assets_full/06_led_botoes.png" alt="Botoes de LED na PJE">
     <div class="module-caption">Use LD, LE e LDE para os olhos</div>
