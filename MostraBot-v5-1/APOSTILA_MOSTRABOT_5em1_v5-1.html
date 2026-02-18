@@ -3444,7 +3444,7 @@ reset_personalizado</pre>
     return h1.id || null;
   }
 
-  function renderMissionTaskState(taskBox, sectionId, taskState) {
+  function renderMissionTaskState(taskBox, taskKey, taskState) {
     const items = Array.from(taskBox.querySelectorAll('.task-row'));
     const firstPending = items.findIndex((_, idx) => !Boolean(taskState.tasks && taskState.tasks[idx]));
     const activeIndex = firstPending === -1 ? -1 : firstPending;
@@ -3475,6 +3475,7 @@ reset_personalizado</pre>
   function enhanceMissionTasks() {
     const boxes = Array.from(document.querySelectorAll('.mission-task'));
     const progress = getTaskProgress();
+    const taskCounterBySection = {};
 
     boxes.forEach((box) => {
       if (box.dataset.ldified === '1') return;
@@ -3482,6 +3483,10 @@ reset_personalizado</pre>
       if (!sectionId) return;
       box.dataset.ldified = '1';
       box.dataset.sectionId = sectionId;
+      const localIndex = taskCounterBySection[sectionId] || 0;
+      const taskKey = sectionId + '::' + String(localIndex);
+      taskCounterBySection[sectionId] = localIndex + 1;
+      box.dataset.taskKey = taskKey;
 
       const list = box.querySelector('ol');
       const liItems = list ? Array.from(list.querySelectorAll('li')) : [];
@@ -3536,10 +3541,10 @@ reset_personalizado</pre>
         if (taskBtn) {
           const row = taskBtn.closest('.task-row');
           const idx = Number(row ? row.dataset.taskIndex || '0' : '0');
-          progress[sectionId] = progress[sectionId] || { tasks: [], finished: false };
-          progress[sectionId].tasks[idx] = true;
+          progress[taskKey] = progress[taskKey] || { tasks: [], finished: false };
+          progress[taskKey].tasks[idx] = true;
           setTaskProgress(progress);
-          renderMissionTaskState(box, sectionId, progress[sectionId]);
+          renderMissionTaskState(box, taskKey, progress[taskKey]);
           return;
         }
 
@@ -3547,8 +3552,8 @@ reset_personalizado</pre>
         if (mBtn) {
           const info = missionBySection[sectionId];
           const currentIdx = info ? info.order : 0;
-          progress[sectionId] = progress[sectionId] || { tasks: [], finished: false };
-          progress[sectionId].finished = true;
+          progress[taskKey] = progress[taskKey] || { tasks: [], finished: false };
+          progress[taskKey].finished = true;
           setTaskProgress(progress);
 
           const completed = getCompletedMissions();
@@ -3566,16 +3571,16 @@ reset_personalizado</pre>
           applyStudentLocks();
           refreshStudentActionButton();
           applyStudentSingleScreen();
-          renderMissionTaskState(box, sectionId, progress[sectionId]);
+          renderMissionTaskState(box, taskKey, progress[taskKey]);
         }
       });
     });
 
     boxes.forEach((box) => {
-      const sid = box.dataset.sectionId;
-      if (!sid) return;
-      progress[sid] = progress[sid] || { tasks: [], finished: false };
-      renderMissionTaskState(box, sid, progress[sid]);
+      const taskKey = box.dataset.taskKey;
+      if (!taskKey) return;
+      progress[taskKey] = progress[taskKey] || { tasks: [], finished: false };
+      renderMissionTaskState(box, taskKey, progress[taskKey]);
     });
   }
 
@@ -3583,10 +3588,10 @@ reset_personalizado</pre>
     const progress = getTaskProgress();
     const boxes = Array.from(document.querySelectorAll('.mission-task[data-section-id]'));
     boxes.forEach((box) => {
-      const sid = box.dataset.sectionId;
-      if (!sid) return;
-      progress[sid] = progress[sid] || { tasks: [], finished: false };
-      renderMissionTaskState(box, sid, progress[sid]);
+      const taskKey = box.dataset.taskKey;
+      if (!taskKey) return;
+      progress[taskKey] = progress[taskKey] || { tasks: [], finished: false };
+      renderMissionTaskState(box, taskKey, progress[taskKey]);
     });
   }
 
