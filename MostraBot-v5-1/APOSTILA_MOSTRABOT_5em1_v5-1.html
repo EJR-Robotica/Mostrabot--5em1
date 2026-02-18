@@ -513,6 +513,13 @@
             gap: 8px;
             align-items: center;
         }
+        .presentation-controls {
+            margin-top: 8px;
+            display: none;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
         .mode-label {
             font-size: 9.5pt;
             color: #1a5276;
@@ -570,6 +577,9 @@
             box-shadow: 0 0 0 3px rgba(46,204,113,0.2);
             background: #f8fff9;
         }
+        .presentation-hidden {
+            display: none !important;
+        }
         body.mode-professor .sparkle,
         body.mode-professor .progress-track,
         body.mode-professor .badge-row,
@@ -624,8 +634,12 @@
         body.mode-apresentacao .indice-box,
         body.mode-apresentacao .module-focus,
         body.mode-apresentacao #lesson-hint,
-        body.mode-apresentacao .quest-box {
+        body.mode-apresentacao .quest-box,
+        body.mode-apresentacao .game-hero {
             display: none !important;
+        }
+        body.mode-apresentacao .presentation-controls {
+            display: flex;
         }
         body.mode-apresentacao .header-banner {
             padding: 18px 22px;
@@ -651,6 +665,23 @@
             border-color: #1f4f77;
             box-shadow: 0 0 0 4px rgba(31,79,119,0.18);
             background: #ffffff;
+        }
+        .quick-exit {
+            display: none;
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 90;
+        }
+        .quick-exit .mode-btn {
+            min-width: 210px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            border-color: #1c7c4c;
+            background: #1c7c4c;
+            color: #fff;
+        }
+        body.mode-apresentacao .quick-exit {
+            display: block;
         }
         .quest-title {
             font-weight: 800;
@@ -722,6 +753,14 @@
             }
             body.mode-apresentacao .learning-hud {
                 top: 4px;
+            }
+            .quick-exit {
+                right: 10px;
+                left: 10px;
+                bottom: 10px;
+            }
+            .quick-exit .mode-btn {
+                width: 100%;
             }
         }
     </style>
@@ -812,6 +851,12 @@
             <button class="mode-btn" type="button" data-mode="apresentacao">Modo Apresentacao</button>
             <span class="hud-pill">Modo atual: <span id="hud-modo">Aluno</span></span>
             <span class="hud-pill">Atalhos: A Aluno | P Professor | D Apresentacao</span>
+        </div>
+        <div class="presentation-controls" id="presentation-controls">
+            <span class="mode-label">Etapas guiadas:</span>
+            <button class="mode-btn" type="button" data-stage-nav="prev">Etapa Anterior</button>
+            <button class="mode-btn" type="button" data-stage-nav="next">Proxima Etapa</button>
+            <span class="hud-pill">Atalho: ← / → para etapas | Esc para sair</span>
         </div>
     </div>
     <div class="module-focus" id="module-focus">
@@ -2253,6 +2298,10 @@ reset_personalizado</pre>
 
 </main>
 
+<div class="quick-exit" id="quick-exit">
+    <button class="mode-btn" type="button" id="exit-presentation">Sair da Apresentacao (Esc)</button>
+</div>
+
 
 <script>
 (function() {
@@ -2271,6 +2320,9 @@ reset_personalizado</pre>
   const hudModo = document.getElementById('hud-modo');
   const focusChips = Array.from(document.querySelectorAll('.focus-chip'));
   const modeButtons = Array.from(document.querySelectorAll('.mode-btn'));
+  const stageButtons = Array.from(document.querySelectorAll('[data-stage-nav]'));
+  const exitPresentationBtn = document.getElementById('exit-presentation');
+  const stageOrder = ['aulas', 'movimento', 'led', 'servo', 'linha', 'ultra', 'controle'];
 
   const moduleLabel = {
     m1: 'Modulo 1',
@@ -2437,6 +2489,59 @@ reset_personalizado</pre>
     activateLessonCard(active);
   }
 
+  function getCurrentSectionId() {
+    const hashId = window.location.hash.replace('#', '');
+    if (hashId && document.getElementById(hashId)) return hashId;
+    let current = headers[0] ? headers[0].id : 'mapa-jogo';
+    for (const h1 of headers) {
+      if (h1.getBoundingClientRect().top <= 140) current = h1.id;
+    }
+    return current || 'mapa-jogo';
+  }
+
+  function getStageIndexFromSection(sectionId) {
+    const missionInfo = missionBySection[sectionId] || missionBySection['mapa-jogo'];
+    return Math.max(0, Math.min(stageOrder.length - 1, missionInfo.order || 0));
+  }
+
+  function applyPresentationFocus(forcedSectionId) {
+    const isPresentation = document.body.classList.contains('mode-apresentacao');
+    const activeSection = forcedSectionId || getCurrentSectionId();
+    const stageIndex = getStageIndexFromSection(activeSection);
+    const targetStageId = stageOrder[stageIndex];
+
+    headers.forEach((h1) => {
+      const content = h1.nextElementSibling;
+      const isTarget = h1.id === targetStageId;
+
+      if (!isPresentation) {
+        h1.classList.remove('presentation-hidden');
+        if (content && content.classList.contains('lesson-content')) {
+          content.classList.remove('presentation-hidden');
+        }
+        return;
+      }
+
+      if (h1.id === 'mapa-jogo') {
+        h1.classList.remove('presentation-hidden');
+      } else {
+        h1.classList.toggle('presentation-hidden', !isTarget);
+      }
+
+      if (content && content.classList.contains('lesson-content')) {
+        content.classList.toggle('presentation-hidden', !isTarget);
+      }
+    });
+  }
+
+  function goStage(stepDelta) {
+    const currentSection = getCurrentSectionId();
+    const currentIndex = getStageIndexFromSection(currentSection);
+    const nextIndex = Math.max(0, Math.min(stageOrder.length - 1, currentIndex + stepDelta));
+    const nextId = stageOrder[nextIndex];
+    window.location.hash = '#' + nextId;
+  }
+
   function applyMode(mode) {
     const validModes = new Set(['aluno', 'professor', 'apresentacao']);
     const finalMode = validModes.has(mode) ? mode : 'aluno';
@@ -2451,6 +2556,7 @@ reset_personalizado</pre>
       else if (finalMode === 'apresentacao') hudModo.textContent = 'Apresentacao';
       else hudModo.textContent = 'Aluno';
     }
+    applyPresentationFocus();
     updateLessonFromScroll();
     updateSectionFromScroll();
     try {
@@ -2481,6 +2587,15 @@ reset_personalizado</pre>
   modeButtons.forEach((btn) => {
     btn.addEventListener('click', () => applyMode(btn.dataset.mode));
   });
+  stageButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const dir = btn.dataset.stageNav === 'prev' ? -1 : 1;
+      goStage(dir);
+    });
+  });
+  if (exitPresentationBtn) {
+    exitPresentationBtn.addEventListener('click', () => applyMode('aluno'));
+  }
 
   document.addEventListener('keydown', (event) => {
     const target = event.target;
@@ -2492,6 +2607,9 @@ reset_personalizado</pre>
     if (key === 'a') applyMode('aluno');
     if (key === 'p') applyMode('professor');
     if (key === 'd') applyMode('apresentacao');
+    if (event.key === 'Escape') applyMode('aluno');
+    if (document.body.classList.contains('mode-apresentacao') && event.key === 'ArrowLeft') goStage(-1);
+    if (document.body.classList.contains('mode-apresentacao') && event.key === 'ArrowRight') goStage(1);
   });
 
   function syncHashTarget() {
@@ -2501,12 +2619,14 @@ reset_personalizado</pre>
     if (!target) return;
     openSectionFromTarget(target);
     setActiveSection(targetId);
+    applyPresentationFocus(targetId);
   }
 
   window.addEventListener('hashchange', syncHashTarget);
   window.addEventListener('scroll', () => {
     updateSectionFromScroll();
     updateLessonFromScroll();
+    applyPresentationFocus();
   }, { passive: true });
 
   let savedMode = 'aluno';
@@ -2524,6 +2644,7 @@ reset_personalizado</pre>
   syncHashTarget();
   updateSectionFromScroll();
   updateLessonFromScroll();
+  applyPresentationFocus();
 })();
 </script>
 
