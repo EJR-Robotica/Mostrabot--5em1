@@ -3459,6 +3459,11 @@ reset_personalizado</pre>
 
   function renderMissionTaskState(taskBox, taskKey, taskState) {
     const items = Array.from(taskBox.querySelectorAll('.task-row'));
+    items.forEach((row, idx) => {
+      if (!row.dataset.taskId) {
+        row.dataset.taskId = taskKey + '::task::' + String(idx);
+      }
+    });
     if (!taskState || typeof taskState !== 'object') taskState = {};
     taskState.taskMap = taskState.taskMap && typeof taskState.taskMap === 'object' ? taskState.taskMap : {};
     if (Array.isArray(taskState.tasks)) {
@@ -3497,7 +3502,6 @@ reset_personalizado</pre>
 
   function enhanceMissionTasks() {
     const boxes = Array.from(document.querySelectorAll('.mission-task'));
-    const progress = getTaskProgress();
     const taskCounterBySection = {};
 
     boxes.forEach((box) => {
@@ -3567,6 +3571,7 @@ reset_personalizado</pre>
         if (taskBtn) {
           const row = taskBtn.closest('.task-row');
           const taskId = row ? row.dataset.taskId || '' : '';
+          const progress = getTaskProgress();
           progress[taskKey] = progress[taskKey] || { taskMap: {}, finished: false };
           progress[taskKey].taskMap = progress[taskKey].taskMap && typeof progress[taskKey].taskMap === 'object'
             ? progress[taskKey].taskMap
@@ -3581,6 +3586,7 @@ reset_personalizado</pre>
         if (mBtn) {
           const info = missionBySection[sectionId];
           const currentIdx = info ? info.order : 0;
+          const progress = getTaskProgress();
           progress[taskKey] = progress[taskKey] || { taskMap: {}, finished: false };
           progress[taskKey].finished = true;
           setTaskProgress(progress);
@@ -3605,6 +3611,7 @@ reset_personalizado</pre>
       });
     });
 
+    const progress = getTaskProgress();
     boxes.forEach((box) => {
       const taskKey = box.dataset.taskKey;
       if (!taskKey) return;
