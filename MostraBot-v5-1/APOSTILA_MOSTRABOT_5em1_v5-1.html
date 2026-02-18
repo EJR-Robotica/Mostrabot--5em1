@@ -773,7 +773,7 @@
     </div>
 
     <h2>O Microcontrolador</h2>
-    <p>O MostraBot usa o <strong>Wemos D1 Mini</strong>, uma placa baseada no chip ESP8266 com WiFi integrado.</p>
+    <p>Dentro do MostraBot existe uma <strong>placa-cerebro</strong> (Wemos D1 Mini). Pense nela como o <strong>cerebro do robo</strong>, que entende os comandos e conecta no Wi‑Fi. (Nome tecnico: Wemos D1 Mini com chip ESP8266).</p>
 
     <h2>Mapa dos Componentes</h2>
     <img class="module-img didactic-img" src="assets_full/03_hardware_componentes.png" alt="Mapa de componentes do robo">
@@ -827,7 +827,7 @@
 
     <div class="box box-danger">
         <h3>ATENCAO PROFESSOR!</h3>
-        <p>Os pinos D3 e D8 sao <strong>COMPARTILHADOS</strong> e sao pinos de <strong>BOOT</strong> do ESP8266!</p>
+        <p>Os pinos D3 e D8 sao <strong>compartilhados</strong>. Pense neles como “lugares delicados”: por isso, so conecte os sensores <strong>depois</strong> que o robô estiver pronto.</p>
         <ol>
             <li>Os sensores devem estar <strong>DESCONECTADOS</strong> ao ligar o robo</li>
             <li>Conecte os sensores <strong>SOMENTE</strong> depois do robo conectar ao WiFi</li>
@@ -1954,7 +1954,7 @@ reset_personalizado</pre>
         <tr><td>Boot</td><td>Inicializacao quando liga</td></tr>
         <tr><td>Buzzer</td><td>Componente que emite sons/bipes</td></tr>
         <tr><td>EEPROM</td><td>Memoria que mantem dados apos desligar</td></tr>
-        <tr><td>ESP8266</td><td>Microcontrolador com WiFi</td></tr>
+        <tr><td>ESP8266</td><td>O “cerebro” que tem Wi‑Fi dentro</td></tr>
         <tr><td>GPIO</td><td>Pinos programaveis de entrada/saida</td></tr>
         <tr><td>HC-SR04</td><td>Modelo do sensor ultrassonico</td></tr>
         <tr><td>Heartbeat</td><td>Pulso periodico do LED indicando saude</td></tr>
@@ -1968,7 +1968,7 @@ reset_personalizado</pre>
         <tr><td>Ultrassonico</td><td>Sensor que mede distancia por ondas sonoras</td></tr>
         <tr><td>Watchdog</td><td>Sistema que reinicia se travar</td></tr>
         <tr><td>WiFi</td><td>Conexao sem fio para internet</td></tr>
-        <tr><td>Wemos D1 Mini</td><td>Placa de desenvolvimento usada no MostraBot</td></tr>
+        <tr><td>Wemos D1 Mini</td><td>A plaquinha do robô onde o “cerebro” mora</td></tr>
         <tr><td>yield()</td><td>Funcao que alimenta o watchdog</td></tr>
     </table>
 

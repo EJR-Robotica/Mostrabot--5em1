@@ -1,0 +1,29 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='700' height='420' viewBox='0 0 700 420'>
+  <rect width='700' height='420' rx='16' fill='#ffffff' stroke='#dee2e6' stroke-width='3'/>
+  <text x='24' y='36' font-size='22' font-family='Arial' fill='#1a5276'>Mapa do Robo (simples)</text>
+
+  <!-- Body -->
+  <rect x='180' y='80' width='340' height='230' rx='20' fill='#f7f9fb' stroke='#b8d9f5' stroke-width='3'/>
+
+  <!-- Eyes / sensor -->
+  <circle cx='260' cy='140' r='16' fill='#3498db'/>
+  <circle cx='320' cy='140' r='16' fill='#3498db'/>
+  <text x='230' y='170' font-size='14' font-family='Arial'>Olhos / Sensor</text>
+
+  <!-- Claw -->
+  <rect x='330' y='120' width='90' height='16' rx='8' fill='#2ecc71'/>
+  <text x='330' y='110' font-size='14' font-family='Arial'>Garra</text>
+
+  <!-- LEDs -->
+  <circle cx='210' cy='210' r='10' fill='#f1c40f'/>
+  <circle cx='470' cy='210' r='10' fill='#f1c40f'/>
+  <text x='190' y='235' font-size='14' font-family='Arial'>LEDs</text>
+
+  <!-- Wheels -->
+  <circle cx='230' cy='300' r='28' fill='#34495e'/>
+  <circle cx='470' cy='300' r='28' fill='#34495e'/>
+  <text x='210' y='350' font-size='14' font-family='Arial'>Rodas</text>
+
+  <!-- Labels -->
+  <text x='24' y='400' font-size='12' font-family='Arial' fill='#555'>Frente em cima, traseira embaixo</text>
+</svg>
