@@ -3834,14 +3834,16 @@ reset_personalizado</pre>
     }
     if (studentStepLabel) {
       if (!readUnlocked) {
-        studentStepLabel.textContent = 'Leia ate o final desta tela para liberar a seta verde ▶';
+        studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Use a seta verde ▶ para continuar';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
       } else if (isTaskStep && !sectionTaskState.finished) {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Conclua a tarefa abaixo para continuar';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
       } else {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Use a seta verde ▶ para continuar';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
       }
     }
-    updateReadGateByScroll();
   }
 
   function changeStudentSlide(delta) {
@@ -4088,12 +4090,15 @@ reset_personalizado</pre>
       setUnlockedStage(0);
       setCompletedMissions([]);
       setTaskProgress({});
+      setReadOnceProgress({});
+      Object.keys(slideIndexBySection).forEach((key) => delete slideIndexBySection[key]);
       applyStudentLocks();
       refreshMissionTaskStates();
       refreshStudentActionButton();
       applyStudentSingleScreen();
       renderStudentSlides();
       window.location.hash = '#intro';
+      window.scrollTo({ top: 0, behavior: 'auto' });
     });
   }
   if (exitPresentationBtn) {
