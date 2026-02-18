@@ -266,7 +266,7 @@
             max-width: 500px;
         }
         .pje-m2-taller {
-            height: 220px;
+            height: 440px;
             width: 100%;
             max-width: 500px;
             object-fit: fill;
@@ -1665,31 +1665,34 @@
    |  (servidor)  |       WiFi
    +--------------+
     </div>
-    <p>O professor ou aluno digita comandos no navegador, e o robo executa automaticamente!</p>
+    <p>O professor e o aluno programam pela PJE no navegador, e o robo executa automaticamente!</p>
 
     <h2>Como Funcionam os Modulos da PJE (Visao Rapida)</h2>
-    <img class="module-img didactic-img" src="assets_full/02_pje_modulo1.png" alt="Modulo 1 da PJE">
+    <img class="module-img didactic-img" src="mod1.png" alt="Modulo 1 da PJE">
     <div class="module-caption">Modulo 1 (botoes prontos)</div>
-    <img class="module-img didactic-img pje-m2-taller" src="assets_full/02_pje_modulo2.png" alt="Modulo 2 da PJE">
-    <div class="module-caption">Modulo 2 (digitar comandos)</div>
-    <img class="module-img didactic-img" src="assets_full/02_pje_modulo4.png" alt="Modulo 4 da PJE">
+    <img class="module-img didactic-img pje-m2-taller" src="mod2.png" alt="Modulo 2 da PJE">
+    <div class="module-caption">Modulo 2 (cliques guiados com tempo t e ms)</div>
+    <img class="module-img didactic-img" src="mod4.png" alt="Modulo 4 da PJE">
     <div class="module-caption">Modulo 4 (sensores e logica)</div>
     <ul>
-        <li><strong>Modulo 1:</strong> controle por botoes e setas, com tempo escolhido em uma lista (select). Nao ha digitacao manual.</li>
-        <li><strong>Modulo 2 e Modulo 3:</strong> comandos manuais em um campo de texto.</li>
-        <li><strong>Modulo 4:</strong> mesmo campo do Modulo 2, com sensores e logica (<code>sensor</code>, <code>repita</code>, <code>se</code>).</li>
+        <li><strong>Modulo 1:</strong> e o mais automatico. O aluno usa botoes prontos e escolhe o tempo no select.</li>
+        <li><strong>Modulo 2:</strong> ainda e por cliques. O aluno monta comandos semi-prontos no campo, escolhendo <code>t</code> e milissegundos para cada acao. Nas primeiras etapas ele nao precisa digitar no teclado.</li>
+        <li><strong>Modulo 4:</strong> e o mais avancado. Aqui o aluno faz tudo manualmente no campo de texto, sem depender dos cliques do mouse, usando sensores e logica (<code>sensor</code>, <code>repita</code>, <code>se</code>).</li>
     </ul>
     <div class="mission-task">
         <div class="mission-task-title">Fluxo real da PJE (acesso externo em nuvem)</div>
         <ol>
             <li>Clique em <strong>Programar</strong> no menu do topo da PJE.
-                <div class="task-visual"><img src="assets_lessons/11_pje_menu_programar.svg" alt="Passo 1 da PJE: clicar em Programar"></div>
+                <div class="task-visual"><img src="pje-programar.png" alt="Passo 1 da PJE: clicar em Programar"></div>
+                <div class="task-visual"><img src="assets_lessons/11_pje_menu_programar.svg" alt="Passo 1 vetorizado: clicar em Programar"></div>
             </li>
             <li>No login, use o <strong>ID da fita amarela da bateria</strong> e senha <strong>123</strong>.
-                <div class="task-visual"><img src="assets_lessons/12_pje_login_id_senha.svg" alt="Passo 2 da PJE: login com ID e senha"></div>
+                <div class="task-visual"><img src="login_pje.png" alt="Passo 2 da PJE: login com ID e senha"></div>
+                <div class="task-visual"><img src="assets_lessons/12_pje_login_id_senha.svg" alt="Passo 2 vetorizado: login com ID e senha"></div>
             </li>
             <li>Na caixa de selecao, escolha o <strong>modulo da missao</strong> (1, 2 ou 4).
-                <div class="task-visual"><img src="assets_lessons/13_pje_modulo_missao.svg" alt="Passo 3 da PJE: escolher modulo da missao"></div>
+                <div class="task-visual"><img src="mod1.png" alt="Passo 3 da PJE: escolher modulo da missao"></div>
+                <div class="task-visual"><img src="assets_lessons/13_pje_modulo_missao.svg" alt="Passo 3 vetorizado: escolher modulo da missao"></div>
             </li>
             <li>Execute a tarefa da missao no modulo correto e valide no robo.</li>
         </ol>
@@ -1960,16 +1963,20 @@
         <li>Na caixa de selecao, escolha <strong>Modulo 1</strong> para a missao inicial.</li>
         <li>Clique em <strong>Entrar</strong>.</li>
     </ol>
-    <img class="module-img didactic-img" src="assets_lessons/11_pje_menu_programar.svg" alt="Clique em Programar no topo da PJE">
+    <img class="module-img didactic-img" src="pje-programar.png" alt="Clique em Programar no topo da PJE">
     <div class="module-caption">Acesso: menu Programar no topo da pagina da PJE</div>
-    <img class="module-img didactic-img" src="assets_lessons/12_pje_login_id_senha.svg" alt="Login da PJE com ID, senha e modulo">
+    <img class="module-img didactic-img" src="login_pje.png" alt="Login da PJE com ID, senha e modulo">
     <div class="module-caption">Login: ID da fita amarela, senha 123 e selecao de modulo</div>
+    <img class="module-img didactic-img" src="assets_lessons/11_pje_menu_programar.svg" alt="Guia vetorizado: clique em Programar">
+    <div class="module-caption">Guia vetorizado: clique em Programar</div>
+    <img class="module-img didactic-img" src="assets_lessons/12_pje_login_id_senha.svg" alt="Guia vetorizado: login na PJE">
+    <div class="module-caption">Guia vetorizado: login com ID, senha e modulo</div>
 
     <div class="mission-task">
         <div class="mission-task-title">Tarefa da Missao 0 (conclusao rapida)</div>
         <ol>
             <li>Clique em <strong>Programar</strong> e entre na PJE no <strong>Modulo 1</strong>.
-                <div class="task-visual"><img src="assets_lessons/11_pje_menu_programar.svg" alt="Programar no topo da PJE"></div>
+                <div class="task-visual"><img src="pje-programar.png" alt="Programar no topo da PJE"></div>
             </li>
             <li>Selecionar tempo <strong>500</strong>.</li>
             <li>Clicar em <strong>LD</strong> e depois em <strong>ENVIAR</strong>.
@@ -1995,7 +2002,7 @@
         <div class="mission-task-title">Tarefa da Missao 1 (Modulo 1)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo1.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 1</strong></a>.
-                <div class="task-visual"><img src="assets_lessons/13_pje_modulo_missao.svg" alt="Escolha e acesso ao modulo da missao"></div>
+                <div class="task-visual"><img src="mod1.png" alt="Escolha e acesso ao modulo da missao"></div>
             </li>
             <li>Escolha tempo 1000 no select.</li>
             <li>Clique em PF e ENVIAR.
@@ -2011,8 +2018,8 @@
     <div class="module-caption">Botoes PF, PT, PD, PE</div>
     <ul>
         <li><strong>Modulo 1:</strong> botoes verdes (PF, PT, PD, PE, LD, LE, LDE, BU, BC, SC) e <strong>select de tempo</strong> com valores prontos.</li>
-        <li><strong>Modulo 2:</strong> caixa de texto para digitar comandos + teclado azul para tempo.</li>
-        <li><strong>Modulo 4:</strong> mesmo formato do Modulo 2, com sensores e logica.</li>
+        <li><strong>Modulo 2:</strong> comandos semi-prontos por cliques, com selecao de tempo <code>t</code> e milissegundos para cada acao.</li>
+        <li><strong>Modulo 4:</strong> comandos manuais completos no campo de texto, com sensores e logica.</li>
     </ul>
     <img class="module-img" src="modulos.png" alt="Modulos 1, 2 e 4 - PJE">
     <div class="module-caption">Use esta imagem para associar exemplos do manual ao layout real da PJE</div>
