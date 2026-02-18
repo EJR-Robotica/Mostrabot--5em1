@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "studentMissionCount": 7,
+  "professorChecklist": [
+    "Conferir bateria e ID na fita amarela",
+    "Confirmar acesso a internet e PJE aberta",
+    "Validar login com senha 123",
+    "Selecionar modulo correto da missao",
+    "Executar demonstração curta antes da turma",
+    "Registrar quais alunos concluíram a fase"
+  ]
+}
