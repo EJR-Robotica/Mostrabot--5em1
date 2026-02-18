@@ -342,11 +342,16 @@
             color: #2c6fb3;
         }
         .task-row {
-            display: flex;
+            display: block;
             gap: 8px;
-            align-items: center;
-            justify-content: space-between;
-            margin: 6px 0;
+            margin: 10px 0;
+            border: 2px solid #9fd4ff;
+            border-radius: 12px;
+            padding: 10px;
+            background: linear-gradient(180deg, #ffffff, #f2fbff);
+        }
+        .task-row.task-row-hidden {
+            display: none;
         }
         .task-row.done {
             opacity: 0.75;
@@ -355,40 +360,55 @@
             text-decoration: line-through;
         }
         .task-text {
-            flex: 1;
+            display: block;
+            font-weight: 700;
+            color: #0e4668;
+            margin-bottom: 8px;
+        }
+        .task-help {
+            display: block;
+            color: #8a2e00;
+            font-size: 9pt;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
         .task-complete-btn {
             border: 2px solid #ff7f11;
             background: linear-gradient(180deg, #fff4e8, #ffe2c2);
             color: #8a2e00;
-            border-radius: 8px;
-            padding: 5px 10px;
-            font-size: 9pt;
-            font-weight: 700;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 10.5pt;
+            font-weight: 800;
             cursor: pointer;
-            white-space: nowrap;
+            white-space: normal;
+            width: 100%;
+            min-height: 52px;
+            text-align: center;
+            box-shadow: 0 0 0 3px rgba(255,127,17,0.18);
         }
         .task-complete-btn.done {
             border-color: #00b894;
             background: linear-gradient(180deg, #e7fff7, #c6ffe8);
             color: #00664d;
+            box-shadow: 0 0 0 3px rgba(0,184,148,0.16);
         }
         .mission-finish-wrap {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
+            margin-top: 14px;
+            display: block;
         }
         .mission-finish-btn {
             border: 2px solid #00b894;
             background: linear-gradient(180deg, #e9fff8, #c6ffe8);
             color: #005640;
-            border-radius: 10px;
-            padding: 7px 12px;
-            font-size: 9.5pt;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 11pt;
             font-weight: 800;
             cursor: pointer;
+            width: 100%;
+            min-height: 54px;
+            text-align: center;
         }
         .mission-finish-btn:disabled {
             opacity: 0.5;
@@ -398,7 +418,9 @@
             box-shadow: 0 0 0 3px rgba(0,184,148,0.2);
         }
         .mission-finish-state {
-            font-size: 9pt;
+            display: block;
+            margin-top: 8px;
+            font-size: 9.5pt;
             color: #1c7c4c;
             font-weight: 700;
         }
@@ -1017,6 +1039,64 @@
         }
         body.mode-apresentacao .quick-exit {
             display: block;
+        }
+        .student-slide-hidden {
+            display: none !important;
+        }
+        .student-step-nav {
+            display: none;
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 12px;
+            z-index: 95;
+            width: min(680px, calc(100% - 22px));
+            border: 2px solid #6ac4ff;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #f8feff, #e8f8ff);
+            box-shadow: 0 10px 24px rgba(14,70,104,0.2);
+            padding: 10px;
+            gap: 8px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .student-step-nav .step-btn {
+            border: 2px solid #6ac4ff;
+            background: linear-gradient(180deg, #f0fbff, #dff5ff);
+            color: #0e4668;
+            border-radius: 11px;
+            padding: 10px 12px;
+            font-size: 10pt;
+            font-weight: 800;
+            cursor: pointer;
+            min-width: 130px;
+        }
+        .student-step-nav .step-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+        .student-step-nav .step-btn-next {
+            border-color: #00b86b;
+            background: linear-gradient(180deg, #e8ffef, #c9ffe0);
+            color: #005c35;
+            box-shadow: 0 0 0 3px rgba(0,184,107,0.18);
+        }
+        .student-step-label {
+            font-size: 9.8pt;
+            color: #0e4668;
+            font-weight: 800;
+            text-align: center;
+            flex: 1;
+        }
+        body.mode-aluno .learning-hud {
+            position: static;
+        }
+        body.mode-aluno .student-step-nav {
+            display: flex;
+        }
+        body.mode-professor .student-step-nav,
+        body.mode-apresentacao .student-step-nav {
+            display: none !important;
         }
         .quest-title {
             font-weight: 800;
@@ -2849,6 +2929,12 @@ reset_personalizado</pre>
     <button class="mode-btn" type="button" id="exit-presentation">Sair da Apresentacao (Esc)</button>
 </div>
 
+<div class="student-step-nav" id="student-step-nav">
+    <button class="step-btn" type="button" id="student-step-prev">◀ Anterior</button>
+    <span class="student-step-label" id="student-step-label">Passo 1 de 1</span>
+    <button class="step-btn step-btn-next" type="button" id="student-step-next">Proximo ▶</button>
+</div>
+
 <div class="robot-dialog-backdrop" id="robot-dialog" hidden>
     <div class="robot-dialog" role="dialog" aria-modal="true" aria-labelledby="robot-dialog-title">
         <h3 id="robot-dialog-title">MostraBot diz:</h3>
@@ -2884,6 +2970,10 @@ reset_personalizado</pre>
   const stageButtons = Array.from(document.querySelectorAll('[data-stage-nav]'));
   const exitPresentationBtn = document.getElementById('exit-presentation');
   const roadmapPanel = document.querySelector('.roadmap-panel');
+  const studentStepNav = document.getElementById('student-step-nav');
+  const studentStepPrev = document.getElementById('student-step-prev');
+  const studentStepNext = document.getElementById('student-step-next');
+  const studentStepLabel = document.getElementById('student-step-label');
   const robotGuideTrigger = document.getElementById('robot-guide-trigger');
   const robotDialog = document.getElementById('robot-dialog');
   const robotDialogClose = document.getElementById('robot-dialog-close');
@@ -2893,6 +2983,7 @@ reset_personalizado</pre>
   const resetProgressBtn = document.getElementById('reset-progress-btn');
   const profChecklistItems = document.getElementById('prof-checklist-items');
   const stageOrder = ['intro', 'ligar-robo', 'led', 'movimento', 'buzzer', 'servo', 'linha'];
+  const slideIndexBySection = {};
   let currentAge = '9-11';
   const defaultGameConfig = {
     version: 1,
@@ -3193,13 +3284,18 @@ reset_personalizado</pre>
 
   function renderMissionTaskState(taskBox, sectionId, taskState) {
     const items = Array.from(taskBox.querySelectorAll('.task-row'));
+    const firstPending = items.findIndex((_, idx) => !Boolean(taskState.tasks && taskState.tasks[idx]));
+    const activeIndex = firstPending === -1 ? -1 : firstPending;
+
     items.forEach((row, idx) => {
       const done = Boolean(taskState.tasks && taskState.tasks[idx]);
+      const visible = activeIndex === -1 ? done && idx === items.length - 1 : idx === activeIndex;
+      row.classList.toggle('task-row-hidden', !visible);
       row.classList.toggle('done', done);
       const btn = row.querySelector('.task-complete-btn');
       if (btn) {
         btn.classList.toggle('done', done);
-        btn.textContent = done ? 'Tarefa concluida' : 'Completar tarefa';
+        btn.textContent = done ? 'Tarefa concluida' : 'Clique para prosseguir';
       }
     });
 
@@ -3207,7 +3303,11 @@ reset_personalizado</pre>
     const finishState = taskBox.querySelector('.mission-finish-state');
     const allDone = items.length > 0 && items.every((_, idx) => Boolean(taskState.tasks && taskState.tasks[idx]));
     if (finishBtn) finishBtn.disabled = !allDone;
-    if (finishState) finishState.textContent = taskState.finished ? 'Missao finalizada!' : '';
+    if (finishState) {
+      if (taskState.finished) finishState.textContent = 'Missao finalizada! Historia concluida.';
+      else if (allDone) finishState.textContent = 'Clique em "Finalizar missao" para liberar a proxima fase.';
+      else finishState.textContent = '';
+    }
   }
 
   function enhanceMissionTasks() {
@@ -3226,11 +3326,12 @@ reset_personalizado</pre>
       if (liItems.length === 0) {
         const synthetic = document.createElement('div');
         synthetic.className = 'task-row';
-        synthetic.innerHTML = '<span class="task-text">Ler e entender esta etapa.</span>';
+        synthetic.innerHTML = '<span class="task-text">Ler e entender esta etapa.</span><span class="task-help">Clique no botao abaixo para prosseguir na historia.</span>';
+        synthetic.dataset.taskIndex = '0';
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'task-complete-btn';
-        btn.textContent = 'Completar tarefa';
+        btn.textContent = 'Clique para prosseguir';
         synthetic.appendChild(btn);
         box.appendChild(synthetic);
       } else {
@@ -3240,11 +3341,15 @@ reset_personalizado</pre>
           const text = document.createElement('span');
           text.className = 'task-text';
           text.innerHTML = li.innerHTML;
+          const help = document.createElement('span');
+          help.className = 'task-help';
+          help.textContent = 'Clique no botao abaixo para prosseguir na historia.';
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'task-complete-btn';
-          btn.textContent = 'Completar tarefa';
+          btn.textContent = 'Clique para prosseguir';
           row.appendChild(text);
+          row.appendChild(help);
           row.appendChild(btn);
           li.replaceWith(row);
           row.dataset.taskIndex = String(idx);
@@ -3256,7 +3361,7 @@ reset_personalizado</pre>
       const finishBtn = document.createElement('button');
       finishBtn.type = 'button';
       finishBtn.className = 'mission-finish-btn';
-      finishBtn.textContent = 'Finalizar missao';
+      finishBtn.textContent = 'Finalizar missao e continuar';
       finishBtn.disabled = true;
       const finishState = document.createElement('span');
       finishState.className = 'mission-finish-state';
@@ -3273,6 +3378,13 @@ reset_personalizado</pre>
           progress[sectionId].tasks[idx] = true;
           setTaskProgress(progress);
           renderMissionTaskState(box, sectionId, progress[sectionId]);
+          const nextVisible = box.querySelector('.task-row:not(.task-row-hidden)');
+          if (nextVisible) {
+            nextVisible.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            const finalBtn = box.querySelector('.mission-finish-btn');
+            if (finalBtn) finalBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
           return;
         }
 
@@ -3416,6 +3528,60 @@ reset_personalizado</pre>
     }
   }
 
+  function renderStudentSlides() {
+    const isAluno = document.body.classList.contains('mode-aluno');
+    const sectionId = stageOrder[getUnlockedStage()] || 'intro';
+    const h1 = document.getElementById(sectionId);
+    const content = h1 ? h1.nextElementSibling : null;
+    const canSlide = Boolean(isAluno && content && content.classList && content.classList.contains('lesson-content'));
+
+    if (!canSlide) {
+      if (studentStepNav) studentStepNav.style.display = 'none';
+      document.querySelectorAll('.student-slide-hidden').forEach((el) => el.classList.remove('student-slide-hidden'));
+      return;
+    }
+
+    const elements = Array.from(content.children).filter((el) => {
+      if (!el || !el.tagName) return false;
+      return !el.classList.contains('mission-header');
+    });
+
+    if (elements.length === 0) {
+      if (studentStepNav) studentStepNav.style.display = 'none';
+      return;
+    }
+
+    if (studentStepNav) studentStepNav.style.display = 'flex';
+    const maxIdx = elements.length - 1;
+    const current = Math.max(0, Math.min(maxIdx, Number(slideIndexBySection[sectionId] || 0)));
+    slideIndexBySection[sectionId] = current;
+
+    elements.forEach((el, idx) => {
+      el.classList.toggle('student-slide-hidden', idx !== current);
+    });
+
+    if (studentStepPrev) studentStepPrev.disabled = current <= 0;
+    if (studentStepNext) studentStepNext.disabled = current >= maxIdx;
+    if (studentStepLabel) {
+      studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(elements.length) + ' - Clique em Proximo para continuar';
+    }
+  }
+
+  function changeStudentSlide(delta) {
+    if (!document.body.classList.contains('mode-aluno')) return;
+    const sectionId = stageOrder[getUnlockedStage()] || 'intro';
+    const h1 = document.getElementById(sectionId);
+    const content = h1 ? h1.nextElementSibling : null;
+    if (!content || !content.classList || !content.classList.contains('lesson-content')) return;
+    const elements = Array.from(content.children).filter((el) => el && el.tagName && !el.classList.contains('mission-header'));
+    if (elements.length === 0) return;
+    const current = Math.max(0, Math.min(elements.length - 1, Number(slideIndexBySection[sectionId] || 0)));
+    const next = Math.max(0, Math.min(elements.length - 1, current + delta));
+    slideIndexBySection[sectionId] = next;
+    renderStudentSlides();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   function refreshStudentActionButton() {
     if (!completeStageBtn) return;
     const unlocked = getUnlockedStage();
@@ -3533,6 +3699,7 @@ reset_personalizado</pre>
     applyStudentLocks();
     refreshStudentActionButton();
     applyStudentSingleScreen();
+    renderStudentSlides();
     applyPresentationFocus();
     updateLessonFromScroll();
     updateSectionFromScroll();
@@ -3580,6 +3747,7 @@ reset_personalizado</pre>
       refreshMissionTaskStates();
       refreshStudentActionButton();
       applyStudentSingleScreen();
+      renderStudentSlides();
       syncHashTarget();
     });
   }
@@ -3604,6 +3772,7 @@ reset_personalizado</pre>
       refreshMissionTaskStates();
       refreshStudentActionButton();
       applyStudentSingleScreen();
+      renderStudentSlides();
       window.location.hash = '#' + (stageOrder[nextUnlocked] || 'intro');
     });
   }
@@ -3626,6 +3795,7 @@ reset_personalizado</pre>
       applyStudentLocks();
       refreshStudentActionButton();
       applyStudentSingleScreen();
+      renderStudentSlides();
     });
   }
   if (resetProgressBtn) {
@@ -3640,11 +3810,18 @@ reset_personalizado</pre>
       refreshMissionTaskStates();
       refreshStudentActionButton();
       applyStudentSingleScreen();
+      renderStudentSlides();
       window.location.hash = '#intro';
     });
   }
   if (exitPresentationBtn) {
     exitPresentationBtn.addEventListener('click', () => applyMode('aluno'));
+  }
+  if (studentStepPrev) {
+    studentStepPrev.addEventListener('click', () => changeStudentSlide(-1));
+  }
+  if (studentStepNext) {
+    studentStepNext.addEventListener('click', () => changeStudentSlide(1));
   }
   if (robotGuideTrigger && robotDialog) {
     robotGuideTrigger.addEventListener('click', () => {
@@ -3675,6 +3852,14 @@ reset_personalizado</pre>
     if (key === 'p') applyMode('professor');
     if (key === 'd') applyMode('apresentacao');
     if (event.key === 'Escape') applyMode('aluno');
+    if (document.body.classList.contains('mode-aluno') && event.key === 'ArrowLeft') {
+      event.preventDefault();
+      changeStudentSlide(-1);
+    }
+    if (document.body.classList.contains('mode-aluno') && event.key === 'ArrowRight') {
+      event.preventDefault();
+      changeStudentSlide(1);
+    }
     if (document.body.classList.contains('mode-apresentacao') && event.key === 'ArrowLeft') goStage(-1);
     if (document.body.classList.contains('mode-apresentacao') && event.key === 'ArrowRight') goStage(1);
   });
@@ -3695,12 +3880,14 @@ reset_personalizado</pre>
     openSectionFromTarget(target);
     setActiveSection(targetId);
     applyPresentationFocus(targetId);
+    renderStudentSlides();
   }
 
   window.addEventListener('hashchange', syncHashTarget);
   window.addEventListener('scroll', () => {
     if (document.body.classList.contains('mode-aluno')) {
       applyStudentSingleScreen();
+      renderStudentSlides();
       return;
     }
     updateSectionFromScroll();
@@ -3740,6 +3927,7 @@ reset_personalizado</pre>
   updateSectionFromScroll();
   updateLessonFromScroll();
   applyStudentSingleScreen();
+  renderStudentSlides();
   applyPresentationFocus();
 })();
 </script>
