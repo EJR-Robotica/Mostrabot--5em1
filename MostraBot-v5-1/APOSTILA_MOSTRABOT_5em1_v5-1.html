@@ -387,6 +387,74 @@
             background: #fff;
             display: block;
         }
+        .robot-signal-card {
+            margin: 12px 0;
+            border: 2px solid #ffd07d;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fffdf1, #fff4d7);
+            padding: 10px;
+        }
+        .robot-signal-title {
+            font-weight: 800;
+            color: #8a2e00;
+            margin-bottom: 8px;
+        }
+        .robot-signal-figure {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            margin: 8px auto;
+        }
+        .robot-signal-figure img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+            border: 2px solid #ffd07d;
+            background: #fff;
+        }
+        .signal-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 999px;
+            border: 3px solid #ff4d4d;
+            box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.25);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .signal-led-dir { top: 42%; left: 62%; }
+        .signal-led-esq { top: 42%; left: 34%; }
+        .signal-buzzer { top: 70%; left: 49%; border-color: #ffa000; box-shadow: 0 0 0 3px rgba(255, 160, 0, 0.25); }
+        .signal-tag {
+            position: absolute;
+            padding: 3px 6px;
+            font-size: 8.5pt;
+            font-weight: 800;
+            border-radius: 8px;
+            color: #083a56;
+            background: #cfeeff;
+            border: 1px solid #7ec9f5;
+            white-space: nowrap;
+        }
+        .tag-led-dir { top: 30%; left: 67%; }
+        .tag-led-esq { top: 30%; left: 6%; }
+        .tag-buzzer { top: 76%; left: 58%; }
+        .awake-status {
+            margin-top: 10px;
+            border-radius: 12px;
+            padding: 10px;
+            font-weight: 800;
+            text-align: center;
+        }
+        .awake-status.locked {
+            background: #eef2f7;
+            border: 2px dashed #95a5a6;
+            color: #5f6c7a;
+        }
+        .awake-status.ready {
+            background: linear-gradient(180deg, #ecfff3, #cfffe2);
+            border: 2px solid #2ecc71;
+            color: #0b6b36;
+        }
         .task-complete-btn {
             border: 2px solid #ff7f11;
             background: linear-gradient(180deg, #fff4e8, #ffe2c2);
@@ -1684,12 +1752,30 @@
                 <div class="task-visual"><img src="login_pje.png" alt="Passo 2 da PJE: login com ID, senha e modulo"></div>
                 <div class="task-visual"><img src="assets_lessons/12_pje_login_id_senha.svg" alt="Passo 2 vetorizado: login com ID, senha e modulo"></div>
             </li>
-            <li>Clique em <strong>Entrar</strong> para abrir o modulo selecionado.
+            <li>Clique em <strong>Entrar</strong> para abrir o modulo selecionado e faca 3 exercicios de validacao no <strong>Modulo 1</strong>:
+                <br>1) acender LED direito (<strong>LD</strong>)
+                <br>2) acender LED esquerdo (<strong>LE</strong>)
+                <br>3) buzinar (<strong>BU</strong>)
                 <div class="task-visual"><img src="mod1.png" alt="Passo 3 da PJE: abrir o modulo selecionado"></div>
+                <div class="task-visual"><img src="assets_full/06_led_botoes.png" alt="Passo 3 da PJE: exercicios LD LE BU no modulo 1"></div>
                 <div class="task-visual"><img src="assets_lessons/13_pje_modulo_missao.svg" alt="Passo 3 vetorizado: escolher modulo da missao"></div>
             </li>
-            <li>Execute a tarefa da missao no modulo correto e valide no robo.</li>
+            <li>Confirme que os 3 testes funcionaram no robo e finalize a tarefa.</li>
         </ol>
+        <div class="robot-signal-card">
+            <div class="robot-signal-title">Sinais que o robo deve mostrar nesta fase</div>
+            <div class="robot-signal-figure">
+                <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot com marcacoes visuais dos sinais esperados">
+                <span class="signal-dot signal-led-dir" aria-hidden="true"></span>
+                <span class="signal-dot signal-led-esq" aria-hidden="true"></span>
+                <span class="signal-dot signal-buzzer" aria-hidden="true"></span>
+                <span class="signal-tag tag-led-dir">LED direito (LD)</span>
+                <span class="signal-tag tag-led-esq">LED esquerdo (LE)</span>
+                <span class="signal-tag tag-buzzer">Buzzer (BU)</span>
+            </div>
+            <p><strong>Valide:</strong> LD acende, LE acende e BU emite som.</p>
+            <div id="awake-status-msg" class="awake-status locked">Mensagem final liberada apos concluir a proxima missao: <strong>Ligar o Robo</strong>.</div>
+        </div>
         <table>
             <tr><th>Modulo</th><th>Como o aluno interage</th><th>Foco pedagogico</th></tr>
             <tr><td>Modulo 1</td><td>Clique em botoes e setas</td><td>Direcao e causa-efeito</td></tr>
@@ -3701,6 +3787,19 @@ reset_personalizado</pre>
       const locked = isAluno && info && typeof info.order === 'number' && id !== 'mapa-jogo' && info.order !== unlocked;
       link.classList.toggle('nav-link-locked', Boolean(locked));
     });
+    renderAwakeStatusMessage();
+  }
+
+  function renderAwakeStatusMessage() {
+    const status = document.getElementById('awake-status-msg');
+    if (!status) return;
+    const completed = getCompletedMissions();
+    const unlockedByNextMission = completed.includes(1);
+    status.classList.toggle('ready', unlockedByNextMission);
+    status.classList.toggle('locked', !unlockedByNextMission);
+    status.innerHTML = unlockedByNextMission
+      ? 'PRONTO O ROBO ACORDOU COMPLETAMENTE!'
+      : 'Mensagem final liberada apos concluir a proxima missao: <strong>Ligar o Robo</strong>.';
   }
 
   function applyStudentSingleScreen() {
