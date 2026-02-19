@@ -2671,13 +2671,14 @@ bu 500</pre></div>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
-repita 30
 seguir-ultra 2000
 t 50
-fim repita
 sensor off
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
+    </div>
+    <div class="box box-warning">
+        <p><strong>MODO AGRESSIVO:</strong> o <code>seguir-ultra</code> sozinho reage rapido e faz movimentos bruscos. Caso queira mais cautela, utilize o exemplo recomendado abaixo, ou utilize os comandos <code>se dist</code> / <code>se distm</code> nas instrucoes a seguir.</p>
     </div>
 
     <h3>Exemplo estavel com pausas (recomendado)</h3>
@@ -3212,74 +3213,29 @@ bu 500</pre></div>
         <p><strong>Lembrete:</strong> Para usar sensores, conecte-os APOS o robo ligar e o LED piscar 2x (WiFi OK). Use <code>sensor linha</code> ou <code>sensor ultra</code> para ativar o sensor desejado.</p>
     </div>
 
-    <h2>Pratica 14: Seguidor de linha basico</h2>
-    <p>O robo segue uma linha preta no chao. Coloque o robo sobre a pista antes de enviar.</p>
+    <h2>Pratica 14: Seguidor de linha simples</h2>
+    <p>O robo segue a linha por 10 segundos e avisa com bipe ao terminar.</p>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
-repita 200
-seguir-linha 100
-t 50
-fim repita
+seguir-linha 10000
 sensor off
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
-    <h2>Pratica 15: Seguidor de linha com LEDs nas curvas</h2>
-    <p>Igual ao anterior, mas pisca o LED do lado em que detecta a curva.</p>
+    <h2>Pratica 15: Seguidor de linha longo com buzzer</h2>
+    <p>O robo segue a linha por mais tempo (20 segundos) e buzina ao final.</p>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
-repita 200
-seguir-linha 100
-t 50
-se sensord
-ld 100
-fim se
-se sensore
-le 100
-fim se
-fim repita
+seguir-linha 20000
 sensor off
-lde 500
-bu 500</pre></div>
+bu 1000</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
-    <h2>Pratica 16: Seguidor com alerta de cruzamento</h2>
-    <p>Se o robo detecta cruzamento (ambos sensores na linha), faz bipe e pisca.</p>
-    <div class="pje-example">
-        <div class="pje-label">Modulo 4</div>
-        <div class="pje-textarea"><pre>sensor linha
-repita 200
-seguir-linha 80
-t 50
-se perdeu
-bu 200
-lde 300
-fim se
-fim repita
-sensor off
-bu 500</pre></div>
-        <div class="pje-send">ENVIAR</div>
-    </div>
-
-    <h2>Pratica 17: Desvio de obstaculos basico</h2>
-    <p>O robo anda para frente e desvia de obstaculos usando o sensor de distancia.</p>
-    <div class="pje-example">
-        <div class="pje-label">Modulo 4</div>
-        <div class="pje-textarea"><pre>sensor ultra
-repita 50
-seguir-ultra 2000
-t 50
-fim repita
-sensor off
-bu 500</pre></div>
-        <div class="pje-send">ENVIAR</div>
-    </div>
-
-    <h2>Pratica 18: Desvio com alerta visual e sonoro</h2>
+    <h2>Pratica 16: Desvio com alerta visual e sonoro</h2>
     <p>Quando detecta obstaculo, o robo recua, pisca os LEDs e faz bipe antes de desviar.</p>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
@@ -3301,7 +3257,7 @@ bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
-    <h2>Pratica 19: Robo guarda (patrulha e detecta)</h2>
+    <h2>Pratica 17: Robo guarda (patrulha e detecta)</h2>
     <p>O robo patrulha em quadrado e se detecta algo perto, alerta com som e luz.</p>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
@@ -3323,7 +3279,7 @@ bu 1000</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
-    <h2>Pratica 20: Desafio completo (Linha + Caneta + Buzzer)</h2>
+    <h2>Pratica 18: Desafio completo (Linha + Caneta + Buzzer)</h2>
     <p>O robo segue a linha, e quando detecta cruzamento, baixa a caneta (marca o ponto) e faz bipe.</p>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
@@ -3344,7 +3300,7 @@ bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
-    <h2>Pratica 21: REPITA dentro de REPITA (loops aninhados)</h2>
+    <h2>Pratica 19: REPITA dentro de REPITA (loops aninhados)</h2>
     <p>O robo faz 3 quadrados seguidos. Demonstra loops aninhados (maximo 3 niveis).</p>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
@@ -3403,36 +3359,6 @@ le 300
 t 50
 pd 220
 bu 1000</pre></div>
-        <div class="pje-send">ENVIAR</div>
-    </div>
-
-    <h2>Seguidor de Linha</h2>
-    <div class="pje-example">
-        <div class="pje-label">Modulo 4</div>
-        <div class="pje-textarea"><pre>sensor linha
-repita 300
-seguir-linha 100
-t 50
-fim repita
-sensor off
-bu 500
-lde 1000</pre></div>
-        <div class="pje-send">ENVIAR</div>
-    </div>
-
-    <h2>Seguidor de Linha com Deteccao</h2>
-    <div class="pje-example">
-        <div class="pje-label">Modulo 4</div>
-        <div class="pje-textarea"><pre>sensor linha
-repita 200
-seguir-linha 50
-t 50
-se perdeu
-bu 200
-lde 200
-fim se
-fim repita
-sensor off</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
