@@ -1461,7 +1461,7 @@
     <a href="#led">6. Comandos LED</a>
     <a href="#servo">7. Comandos Servo</a>
     <a href="#buzzer">8. Comando Buzzer</a>
-    <a href="#linha">9. Sensor de Linha</a>
+    <a href="#linha">9. Seguidor de Linha</a>
     <a href="#ultra">10. Sensor Ultrassonico (sensor de distancia)</a>
     <a href="#controle">11. Estruturas de Controle</a>
     <a href="#condicoes">12. Condicoes SE</a>
@@ -1496,7 +1496,7 @@
             <li><a href="#led">6. Comandos LED</a></li>
             <li><a href="#servo">7. Comandos Servo</a></li>
             <li><a href="#buzzer">8. Comando Buzzer</a></li>
-            <li><a href="#linha">9. Sensor de Linha</a></li>
+            <li><a href="#linha">9. Seguidor de Linha</a></li>
             <li><a href="#ultra">10. Sensor Ultrassonico (sensor de distancia)</a></li>
             <li><a href="#controle">11. Estruturas de Controle</a></li>
             <li><a href="#condicoes">12. Condicoes SE</a></li>
@@ -1685,7 +1685,7 @@
     </div>
 
     <div class="lesson-card" id="aula-7" data-module="m4" data-aula="Aula 7">
-        <div class="lesson-title">Sensor de Linha — Aula 7</div>
+        <div class="lesson-title">Seguidor de Linha — Aula 7</div>
         <div class="lesson-goal">Objetivo: seguir a linha no chão.</div>
         <img class="module-img didactic-img" src="assets_lessons/06_linha.svg" alt="Seguir linha">
         <div class="module-caption">Pista simples para seguir</div>
@@ -2399,7 +2399,7 @@ bu</pre></div>
     </div>
 
     <!-- SECAO 9 -->
-    <h1 id="linha">9. Sensor de Linha (segue a faixa) <img class="icon-inline" src="assets_icons/check.svg" alt="Linha"></h1>
+    <h1 id="linha">9. Seguidor de Linha (segue a faixa) <img class="icon-inline" src="assets_icons/check.svg" alt="Linha"></h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Seguir Trilhos</div>
@@ -2448,6 +2448,39 @@ bu</pre></div>
         <tr><td>Desviou p/ direita</td><td>HIGH (branco)</td><td>LOW (linha)</td><td>Corrige p/ direita</td></tr>
         <tr><td>Cruzamento/Fim</td><td>LOW (linha)</td><td>LOW (linha)</td><td>Reduz velocidade</td></tr>
     </table>
+
+    <h2>Exemplo 1 (pratico)</h2>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor linha
+seguir-linha 10000</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+    <div class="box box-info">
+        <p><strong>Legenda dos comandos:</strong></p>
+        <p><code>sensor linha</code> -> liga o sensor</p>
+        <p><code>seguir-linha</code> -> comando do sensor</p>
+        <p><code>10000</code> -> tempo (em ms)</p>
+    </div>
+
+    <h2>Exemplo 2 (linha + LED)</h2>
+    <p>Para funcionar os LEDs, finalize o modo de sensor antes com <code>sensor off</code>. Sem isso, LD/LE/LDE podem falhar.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor linha
+seguir-linha 10000
+sensor off
+ld 300
+le 300
+lde 300
+sensor linha
+seguir-linha 10000
+sensor off</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+    <div class="box box-info">
+        <p><strong>Leitura rapida do fluxo:</strong> liga sensor -> segue linha -> desliga sensor -> usa LEDs -> liga sensor de novo -> segue linha -> desliga sensor.</p>
+    </div>
 
     <h2>Ativando</h2>
     <div class="pje-example">
