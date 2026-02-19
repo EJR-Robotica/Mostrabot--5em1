@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-label="Mapa infantil do hardware do MostraBot">
+  <defs>
+    <style>
+      .title { font: 700 44px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #0f4e79; }
+      .label { font: 700 24px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #203040; }
+      .small { font: 600 20px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #304050; }
+      .note { font: 700 22px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #0d6a3a; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="760" fill="#f4fbff"/>
+  <text x="600" y="58" text-anchor="middle" class="title">Mapa do Robo (para criancas)</text>
+  <text x="600" y="100" text-anchor="middle" class="label">FRENTE</text>
+  <polygon points="600,112 620,146 580,146" fill="#0f4e79"/>
+  <rect x="250" y="150" width="700" height="440" rx="34" fill="#fff" stroke="#8bc9ff" stroke-width="6"/>
+  <rect x="430" y="184" width="340" height="72" rx="18" fill="#ffe2b8" stroke="#ff9f1c" stroke-width="4"/>
+  <text x="600" y="228" text-anchor="middle" class="label">CANETA (SERVO)</text>
+  <line x1="600" y1="256" x2="600" y2="286" stroke="#203040" stroke-width="4"/>
+  <rect x="470" y="286" width="260" height="96" rx="20" fill="#dff5ff" stroke="#4ea3d8" stroke-width="4"/>
+  <text x="600" y="332" text-anchor="middle" class="label">OLHOS</text>
+  <text x="600" y="360" text-anchor="middle" class="small">SENSOR ULTRASSONICO</text>
+  <circle cx="400" cy="430" r="28" fill="#ffd1d1" stroke="#ff6b6b" stroke-width="4"/>
+  <circle cx="800" cy="430" r="28" fill="#ffd1d1" stroke="#ff6b6b" stroke-width="4"/>
+  <text x="400" y="474" text-anchor="middle" class="small">LED ESQ (D8)</text>
+  <text x="800" y="474" text-anchor="middle" class="small">LED DIR (D3)</text>
+  <rect x="320" y="500" width="200" height="72" rx="18" fill="#e6ffe8" stroke="#39b56a" stroke-width="4"/>
+  <text x="420" y="544" text-anchor="middle" class="label">MOTOR 1</text>
+  <rect x="680" y="500" width="200" height="72" rx="18" fill="#e6ffe8" stroke="#39b56a" stroke-width="4"/>
+  <text x="780" y="544" text-anchor="middle" class="label">MOTOR 2</text>
+  <circle cx="320" cy="620" r="48" fill="#d9d9d9" stroke="#707070" stroke-width="5"/>
+  <circle cx="880" cy="620" r="48" fill="#d9d9d9" stroke="#707070" stroke-width="5"/>
+  <text x="320" y="688" text-anchor="middle" class="small">RODA ESQ</text>
+  <text x="880" y="688" text-anchor="middle" class="small">RODA DIR</text>
+  <text x="600" y="728" text-anchor="middle" class="label">TRASEIRA</text>
+  <text x="54" y="188" class="note">1) OLHOS VEEM</text>
+  <text x="54" y="222" class="note">2) CEREBRO DECIDE</text>
+  <text x="54" y="256" class="note">3) RODAS ANDAM</text>
+  <text x="54" y="290" class="note">4) CANETA DESENHA</text>
+  <text x="54" y="324" class="note">5) LED AVISA</text>
+</svg>

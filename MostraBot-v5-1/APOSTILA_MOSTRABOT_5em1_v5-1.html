@@ -311,6 +311,44 @@
         .didactic-img {
             max-width: 500px;
         }
+        .component-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 14px 0 10px 0;
+        }
+        .component-card {
+            border: 2px solid #b8d9f5;
+            background: #f7fbff;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+        }
+        .component-card h4 {
+            margin: 6px 0 8px 0;
+            color: #1a5276;
+            font-size: 11pt;
+        }
+        .component-card p {
+            margin: 6px 0 0 0;
+            font-size: 9.5pt;
+        }
+        .component-img {
+            width: 100%;
+            max-width: 260px;
+            height: 180px;
+            object-fit: contain;
+            margin: 0 auto;
+            display: block;
+            background: white;
+            border: 1px solid #d8e9f7;
+            border-radius: 8px;
+        }
+        @media (max-width: 900px) {
+            .component-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
         
         .icon-inline {
             width: 54px;
@@ -1794,19 +1832,14 @@
 
     <h2>A Plataforma PJE Nuvem</h2>
     <p>O MostraBot funciona conectado a <strong>Plataforma Jabuti Edu (PJE) Nuvem</strong>:</p>
-    <div class="diagram">
-   PROFESSOR/ALUNO                        MOSTRABOT
-   +--------------+                       +--------------+
-   |   Digita     |    Internet           |   Executa    |
-   |  comandos    | --------------------> |   comandos   |
-   |   na PJE     |                       |  no robo     |
-   +--------------+                       +--------------+
-         |                                     ^
-         v                                     |
-   +--------------+                            |
-   |  PJE NUVEM   |----------------------------+
-   |  (servidor)  |       WiFi
-   +--------------+
+    <div class="box box-info">
+        <h3>Fluxo simples de comunicacao</h3>
+        <ol>
+            <li>Professor/aluno escreve o comando na PJE.</li>
+            <li>A PJE Nuvem envia o comando pela internet.</li>
+            <li>O MostraBot recebe por WiFi e executa no robo.</li>
+            <li>Voce observa o movimento, LED e buzzer como resposta.</li>
+        </ol>
     </div>
     <p>O professor e o aluno programam pela PJE no navegador, e o robo executa automaticamente!</p>
 
@@ -1877,17 +1910,12 @@
     </div>
 
     <h2>Progressao Pedagogica</h2>
-    <div class="diagram">
-  INICIANTE          INTERMEDIARIO           AVANCADO
-  (Modulos 1-3)      (Modulo 4 Linha)        (Modulo 4 Ultra)
-
-  +---------+        +-------------+         +--------------+
-  | Controle|  -->   |  Seguidor   |   -->   |  Navegacao   |
-  | Direto  |        |  de Linha   |         |  Autonoma    |
-  +---------+        +-------------+         +--------------+
-
-  "Anda para         "Segue uma             "Explora o
-   frente!"           linha preta"           ambiente sozinho"
+    <div class="box box-info">
+        <h3>Progressao visual da aprendizagem</h3>
+        <p><strong>Iniciante:</strong> controle direto (PF, PT, PD, PE).</p>
+        <p><strong>Intermediario:</strong> seguidor de linha (robo segue faixa).</p>
+        <p><strong>Avancado:</strong> navegacao autonoma (sensor ultrassonico).</p>
+        <p><strong>Resumo:</strong> andar -> seguir linha -> desviar sozinho.</p>
     </div>
 
     <!-- SECAO 2 -->
@@ -1913,37 +1941,39 @@
     <h2>Mapa dos Componentes</h2>
     <img class="module-img didactic-img" src="assets_full/03_hardware_componentes.png" alt="Mapa de componentes do robo">
     <div class="module-caption">Mapa rapido dos principais componentes</div>
-    <div class="diagram">
-            +--------------------------------------------+
-            |           FRENTE DO ROBO                   |
-            |                                            |
-            |         +----------------+                 |
-            |         |    CANETA      |                 |
-            |         |   (Servo)     |                 |
-            |         +----------------+                 |
-            |                |                           |
-            |         +------+------+                    |
-            |         |   SENSOR    |                    |
-            |         | ULTRASSONICO|                    |
-            |         |   (Olhos)   |                    |
-            |         +-------------+                    |
-            |                                            |
-            |    LED           LED                       |
-            |  Esquerdo      Direito                     |
-            |    (D8)         (D3)                       |
-            |                                            |
-            +--------------------------------------------+
-            |                                            |
-            |   +-----+              +-----+             |
-            |   |Motor|              |Motor|             |
-            |   |  1  |              |  2  |             |
-            |   |(ESQ)|              |(DIR)|             |
-            |   +-----+              +-----+             |
-            |      |                   |                 |
-            |     ooo                 ooo                |
-            |    RODAS               RODAS               |
-            +--------------------------------------------+
-                        TRASEIRA DO ROBO
+    <div class="box box-info">
+        <h3>Leitura rapida do corpo do robo</h3>
+        <p><strong>Frente:</strong> caneta + olhos (ultrassonico).</p>
+        <p><strong>Meio:</strong> LEDs esquerdo e direito (sinais visuais).</p>
+        <p><strong>Base:</strong> motor 1 e motor 2 movem as rodas.</p>
+        <p><strong>Traseira:</strong> parte de apoio e equilibrio.</p>
+    </div>
+    <h3>Mapa visual para criancas (7 anos)</h3>
+    <img class="module-img" src="assets_lessons/17_hardware_mapa_kids.svg" alt="Mapa visual infantil do robo com caneta, olhos, LEDs e rodas">
+    <div class="module-caption">Desenho simples: frente, olhos, caneta, motores e rodas</div>
+    <img class="module-img" src="assets_lessons/18_hardware_fluxo_kids.svg" alt="Fluxo logico infantil: olhos veem, cerebro decide e rodas movem">
+    <div class="module-caption">Logica do robo em 5 passos: olhar, pensar, mover, desenhar e avisar</div>
+    <div class="box box-info">
+        <p><strong>Jeito de explicar para crianca:</strong> o robo e um carrinho com olhos e caneta. Os olhos veem, o cerebro decide, as rodas andam e os LEDs avisam.</p>
+    </div>
+
+    <h3>Pecas reais ilustradas</h3>
+    <div class="component-gallery">
+        <div class="component-card">
+            <h4>LED (luz)</h4>
+            <img class="component-img" src="assets_lessons/14_led_chicote.png" alt="LED com chicote">
+            <p>Acende para mostrar que o robo esta funcionando.</p>
+        </div>
+        <div class="component-card">
+            <h4>Motor DC 5V</h4>
+            <img class="component-img" src="assets_lessons/15_motor_dc_5v.png" alt="Motor DC 5V">
+            <p>Faz as rodas girarem para o robo andar.</p>
+        </div>
+        <div class="component-card">
+            <h4>Servo da caneta</h4>
+            <img class="component-img" src="assets_lessons/16_servo_caneta.png" alt="Servo para controle da caneta">
+            <p>Sobe e desce a caneta para desenhar.</p>
+        </div>
     </div>
 
     <h2>Tabela simples de onde cada coisa liga</h2>
@@ -1986,31 +2016,15 @@
     <h2>Sequencia de Boot</h2>
     <img class="module-img didactic-img" src="assets_full/04_sinais_led.png" alt="LED mostra o status do robo">
     <div class="module-caption">O LED mostra se o robo esta conectando ou pronto</div>
-    <div class="diagram">
-  PASSO 1: Liga o robo
-           |
-           v
-  PASSO 2: LED pisca rapido (50ms ON, 200ms OFF) - conectando WiFi
-           * o * o * o * o * o * o
-           |
-           v
-  PASSO 3: Conexao bem-sucedida?
-           |
-     +-----+-----+
-     |           |
-     v           v
-   SIM          NAO
-     |           |
-     v           v
-  LED pisca    LED pisca
-  2 vezes      muito rapido
-  (500ms)      (tentando reconectar)
-     |
-     v
-  PASSO 4: Configurando DNS (pisca 100ms ON/OFF)
-     |
-     v
-  PASSO 5: Robo esta online e pronto!
+    <div class="box box-info">
+        <h3>Sequencia de boot (passo a passo)</h3>
+        <ol>
+            <li>Ligue o robo.</li>
+            <li>LED pisca rapido: conectando no WiFi.</li>
+            <li>Se conectar: duas piscadas lentas.</li>
+            <li>Pisca medio: configurando DNS.</li>
+            <li>Pronto: robo online para receber comandos.</li>
+        </ol>
     </div>
 
     <h2>Resumo de Todos os Sinais</h2>
@@ -2199,26 +2213,12 @@
     <p>No Modulo 1 nao existe digitacao de comandos. No Modulo 2 a montagem ainda e guiada (semi-pronta). A escrita totalmente manual acontece no Modulo 4.</p>
 
     <h2>Os 4 Comandos Basicos</h2>
-    <div class="diagram">
-                          ^
-                          |
-                     +---------+
-                     |   PF    |  PF = Para Frente
-                     | FRENTE  |
-                     +---------+
-
-            &lt;--------------+--------------&gt;
-       +---------+         |         +---------+
-       |   PE    |         |         |   PD    |
-       |ESQUERDA |         |         | DIREITA |
-       +---------+         |         +---------+
-                           |
-                     +---------+
-                     |   PT    |  PT = Para Tras
-                     |  TRAS   |
-                     +---------+
-                           |
-                           v
+    <div class="box box-info">
+        <h3>Mapa de direcoes (comandos basicos)</h3>
+        <p><strong>PF</strong> = para frente</p>
+        <p><strong>PT</strong> = para tras</p>
+        <p><strong>PD</strong> = gira para direita</p>
+        <p><strong>PE</strong> = gira para esquerda</p>
     </div>
 
     <h2>Sintaxe</h2>
@@ -2247,10 +2247,7 @@
     <h2>Exemplos de Movimento (com pausa de protecao)</h2>
 
     <h3>Quadrado seguro</h3>
-    <div class="shape-diagram">+------+ 
-|      |
-|      |
-+------+</div>
+    <div class="shape-diagram">Trajeto em quadrado: quatro lados iguais com quatro giros de 90 graus.</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
         <div class="pje-textarea"><pre>pf 1000
@@ -2272,9 +2269,7 @@ pd 220</pre></div>
     </div>
 
     <h3>Triangulo seguro</h3>
-    <div class="shape-diagram">  /\
- /  \
-/____\</div>
+    <div class="shape-diagram">Trajeto em triangulo: tres lados com tres giros de aproximadamente 120 graus.</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
         <div class="pje-textarea"><pre>pf 1000
@@ -2292,7 +2287,7 @@ pd 260</pre></div>
     </div>
 
     <h3>Zigue-zague seguro</h3>
-    <div class="shape-diagram">/\/\_/\/\</div>
+    <div class="shape-diagram">Trajeto em zigue-zague: alternar pequenas viradas para direita e esquerda.</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
         <div class="pje-textarea"><pre>pf 500
@@ -2379,6 +2374,61 @@ pd 120</pre></div>
         <p>Os LEDs D3 e D8 compartilham os pinos com os sensores! Antes de usar comandos de LED, execute: <code>sensor off</code></p>
     </div>
 
+    <h2>Exemplos de LED</h2>
+
+    <h3>Piscar LED direito (500ms padrao)</h3>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+ld</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h3>Piscar LED esquerdo por 300ms</h3>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+le 300</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h3>Piscar ambos os LEDs por 1 segundo</h3>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+lde 1000</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h3>Sequencia alternada (direito, esquerdo, ambos)</h3>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+ld 500
+le 500
+ld 300
+le 300
+lde 1000</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h3>Movimento com feedback visual</h3>
+    <p>O robo anda e pisca os olhos para indicar que terminou cada etapa.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+pf 1000
+ld 200
+t 50
+pd 300
+le 200
+t 50
+pf 1000
+lde 500
+bu 300</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
     <!-- SECAO 7 -->
     <h1 id="servo">8. Comandos de Servo (Caneta) <img class="icon-inline" src="assets_icons/servo.svg" alt="Servo"></h1>
     <div class="mission-header">
@@ -2414,16 +2464,16 @@ pd 120</pre></div>
     <h3>Exemplo: Desenhar e levantar</h3>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>bc              # Baixa caneta (comeca a desenhar)
+        <div class="pje-textarea"><pre>bc
 t 50
-pf 1000         # Move para frente desenhando
+pf 1000
 t 50
-sc              # Sobe caneta (para de desenhar)
+sc
 t 50
-pd 220          # Gira
+pd 220
 t 50
-bc              # Baixa caneta novamente
-pf 1000         # Desenha outro traco</pre></div>
+bc
+pf 1000</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -2458,8 +2508,8 @@ pf 1000         # Desenha outro traco</pre></div>
     <h3>Exemplos</h3>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>bu 500          # Bipe de 0.5 segundos
-bu              # Bipe de 800ms (padrao)</pre></div>
+        <div class="pje-textarea"><pre>bu 500
+bu</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -2489,20 +2539,11 @@ bu              # Bipe de 800ms (padrao)</pre></div>
     <div class="module-caption">O robo segue a linha no chao</div>
 
     <h2>Como Funciona</h2>
-    <div class="diagram">
-                      SENSORES IR
-                    +-----+-----+
-                    | ESQ | DIR |
-                    | D8  | D3  |
-                    +--+--+--+--+
-                       |     |
-                       v     v
-   ==============+===========+=================
-   BRANCO        |   LINHA   |    BRANCO
-                 |   PRETA   |
-   ==============+===========+=================
-
-   A linha deve passar ENTRE os dois sensores!
+    <div class="box box-info">
+        <h3>Como o seguidor de linha enxerga</h3>
+        <p>Sensor esquerdo (D8) e sensor direito (D3) leem o chao.</p>
+        <p>Quando a linha preta passa entre eles, o robo corrige a direcao.</p>
+        <p><strong>Regra pratica:</strong> manter a faixa centralizada entre os sensores.</p>
     </div>
 
     <h2>Logica de Deteccao</h2>
@@ -2551,10 +2592,8 @@ sensor off</pre></div>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
-repita 50
-  seguir-linha 100
-  t 50
-fim repita
+seguir-linha 1000
+t 50
 sensor off
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -2599,23 +2638,11 @@ bu 500</pre></div>
     <div class="module-caption">Desvia de obstaculos automaticamente</div>
 
     <h2>Como Funciona</h2>
-    <div class="diagram">
-                         SENSOR HC-SR04
-                    +-------------------+
-                    |    (o)     (o)    |
-                    |   TRIG    ECHO    |
-                    |    D3      D8     |
-                    +-------------------+
-                            |
-                            |  Envia onda sonora
-                            |  =================>  +----------+
-                            |                      |          |
-                            |  Recebe eco          | OBSTACULO|
-                            |  <=================  |          |
-                            |                      +----------+
-
-   Tempo entre envio e retorno = Distancia ao obstaculo
-   Alcance: 2cm a 300cm (3 metros)
+    <div class="box box-info">
+        <h3>Como o ultrassonico mede distancia</h3>
+        <p>TRIG envia a onda sonora e ECHO recebe o retorno.</p>
+        <p>Quanto mais rapido o eco voltar, mais perto esta o obstaculo.</p>
+        <p><strong>Alcance tipico:</strong> 2 cm ate 300 cm.</p>
     </div>
 
     <h2>Comando de Navegacao</h2>
@@ -2645,8 +2672,8 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 30
-  seguir-ultra 2000
-  t 50
+seguir-ultra 2000
+t 50
 fim repita
 sensor off
 bu 500</pre></div>
@@ -2658,15 +2685,15 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 100
-  pf 80
-  t 65
-  se dist 30
-    pt 150
-    t 65
-    pd 150
-    t 65
-  fim se
-  t 65
+pf 80
+t 65
+se dist 30
+pt 150
+t 65
+pd 150
+t 65
+fim se
+t 65
 fim repita
 sensor off
 t 500</pre></div>
@@ -2707,11 +2734,27 @@ t 500</pre></div>
         <p><strong>Missao concluida:</strong> aluno criou comportamento com repeticao e decisao.</p>
     </div>
 
+    <div class="box box-danger">
+        <h3>Regra importante da PJE Nuvem: sem espacos no inicio!</h3>
+        <p>A Plataforma Jabuti Edu (PJE Nuvem) <strong>nao aceita espacos ou tabulacoes no inicio das linhas</strong>. Todos os comandos devem comecar na primeira coluna, mesmo dentro de <code>repita</code> ou <code>se</code>.</p>
+        <p><strong>Errado</strong> (com espacos — a PJE nao vai entender):</p>
+        <pre>repita 4
+  pf 500
+  pd 200
+fim repita</pre>
+        <p><strong>Correto</strong> (sem espacos — todos os comandos colados na esquerda):</p>
+        <pre>repita 4
+pf 500
+pd 200
+fim repita</pre>
+        <p>Essa regra vale para <strong>todos os comandos</strong> dentro de <code>repita</code>, <code>se</code> e qualquer estrutura. Sempre cole o codigo sem indentacao.</p>
+    </div>
+
     <h2>REPITA (Loop)</h2>
     <img class="module-img didactic-img" src="assets_full/11_repita.png" alt="Exemplo de REPITA">
     <div class="module-caption">Exemplo simples de repeticao</div>
     <pre>repita &lt;N&gt;
-  &lt;comandos&gt;
+&lt;comandos&gt;
 fim repita</pre>
     <p><strong>Maximo:</strong> 3 niveis de aninhamento</p>
 
@@ -2719,10 +2762,10 @@ fim repita</pre>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
         <div class="pje-textarea"><pre>repita 4
-  pf 500
-  t 50
-  pd 200
-  t 50
+pf 500
+t 50
+pd 200
+t 50
 fim repita</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
@@ -2731,34 +2774,19 @@ fim repita</pre></div>
     <img class="module-img didactic-img" src="assets_full/12_se.png" alt="Exemplo de SE">
     <div class="module-caption">Se a condicao for verdadeira, o robo executa</div>
     <pre>se &lt;condicao&gt;
-  &lt;comandos&gt;
+&lt;comandos&gt;
 fim se</pre>
 
-    <h3>Exemplo com sensor de linha (segue a faixa)</h3>
-    <div class="pje-example">
-        <div class="pje-label">Modulo 4</div>
-        <div class="pje-textarea"><pre>sensor linha
-se sensord
-  pd 150
-  t 50
-fim se
-sensor off</pre></div>
-        <div class="pje-send">ENVIAR</div>
-    </div>
-
-    <h2>Combinando REPITA e SE</h2>
+    <h3>Exemplo: sensor detecta linha e buzina</h3>
+    <p>O robo fica verificando. Se o sensor direito tocar na linha, o buzzer toca. Precisa de REPITA para ficar checando varias vezes.</p>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
 repita 30
-  seguir-linha 100
-  t 50
-  se perdeu
-    pt 200
-    t 50
-    pd 200
-    t 50
-  fim se
+se sensord
+bu 200
+fim se
+t 50
 fim repita
 sensor off</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -2802,10 +2830,10 @@ sensor off</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 se dist 20
-  pt 300
-  t 50
-  pd 200
-  t 50
+pt 300
+t 50
+pd 200
+t 50
 fim se
 sensor off</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -2816,16 +2844,16 @@ sensor off</pre></div>
 
     <h3>Exemplos adicionais (condicoes)</h3>
 
-    <div class="shape-diagram">[X] obstaculo perto -> recuo curto -> giro -> avance</div>
+    <div class="shape-diagram">Fluxo: obstaculo perto, recua um pouco, gira e volta a avancar.</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 se dist 10
-  bu 100
-  pt 250
-  t 50
-  pe 220
-  t 50
+bu 100
+pt 250
+t 50
+pe 220
+t 50
 fim se
 sensor off</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -2834,13 +2862,13 @@ sensor off</pre></div>
         <p><strong>Legenda rapida:</strong> <code>dist 10</code> = distancia &lt;= 10 <strong>cm</strong> (emergencia) | giro para esquerda | pausas para estabilidade</p>
     </div>
 
-    <div class="shape-diagram">[ ] caminho livre -> avance rapido</div>
+    <div class="shape-diagram">Fluxo: caminho livre, avancar com passos curtos e seguros.</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 se distm 30
-  pf 400
-  t 50
+pf 400
+t 50
 fim se
 sensor off</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -3108,10 +3136,10 @@ bu 200</pre></div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2 / Modulo 4</div>
         <div class="pje-textarea"><pre>repita 4
-  pf 1000
-  t 50
-  pd 220
-  t 50
+pf 1000
+t 50
+pd 220
+t 50
 fim repita
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -3122,10 +3150,10 @@ bu 500</pre></div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2 / Modulo 4</div>
         <div class="pje-textarea"><pre>repita 3
-  pf 1200
-  t 50
-  pd 280
-  t 50
+pf 1200
+t 50
+pd 280
+t 50
 fim repita
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -3137,18 +3165,18 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 2 / Modulo 4</div>
         <div class="pje-textarea"><pre>sensor off
 repita 3
-  pf 500
-  ld 200
-  t 50
-  pd 300
-  le 200
-  t 50
-  pt 500
-  lde 300
-  bu 100
-  t 50
-  pe 300
-  t 50
+pf 500
+ld 200
+t 50
+pd 300
+le 200
+t 50
+pt 500
+lde 300
+bu 100
+t 50
+pe 300
+t 50
 fim repita
 lde 1000
 bu 500</pre></div>
@@ -3160,10 +3188,10 @@ bu 500</pre></div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2 / Modulo 4</div>
         <div class="pje-textarea"><pre>repita 5
-  pf 1500
-  t 50
-  pd 400
-  t 50
+pf 1500
+t 50
+pd 400
+t 50
 fim repita
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -3190,8 +3218,8 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
 repita 200
-  seguir-linha 100
-  t 50
+seguir-linha 100
+t 50
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3204,14 +3232,14 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
 repita 200
-  seguir-linha 100
-  t 50
-  se sensord
-    ld 100
-  fim se
-  se sensore
-    le 100
-  fim se
+seguir-linha 100
+t 50
+se sensord
+ld 100
+fim se
+se sensore
+le 100
+fim se
 fim repita
 sensor off
 lde 500
@@ -3225,12 +3253,12 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
 repita 200
-  seguir-linha 80
-  t 50
-  se perdeu
-    bu 200
-    lde 300
-  fim se
+seguir-linha 80
+t 50
+se perdeu
+bu 200
+lde 300
+fim se
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3243,8 +3271,8 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 50
-  seguir-ultra 2000
-  t 50
+seguir-ultra 2000
+t 50
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3257,16 +3285,16 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 40
-  se dist 20
-    bu 200
-    lde 300
-    pt 300
-    t 50
-    pd 300
-    t 50
-  fim se
-  pf 300
-  t 50
+se dist 20
+bu 200
+lde 300
+pt 300
+t 50
+pd 300
+t 50
+fim se
+pf 300
+t 50
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3279,16 +3307,16 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 8
-  pf 1000
-  t 50
-  se dist 25
-    bu 500
-    lde 500
-    pt 500
-    t 50
-  fim se
-  pd 220
-  t 50
+pf 1000
+t 50
+se dist 25
+bu 500
+lde 500
+pt 500
+t 50
+fim se
+pd 220
+t 50
 fim repita
 sensor off
 bu 1000</pre></div>
@@ -3302,14 +3330,14 @@ bu 1000</pre></div>
         <div class="pje-textarea"><pre>sensor linha
 sc
 repita 150
-  seguir-linha 80
-  t 50
-  se perdeu
-    bu 200
-    bc
-    lde 500
-    sc
-  fim se
+seguir-linha 80
+t 50
+se perdeu
+bu 200
+bc
+lde 500
+sc
+fim se
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3322,16 +3350,16 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor off
 repita 3
-  repita 4
-    pf 800
-    t 50
-    pd 220
-    t 50
-  fim repita
-  lde 500
-  bu 200
-  pe 300
-  t 50
+repita 4
+pf 800
+t 50
+pd 220
+t 50
+fim repita
+lde 500
+bu 200
+pe 300
+t 50
 fim repita
 bu 1000</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -3383,8 +3411,8 @@ bu 1000</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
 repita 300
-  seguir-linha 100
-  t 50
+seguir-linha 100
+t 50
 fim repita
 sensor off
 bu 500
@@ -3397,12 +3425,12 @@ lde 1000</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor linha
 repita 200
-  seguir-linha 50
-  t 50
-  se perdeu
-    bu 200
-    lde 200
-  fim se
+seguir-linha 50
+t 50
+se perdeu
+bu 200
+lde 200
+fim se
 fim repita
 sensor off</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -3413,8 +3441,8 @@ sensor off</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 30
-  seguir-ultra 2000
-  t 50
+seguir-ultra 2000
+t 50
 fim repita
 sensor off
 lde 500
@@ -3428,20 +3456,20 @@ bu 300</pre></div>
     </div>
 
     <h3>Personalidade 1: Cauteloso (Desvia com calma)</h3>
-    <div class="shape-diagram">[ ]  ->  [ ]  ->  [ ]  (passos curtos e pausas)</div>
+    <div class="shape-diagram">Explorador seguro: movimentos curtos com pequenas pausas entre cada acao.</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 50
-  se dist 20
-    bu 100
-    pt 200
-    t 50
-    pd 200
-    t 50
-  fim se
-  pf 200
-  t 50
+se dist 20
+bu 100
+pt 200
+t 50
+pd 200
+t 50
+fim se
+pf 200
+t 50
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3452,20 +3480,20 @@ bu 500</pre></div>
     </div>
 
     <h3>Personalidade 2: Explorer (Avanca mais e corrige)</h3>
-    <div class="shape-diagram">---->  /  ---->  \\  ---->  (exploracao ativa)</div>
+    <div class="shape-diagram">Explorador ativo: avanca, testa direcoes e continua buscando caminho.</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 60
-  se dist 25
-    bu 100
-    pt 150
-    t 50
-    pe 220
-    t 50
-  fim se
-  pf 300
-  t 50
+se dist 25
+bu 100
+pt 150
+t 50
+pe 220
+t 50
+fim se
+pf 300
+t 50
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3476,22 +3504,22 @@ bu 500</pre></div>
     </div>
 
     <h3>Personalidade 3: Labirinto (Alterna lados)</h3>
-    <div class="shape-diagram">|_| -> |_| -> |_|  (vira para testar saidas)</div>
+    <div class="shape-diagram">Labirinto: alterna giros para testar saidas e encontrar passagem.</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 40
-  se dist 15
-    bu 100
-    pt 200
-    t 50
-    pd 200
-    t 50
-  fim se
-  se distm 15
-    pf 200
-    t 50
-  fim se
+se dist 15
+bu 100
+pt 200
+t 50
+pd 200
+t 50
+fim se
+se distm 15
+pf 200
+t 50
+fim se
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3504,13 +3532,13 @@ bu 500</pre></div>
     <h2>Desenho com Caneta</h2>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>bc              # Baixa caneta (comeca a desenhar)
+        <div class="pje-textarea"><pre>bc
 t 50
-pf 1500         # Desenha uma linha
+pf 1500
 t 50
-sc              # Sobe caneta (para de desenhar)
+sc
 t 50
-pt 1500         # Volta ao inicio
+pt 1500
 t 50
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
@@ -3521,15 +3549,15 @@ bu 500</pre></div>
         <div class="pje-label">Modulo 4</div>
         <div class="pje-textarea"><pre>sensor ultra
 repita 50
-  se dist 15
-    bu 100
-    pt 200
-    t 50
-    pd 200
-    t 50
-  fim se
-  pf 200
-  t 50
+se dist 15
+bu 100
+pt 200
+t 50
+pd 200
+t 50
+fim se
+pf 200
+t 50
 fim repita
 sensor off
 bu 500</pre></div>
@@ -3636,10 +3664,10 @@ bu 500</pre></div>
     </table>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>define_vel 900           # Movimento mais rapido
-define_vel 500           # Movimento mais lento
-define_vel_linha 600     # Linha mais lenta
-define_vel_ultra 700     # Ultra mais lento</pre></div>
+        <div class="pje-textarea"><pre>define_vel 900
+define_vel 500
+define_vel_linha 600
+define_vel_ultra 700</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 

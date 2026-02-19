@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-label="Fluxo logico infantil do hardware do MostraBot">
+  <defs>
+    <style>
+      .title { font: 700 42px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #0f4e79; }
+      .step { font: 700 24px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #173246; }
+      .desc { font: 600 20px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #2b4558; }
+      .num { font: 700 28px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #ffffff; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="620" fill="#f7fbff"/>
+  <text x="600" y="58" text-anchor="middle" class="title">Como o robo pensa (passo a passo)</text>
+  <g transform="translate(80,150)"><circle cx="40" cy="40" r="32" fill="#0f4e79"/><text x="40" y="50" text-anchor="middle" class="num">1</text><rect x="90" y="0" width="180" height="86" rx="18" fill="#dff5ff" stroke="#4ea3d8" stroke-width="4"/><text x="180" y="38" text-anchor="middle" class="step">OLHOS</text><text x="180" y="64" text-anchor="middle" class="desc">veem obstaculo</text></g>
+  <polygon points="370,184 420,184 420,170 455,193 420,216 420,202 370,202" fill="#0f4e79"/>
+  <g transform="translate(470,150)"><circle cx="40" cy="40" r="32" fill="#0f4e79"/><text x="40" y="50" text-anchor="middle" class="num">2</text><rect x="90" y="0" width="220" height="86" rx="18" fill="#ffe8c8" stroke="#ff9f1c" stroke-width="4"/><text x="200" y="38" text-anchor="middle" class="step">CEREBRO</text><text x="200" y="64" text-anchor="middle" class="desc">decide virar/andar</text></g>
+  <polygon points="790,184 840,184 840,170 875,193 840,216 840,202 790,202" fill="#0f4e79"/>
+  <g transform="translate(890,150)"><circle cx="40" cy="40" r="32" fill="#0f4e79"/><text x="40" y="50" text-anchor="middle" class="num">3</text><rect x="90" y="0" width="200" height="86" rx="18" fill="#e6ffe8" stroke="#39b56a" stroke-width="4"/><text x="190" y="38" text-anchor="middle" class="step">MOTORES</text><text x="190" y="64" text-anchor="middle" class="desc">movem as rodas</text></g>
+  <g transform="translate(170,360)"><circle cx="40" cy="40" r="32" fill="#0f4e79"/><text x="40" y="50" text-anchor="middle" class="num">4</text><rect x="90" y="0" width="240" height="86" rx="18" fill="#fff0d8" stroke="#ff9f1c" stroke-width="4"/><text x="210" y="38" text-anchor="middle" class="step">CANETA</text><text x="210" y="64" text-anchor="middle" class="desc">sobe/desce e desenha</text></g>
+  <g transform="translate(700,360)"><circle cx="40" cy="40" r="32" fill="#0f4e79"/><text x="40" y="50" text-anchor="middle" class="num">5</text><rect x="90" y="0" width="220" height="86" rx="18" fill="#ffd8d8" stroke="#ff6b6b" stroke-width="4"/><text x="200" y="38" text-anchor="middle" class="step">LEDs</text><text x="200" y="64" text-anchor="middle" class="desc">avisam o estado</text></g>
+  <line x1="430" y1="405" x2="680" y2="405" stroke="#0f4e79" stroke-width="6" stroke-dasharray="12 10"/>
+  <text x="600" y="535" text-anchor="middle" class="step">RESUMO: OLHAR -> PENSAR -> MOVER -> DESENHAR -> AVISAR</text>
+</svg>
