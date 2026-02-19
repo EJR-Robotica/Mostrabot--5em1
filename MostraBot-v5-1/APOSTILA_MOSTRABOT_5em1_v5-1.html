@@ -1515,8 +1515,8 @@
     <div class="game-hero">
         <div class="sparkle"></div>
         <h2>Missões do MostraBot</h2>
-        <p>O professor guia as crianças como um jogo por fases. Cada missão tem um objetivo simples.</p>
-        <p><strong>Meta:</strong> completar as missões e ganhar selos.</p>
+        <p>Guia rapido por fases: cada missao tem um objetivo simples.</p>
+        <p><strong>Meta:</strong> concluir as missoes na ordem.</p>
         <div class="progress-track"><div class="progress-fill"></div></div>
     </div>
     <div class="learning-hud" id="learning-hud">
@@ -1524,14 +1524,14 @@
             <span class="hud-pill">Missao atual: <span id="hud-missao">Missao 0</span></span>
             <span class="hud-pill">Aula atual: <span id="hud-aula">Aula 1</span></span>
             <span class="hud-pill">Modulo atual: <span id="hud-modulo">Modulo 1</span></span>
-            <span class="hud-pill">Secao: <span id="hud-secao">Mapa do Jogo</span></span>
+            <span class="hud-pill">Seção: <span id="hud-secao">Mapa do Jogo</span></span>
             <span class="hud-pill">Atalhos: A | P | D</span>
         </div>
         <div class="start-steps">
             <section class="step-panel">
                 <span class="step-kicker">Etapa 1</span>
                 <h3>Toque no MostraBot</h3>
-                <p>Clique no robô para abrir orientações curtas e tranquilas.</p>
+                <p>Clique para abrir uma dica curta.</p>
                 <button class="robot-guide-btn" type="button" id="robot-guide-trigger">
                     <img class="robot-hero-img" src="assets_lessons/mostrabot-padrao.png" alt="MostraBot guia da missão">
                     <span>Oi! Clique em mim para receber a dica da fase.</span>
@@ -1540,7 +1540,7 @@
             <section class="step-panel">
                 <span class="step-kicker">Etapa 2</span>
                 <h3>Escolha o modo</h3>
-                <p>Professor vê tudo. Aluno avança fase por fase.</p>
+                <p>Aluno ou Professor.</p>
                 <div class="mode-switch" id="mode-switch">
                     <button class="mode-btn active" type="button" data-mode="aluno">Modo Aluno</button>
                     <button class="mode-btn" type="button" data-mode="professor">Modo Professor</button>
@@ -1551,18 +1551,10 @@
             <section class="step-panel">
                 <span class="step-kicker">Etapa 3</span>
                 <h3>Controle de avanço</h3>
-                <p>Complete tarefas para liberar a próxima fase.</p>
+                <p>Conclua a fase para liberar a proxima.</p>
                 <div class="student-controls" id="student-controls">
-                    <span class="mode-label">Faixa etaria (Aluno):</span>
-                    <select class="age-select" id="age-select">
-                        <option value="6-8">6-8 anos</option>
-                        <option value="9-11" selected>9-11 anos</option>
-                        <option value="12-14">12-14 anos</option>
-                        <option value="15+">15+ anos</option>
-                    </select>
                     <button class="mode-btn" type="button" id="back-stage-btn">Voltar 1 fase</button>
                     <button class="mode-btn" type="button" id="complete-stage-btn">Completar fase atual</button>
-                    <button class="mode-btn" type="button" id="reset-progress-btn">Resetar progresso</button>
                     <span class="hud-pill">Fase liberada: <span id="hud-unlock">0</span>/6</span>
                     <span class="hud-pill">Missoes concluidas: <span id="hud-completed">0</span>/7</span>
                 </div>
@@ -1635,29 +1627,8 @@
         <div class="quest-title">Regra do Jogo</div>
         <p>Somente avance quando a turma concluir a missão anterior. Isso evita confusão.</p>
     </div>
-    <div class="mascot-strip">
-        <div class="mascot-card">
-            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot sorrindo">
-            <div class="mascot-title">MostraBot Feliz :)</div>
-            <div class="mascot-text">"Vamos com calma. Voce consegue!"</div>
-        </div>
-        <div class="mascot-card">
-            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot em desafio">
-            <div class="mascot-title">MostraBot Desafio !</div>
-            <div class="mascot-text">"Hora da tarefa: um passo por vez."</div>
-        </div>
-        <div class="mascot-card">
-            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot conquista">
-            <div class="mascot-title">MostraBot Vitoria *</div>
-            <div class="mascot-text">"Missao concluida! Novo selo desbloqueado."</div>
-        </div>
-    </div>
         </div>
     </details>
-    <div class="box box-info">
-        <h3>Sinalizacoes de tranquilidade</h3>
-        <p><strong>Verde:</strong> pode seguir. <strong>Amarelo:</strong> revisar com calma. <strong>Azul:</strong> dica de apoio. O foco e aprender com confianca, passo a passo.</p>
-    </div>
     <!-- SECAO 1 -->
     
     <!-- SECAO AULAS -->
@@ -1698,10 +1669,10 @@
     </div>
 
     <div class="lesson-card" id="aula-5" data-module="m2" data-aula="Aula 5">
-        <div class="lesson-title">Módulo 2 — Aula 5: Garra e Som</div>
-        <div class="lesson-goal">Objetivo: usar garra e buzzer em sequência.</div>
+        <div class="lesson-title">Módulo 2 — Aula 5: Caneta e Som</div>
+        <div class="lesson-goal">Objetivo: usar caneta (BC/SC) e buzzer em sequencia.</div>
         <img class="module-img didactic-img" src="assets_lessons/05_garra_pegar.svg" alt="Pegar objeto">
-        <div class="module-caption">Abrir/fechar garra com som</div>
+        <div class="module-caption">Baixar/subir caneta com som</div>
     </div>
 
     <div class="lesson-card" id="aula-6" data-module="m4" data-aula="Aula 6">
@@ -1882,7 +1853,7 @@
             |           FRENTE DO ROBO                   |
             |                                            |
             |         +----------------+                 |
-            |         |     GARRA      |                 |
+            |         |    CANETA      |                 |
             |         | (Servo1+Servo2)|                 |
             |         +----------------+                 |
             |                |                           |
@@ -1917,8 +1888,8 @@
         <tr><td>Motor 1 Re</td><td>D5</td><td>GPIO14</td><td>Roda esquerda para tras</td></tr>
         <tr><td>Roda direita (frente)</td><td>D1</td><td>GPIO5</td><td>Roda direita para frente</td></tr>
         <tr><td>Motor 2 Re</td><td>D4</td><td>GPIO2</td><td>Roda direita para tras</td></tr>
-        <tr><td>Garra (servo 1)</td><td>D6</td><td>GPIO12</td><td>Garra (servo esquerdo)</td></tr>
-        <tr><td>Braco (servo 2)</td><td>D7</td><td>GPIO13</td><td>Garra (servo direito)</td></tr>
+        <tr><td>Caneta (servo 1)</td><td>D6</td><td>GPIO12</td><td>Controle da caneta</td></tr>
+        <tr><td>Braco (servo 2)</td><td>D7</td><td>GPIO13</td><td>Ajuste de posicao</td></tr>
         <tr><td>D3 (Compartilhado)</td><td>D3</td><td>GPIO0</td><td>Ultra TRIG / Linha Dir / LED Dir</td></tr>
         <tr><td>D8 (Compartilhado)</td><td>D8</td><td>GPIO15</td><td>Ultra ECHO / Linha Esq / LED Esq</td></tr>
         <tr><td>LED/Buzzer</td><td>D2</td><td>GPIO4</td><td>LED externo e buzina</td></tr>
@@ -2210,7 +2181,7 @@
         <tr><td>360 graus</td><td>~880ms</td><td><code>pd 880</code> ou <code>pe 880</code></td></tr>
     </table>
 
-    <h2>Exemplos de Movimento (com pausa de protecao)</h2>
+    <h2>Exemplos de Movimento (com pausa de proteção)</h2>
 
     <h3>Quadrado seguro</h3>
     <div class="shape-diagram">+------+ 
@@ -2219,21 +2190,21 @@
 +------+</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>pf 1000
+        <div class="pje-textarea"><pre>pf 900
 t 50
-pd 220
+pd 200
 t 50
-pf 1000
+pf 900
 t 50
-pd 220
+pd 200
 t 50
-pf 1000
+pf 900
 t 50
-pd 220
+pd 200
 t 50
-pf 1000
+pf 900
 t 50
-pd 220</pre></div>
+pd 200</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -2243,17 +2214,17 @@ pd 220</pre></div>
 /____\</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>pf 1000
+        <div class="pje-textarea"><pre>pf 900
 t 50
-pd 260
+pd 300
 t 50
-pf 1000
+pf 900
 t 50
-pd 260
+pd 300
 t 50
-pf 1000
+pf 900
 t 50
-pd 260</pre></div>
+pd 300</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -2346,48 +2317,48 @@ pd 120</pre></div>
     </div>
 
     <!-- SECAO 7 -->
-    <h1 id="servo">7. Comandos de Servo (Garra) <img class="icon-inline" src="assets_icons/servo.svg" alt="Servo"></h1>
+    <h1 id="servo">7. Comandos de Servo (Caneta) <img class="icon-inline" src="assets_icons/servo.svg" alt="Servo"></h1>
     <div class="mission-header">
         <div>
-            <div class="mission-name">Missao: Garra Colecionadora</div>
-            <div class="mission-goal">Objetivo: Abrir e fechar</div>
-            <div class="mission-reward">Selo: Garra</div>
+            <div class="mission-name">Missao: Controle de Caneta</div>
+            <div class="mission-goal">Objetivo: Baixar e subir caneta</div>
+            <div class="mission-reward">Selo: Caneta</div>
         </div>
-        <div class="mission-badges"><span class="mission-badge">Garra</span></div>
+        <div class="mission-badges"><span class="mission-badge">Caneta</span></div>
     </div>
     <div class="mission-task">
         <div class="mission-task-title">Tarefa da Missao 3 (Modulo 2)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 2</strong></a>.</li>
             <li>Digite: <code>sc</code>, <code>t 100</code>, <code>bc</code>.
-                <div class="task-visual"><img src="assets_full/07_servo_botoes.png" alt="Comandos de garra no modulo 2"></div>
+                <div class="task-visual"><img src="assets_full/07_servo_botoes.png" alt="Comandos de caneta no modulo 2"></div>
             </li>
             <li>Clique em ENVIAR.</li>
-            <li>Observe a garra abrir e fechar.</li>
+            <li>Observe a caneta baixar e subir.</li>
         </ol>
-        <p><strong>Missao concluida:</strong> garra respondeu ao programa digitado.</p>
+        <p><strong>Missao concluida:</strong> caneta respondeu ao programa digitado.</p>
     </div>
-    <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Botoes da garra na PJE">
-    <div class="module-caption">BC = baixa a garra, SC = sobe a garra</div>
+    <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Comandos de caneta na PJE">
+    <div class="module-caption">BC = baixa caneta, SC = sobe caneta</div>
 
     <table>
         <tr><th>Comando</th><th>Descricao</th><th>Angulo</th></tr>
-        <tr><td><code>bc</code></td><td>Baixar/Fechar garra</td><td>10 graus</td></tr>
-        <tr><td><code>sc</code></td><td>Subir/Abrir garra</td><td>170 graus</td></tr>
+        <tr><td><code>bc</code></td><td>Baixar caneta</td><td>10 graus</td></tr>
+        <tr><td><code>sc</code></td><td>Subir caneta</td><td>170 graus</td></tr>
         <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Controle fino servo 1</td><td>0-180 graus</td></tr>
         <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Controle fino servo 2</td><td>0-180 graus</td></tr>
     </table>
 
-    <h3>Exemplo: Pegar objeto</h3>
+    <h3>Exemplo: Traco com caneta</h3>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>sc              # Abre a garra
+        <div class="pje-textarea"><pre>sc
 t 50
-pf 500          # Aproxima do objeto
+pf 500
 t 50
-bc              # Fecha a garra
+bc
 t 50
-pt 500          # Recua com o objeto</pre></div>
+pt 500</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -2422,8 +2393,8 @@ pt 500          # Recua com o objeto</pre></div>
     <h3>Exemplos</h3>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>bu 500          # Bipe de 0.5 segundos
-bu              # Bipe de 800ms (padrao)</pre></div>
+        <div class="pje-textarea"><pre>bu 500
+bu</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -2818,7 +2789,7 @@ sensor off</pre></div>
     <h1 id="velocidades">14. Configuracao de Velocidades (Upgrade 5.2)</h1>
 
     <p>Na versao 5.1, a forma mais previsivel de reduzir a velocidade e usar <strong>tempos menores</strong> nos comandos e pausas <code>t</code> entre movimentos.</p>
-    <p>O ajuste completo de velocidades (movimento, linha e ultrassom) faz parte do <strong>Upgrade 5.2</strong>, descrito na Secao 18.</p>
+    <p>O ajuste completo de velocidades (movimento, linha e ultrassom) faz parte do <strong>Upgrade 5.2</strong>, descrito na Seção 18.</p>
 
     <!-- SECAO 15 -->
     <h1 id="referencia">15. Tabela de Referencia Rapida</h1>
@@ -2840,10 +2811,10 @@ sensor off</pre></div>
         <tr><td rowspan="3">LEDs</td><td><code>ld &lt;ms&gt;</code></td><td>LED direito</td></tr>
         <tr><td><code>le &lt;ms&gt;</code></td><td>LED esquerdo</td></tr>
         <tr><td><code>lde &lt;ms&gt;</code></td><td>Ambos LEDs</td></tr>
-        <tr><td rowspan="4">Garra</td><td><code>bc</code></td><td>Baixar/Fechar</td></tr>
-        <tr><td><code>sc</code></td><td>Subir/Abrir</td></tr>
-        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Garra (servo 1)</td></tr>
-        <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Braco (servo 2)</td></tr>
+        <tr><td rowspan="4">Caneta/Servo</td><td><code>bc</code></td><td>Baixar caneta</td></tr>
+        <tr><td><code>sc</code></td><td>Subir caneta</td></tr>
+        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Servo 1 (ajuste fino)</td></tr>
+        <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Servo 2 (ajuste fino)</td></tr>
         <tr><td>Som</td><td><code>bu &lt;ms&gt;</code></td><td>Buzzer</td></tr>
         <tr><td>Pausa</td><td><code>t &lt;ms&gt;</code></td><td>Pausa silenciosa</td></tr>
         <tr><td rowspan="3">Sensores</td><td><code>sensor linha</code></td><td>Ativa IR</td></tr>
@@ -3038,15 +3009,15 @@ bu 500</pre></div>
     <h2>Coletor de Objetos</h2>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>sc              # Abre garra
+        <div class="pje-textarea"><pre>sc
 t 50
-pf 1500         # Aproxima
+pf 1500
 t 50
-bc              # Pega objeto
+bc
 t 50
-pt 1500         # Recua
+pt 1500
 t 50
-sc              # Solta
+sc
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
@@ -3171,10 +3142,10 @@ bu 500</pre></div>
     </table>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>define_vel 900           # Movimento mais rapido
-define_vel 500           # Movimento mais lento
-define_vel_linha 600     # Linha mais lenta
-define_vel_ultra 700     # Ultra mais lento</pre></div>
+        <div class="pje-textarea"><pre>define_vel 900
+define_vel 500
+define_vel_linha 600
+define_vel_ultra 700</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -3216,7 +3187,7 @@ reset_personalizado</pre>
         <tr><td>PJE</td><td>Plataforma Jabuti Edu - sistema de controle online</td></tr>
         <tr><td>PWM</td><td>Controle de potencia dos motores</td></tr>
         <tr><td>Rampa</td><td>Sistema de aceleracao/desaceleracao suave</td></tr>
-        <tr><td>Servo</td><td>Motor de posicionamento preciso (garra)</td></tr>
+        <tr><td>Servo</td><td>Motor de posicionamento preciso (caneta)</td></tr>
         <tr><td>t (Tempo)</td><td>Comando de pausa silenciosa em milissegundos (ms)</td></tr>
         <tr><td>Ultrassonico (sensor de distancia)</td><td>Sensor que mede distancia por ondas sonoras</td></tr>
         <tr><td>Watchdog</td><td>Sistema que reinicia se travar</td></tr>
@@ -3539,7 +3510,7 @@ reset_personalizado</pre>
     const hint = document.createElement('div');
     hint.id = 'lesson-hint';
     hint.className = 'lesson-hint';
-    hint.textContent = 'Clique no titulo de cada secao para abrir e fechar.';
+    hint.textContent = 'Clique no título de cada seção para abrir e fechar.';
     map.insertAdjacentElement('afterend', hint);
   }
 
@@ -4053,13 +4024,13 @@ reset_personalizado</pre>
     if (studentStepLabel) {
       if (!readUnlocked) {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Use a seta verde ▶ para continuar';
-        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desça ate baixo para ler todas as informacoes desta etapa)';
       } else if (isTaskStep && !sectionTaskState.finished) {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Conclua a tarefa abaixo para continuar';
-        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desça ate baixo para ler todas as informacoes desta etapa)';
       } else {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Use a seta verde ▶ para continuar';
-        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desça ate baixo para ler todas as informacoes desta etapa)';
       }
     }
   }
