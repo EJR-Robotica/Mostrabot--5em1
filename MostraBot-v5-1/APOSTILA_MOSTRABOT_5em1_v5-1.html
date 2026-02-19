@@ -62,6 +62,52 @@
             background: rgba(255,255,255,0.28);
             font-weight: 700;
         }
+        /* Menu categorizado com submenus */
+        .nav-category {
+            margin: 6px 0 2px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(255,255,255,0.12);
+            user-select: none;
+            transition: background 0.15s;
+        }
+        .nav-category:hover { background: rgba(255,255,255,0.22); }
+        .nav-category::after {
+            content: '▾';
+            font-size: 11pt;
+            transition: transform 0.2s;
+        }
+        .nav-category.collapsed::after { transform: rotate(-90deg); }
+        .nav-submenu {
+            max-height: 600px;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+            padding-left: 10px;
+            border-left: 2px solid rgba(255,255,255,0.15);
+            margin-left: 8px;
+        }
+        .nav-submenu.collapsed {
+            max-height: 0;
+        }
+        .nav-submenu a {
+            font-size: 9.5pt;
+            padding: 6px 10px;
+        }
+        .nav-category.active-category {
+            background: rgba(255,255,255,0.32);
+            box-shadow: inset 3px 0 0 #fff;
+        }
+        /* Filtro de conteudo por nivel */
+        .section-hidden {
+            display: none !important;
+        }
         main {
             margin-left: 300px;
             padding: 30px 40px;
@@ -320,16 +366,7 @@
             font-weight: 700;
         }
         
-        .lesson-toggle { cursor: pointer; }
-        .lesson-toggle::after {
-            content: '▼';
-            float: right;
-            font-size: 12pt;
-            color: #1a5276;
-        }
-        .lesson-toggle.collapsed::after { content: '▶'; }
         .lesson-content { margin-bottom: 24px; }
-        .lesson-content.collapsed { display: none; }
         .lesson-hint { font-size: 9pt; color: #555; }
             .mission-task {
             border: 2px dashed #b8d9f5;
@@ -1449,29 +1486,56 @@
 <body>
 
 <nav>
-    <h2>INDICE</h2>
-            <a href="#mapa-jogo">0. Mapa do Jogo</a>
-<a href="#aulas">0. Aulas por Etapas</a>
-<a href="#intro">1. Introducao</a>
-    <a href="#hardware">2. Hardware</a>
-    <a href="#sinais">3. Sinais LED</a>
-    <a href="#primeiros-passos">4. Primeiros Passos</a>
-    <a href="#ligar-robo">4A. Como Ligar o Robo (Bateria + ID)</a>
-    <a href="#movimento">5. Comandos Movimento</a>
-    <a href="#led">6. Comandos LED</a>
-    <a href="#servo">7. Comandos Servo</a>
-    <a href="#buzzer">8. Comando Buzzer</a>
-    <a href="#linha">9. Seguidor de Linha</a>
-    <a href="#ultra">10. Sensor Ultrassonico (sensor de distancia)</a>
-    <a href="#controle">11. Estruturas de Controle</a>
-    <a href="#condicoes">12. Condicoes SE</a>
-    <a href="#calibracao">13. Calibracao Motores</a>
-    <a href="#velocidades">14. Velocidades (Upgrade 5.2)</a>
-    <a href="#referencia">15. Referencia Rapida</a>
-    <a href="#exemplos">16. Exemplos Praticos</a>
-    <a href="#problemas">17. Resolucao Problemas</a>
-    <a href="#upgrade52">18. Upgrade 5.2</a>
-    <a href="#glossario">19. Glossario</a>
+    <h2>MENU</h2>
+
+    <div class="nav-category collapsed" data-submenu="home">Home</div>
+    <div class="nav-submenu collapsed" id="submenu-home">
+        <a href="#mapa-jogo">Mapa do Jogo</a>
+        <a href="#aulas">Aulas por Etapas</a>
+        <a href="#glossario">Glossario</a>
+    </div>
+
+    <div class="nav-category collapsed" data-submenu="iniciante">Iniciante</div>
+    <div class="nav-submenu collapsed" id="submenu-iniciante">
+        <a href="#intro">Introducao</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#sinais">Sinais LED</a>
+        <a href="#primeiros-passos">Primeiros Passos</a>
+        <a href="#ligar-robo">Como Ligar o Robo</a>
+        <a href="#movimento">Comandos de Movimento</a>
+        <a href="#led">Comandos de LED</a>
+    </div>
+
+    <div class="nav-category collapsed" data-submenu="intermediario">Intermediario</div>
+    <div class="nav-submenu collapsed" id="submenu-intermediario">
+        <a href="#servo">Comandos de Servo</a>
+        <a href="#buzzer">Comando Buzzer</a>
+        <a href="#controle">Estruturas de Controle (Repita)</a>
+    </div>
+
+    <div class="nav-category collapsed" data-submenu="avancado">Avancado</div>
+    <div class="nav-submenu collapsed" id="submenu-avancado">
+        <a href="#linha">Seguidor de Linha</a>
+        <a href="#ultra">Sensor Ultrassonico</a>
+        <a href="#condicoes">Condicoes SE</a>
+        <a href="#calibracao">Calibracao Motores</a>
+        <a href="#velocidades">Velocidades (Upgrade 5.2)</a>
+        <a href="#upgrade52">Upgrade 5.2</a>
+    </div>
+
+    <div class="nav-category collapsed" data-submenu="praticas">Praticas</div>
+    <div class="nav-submenu collapsed" id="submenu-praticas">
+        <a href="#praticas-iniciante">Praticas Iniciante</a>
+        <a href="#praticas-intermediario">Praticas Intermediario</a>
+        <a href="#praticas-avancado">Praticas Avancado</a>
+        <a href="#exemplos">Exemplos Completos</a>
+    </div>
+
+    <div class="nav-category collapsed" data-submenu="referencias">Referencias e Problemas</div>
+    <div class="nav-submenu collapsed" id="submenu-referencias">
+        <a href="#referencia">Tabela de Referencia Rapida</a>
+        <a href="#problemas">Resolucao de Problemas</a>
+    </div>
 </nav>
 
 <main>
@@ -1481,42 +1545,14 @@
         <p style="font-size:10pt; margin-top:20px;">Plataforma Jabuti Edu (PJE) | Janeiro 2026</p>
     </div>
 
-    <!-- INDICE NO CORPO (para PDF) -->
-    <div class="indice-box" id="indice">
-        <div class="indice-title">INDICE</div>
-        <ul class="indice-list">
-                                    <li><a href="#mapa-jogo">0. Mapa do Jogo</a></li>
-<li><a href="#aulas">0. Aulas por Etapas</a></li>
-<li><a href="#intro">1. Introducao</a></li>
-            <li><a href="#hardware">2. Hardware</a></li>
-            <li><a href="#sinais">3. Sinais LED</a></li>
-            <li><a href="#primeiros-passos">4. Primeiros Passos</a></li>
-            <li><a href="#ligar-robo">4A. Como Ligar o Robo (Bateria + ID)</a></li>
-            <li><a href="#movimento">5. Comandos Movimento</a></li>
-            <li><a href="#led">6. Comandos LED</a></li>
-            <li><a href="#servo">7. Comandos Servo</a></li>
-            <li><a href="#buzzer">8. Comando Buzzer</a></li>
-            <li><a href="#linha">9. Seguidor de Linha</a></li>
-            <li><a href="#ultra">10. Sensor Ultrassonico (sensor de distancia)</a></li>
-            <li><a href="#controle">11. Estruturas de Controle</a></li>
-            <li><a href="#condicoes">12. Condicoes SE</a></li>
-            <li><a href="#calibracao">13. Calibracao Motores</a></li>
-            <li><a href="#velocidades">14. Velocidades (Upgrade 5.2)</a></li>
-            <li><a href="#referencia">15. Referencia Rapida</a></li>
-            <li><a href="#exemplos">16. Exemplos Praticos</a></li>
-            <li><a href="#problemas">17. Resolucao Problemas</a></li>
-            <li><a href="#upgrade52">18. Upgrade 5.2</a></li>
-            <li><a href="#glossario">19. Glossario</a></li>
-        </ul>
-    </div>
 
-    <h1 id="mapa-jogo">0. Mapa do Jogo (Apostila Gamificada)</h1>
+    <h1 id="mapa-jogo">Mapa do Jogo (Apostila Gamificada)</h1>
 
     <div class="game-hero">
         <div class="sparkle"></div>
         <h2>Missões do MostraBot</h2>
-        <p>Guia rapido por fases: cada missao tem um objetivo simples.</p>
-        <p><strong>Meta:</strong> concluir as missoes na ordem.</p>
+        <p>O professor guia as crianças como um jogo por fases. Cada missão tem um objetivo simples.</p>
+        <p><strong>Meta:</strong> completar as missões e ganhar selos.</p>
         <div class="progress-track"><div class="progress-fill"></div></div>
     </div>
     <div class="learning-hud" id="learning-hud">
@@ -1524,14 +1560,14 @@
             <span class="hud-pill">Missao atual: <span id="hud-missao">Missao 0</span></span>
             <span class="hud-pill">Aula atual: <span id="hud-aula">Aula 1</span></span>
             <span class="hud-pill">Modulo atual: <span id="hud-modulo">Modulo 1</span></span>
-            <span class="hud-pill">Seção: <span id="hud-secao">Mapa do Jogo</span></span>
+            <span class="hud-pill">Secao: <span id="hud-secao">Mapa do Jogo</span></span>
             <span class="hud-pill">Atalhos: A | P | D</span>
         </div>
         <div class="start-steps">
             <section class="step-panel">
                 <span class="step-kicker">Etapa 1</span>
                 <h3>Toque no MostraBot</h3>
-                <p>Clique para abrir uma dica curta.</p>
+                <p>Clique no robô para abrir orientações curtas e tranquilas.</p>
                 <button class="robot-guide-btn" type="button" id="robot-guide-trigger">
                     <img class="robot-hero-img" src="assets_lessons/mostrabot-padrao.png" alt="MostraBot guia da missão">
                     <span>Oi! Clique em mim para receber a dica da fase.</span>
@@ -1540,7 +1576,7 @@
             <section class="step-panel">
                 <span class="step-kicker">Etapa 2</span>
                 <h3>Escolha o modo</h3>
-                <p>Aluno ou Professor.</p>
+                <p>Professor vê tudo. Aluno avança fase por fase.</p>
                 <div class="mode-switch" id="mode-switch">
                     <button class="mode-btn active" type="button" data-mode="aluno">Modo Aluno</button>
                     <button class="mode-btn" type="button" data-mode="professor">Modo Professor</button>
@@ -1551,10 +1587,18 @@
             <section class="step-panel">
                 <span class="step-kicker">Etapa 3</span>
                 <h3>Controle de avanço</h3>
-                <p>Conclua a fase para liberar a proxima.</p>
+                <p>Complete tarefas para liberar a próxima fase.</p>
                 <div class="student-controls" id="student-controls">
+                    <span class="mode-label">Faixa etaria (Aluno):</span>
+                    <select class="age-select" id="age-select">
+                        <option value="6-8">6-8 anos</option>
+                        <option value="9-11" selected>9-11 anos</option>
+                        <option value="12-14">12-14 anos</option>
+                        <option value="15+">15+ anos</option>
+                    </select>
                     <button class="mode-btn" type="button" id="back-stage-btn">Voltar 1 fase</button>
                     <button class="mode-btn" type="button" id="complete-stage-btn">Completar fase atual</button>
+                    <button class="mode-btn" type="button" id="reset-progress-btn">Resetar progresso</button>
                     <span class="hud-pill">Fase liberada: <span id="hud-unlock">0</span>/6</span>
                     <span class="hud-pill">Missoes concluidas: <span id="hud-completed">0</span>/7</span>
                 </div>
@@ -1627,13 +1671,34 @@
         <div class="quest-title">Regra do Jogo</div>
         <p>Somente avance quando a turma concluir a missão anterior. Isso evita confusão.</p>
     </div>
+    <div class="mascot-strip">
+        <div class="mascot-card">
+            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot sorrindo">
+            <div class="mascot-title">MostraBot Feliz :)</div>
+            <div class="mascot-text">"Vamos com calma. Voce consegue!"</div>
+        </div>
+        <div class="mascot-card">
+            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot em desafio">
+            <div class="mascot-title">MostraBot Desafio !</div>
+            <div class="mascot-text">"Hora da tarefa: um passo por vez."</div>
+        </div>
+        <div class="mascot-card">
+            <img src="assets_lessons/mostrabot-padrao.png" alt="MostraBot conquista">
+            <div class="mascot-title">MostraBot Vitoria *</div>
+            <div class="mascot-text">"Missao concluida! Novo selo desbloqueado."</div>
+        </div>
+    </div>
         </div>
     </details>
+    <div class="box box-info">
+        <h3>Sinalizacoes de tranquilidade</h3>
+        <p><strong>Verde:</strong> pode seguir. <strong>Amarelo:</strong> revisar com calma. <strong>Azul:</strong> dica de apoio. O foco e aprender com confianca, passo a passo.</p>
+    </div>
     <!-- SECAO 1 -->
     
     <!-- SECAO AULAS -->
     
-    <h1 id="aulas">0. Plano do Professor (aulas por etapas)</h1>
+    <h1 id="aulas">Plano do Professor (aulas por etapas)</h1>
     <p>Visivel no modo Professor. O aluno segue as missoes guiadas; este bloco e para planejamento docente.</p>
     <div class="prof-checklist" id="prof-checklist">
         <h3>Checklist rapido do professor</h3>
@@ -1670,9 +1735,9 @@
 
     <div class="lesson-card" id="aula-5" data-module="m2" data-aula="Aula 5">
         <div class="lesson-title">Módulo 2 — Aula 5: Caneta e Som</div>
-        <div class="lesson-goal">Objetivo: usar caneta (BC/SC) e buzzer em sequencia.</div>
-        <img class="module-img didactic-img" src="assets_lessons/05_garra_pegar.svg" alt="Pegar objeto">
-        <div class="module-caption">Baixar/subir caneta com som</div>
+        <div class="lesson-goal">Objetivo: usar servo da caneta e buzzer em sequência.</div>
+        <img class="module-img didactic-img" src="assets_lessons/05_garra_pegar.svg" alt="Caneta e servo">
+        <div class="module-caption">Subir/baixar caneta com som</div>
     </div>
 
     <div class="lesson-card" id="aula-6" data-module="m4" data-aula="Aula 6">
@@ -1854,7 +1919,7 @@
             |                                            |
             |         +----------------+                 |
             |         |    CANETA      |                 |
-            |         | (Servo1+Servo2)|                 |
+            |         |   (Servo)     |                 |
             |         +----------------+                 |
             |                |                           |
             |         +------+------+                    |
@@ -1888,8 +1953,7 @@
         <tr><td>Motor 1 Re</td><td>D5</td><td>GPIO14</td><td>Roda esquerda para tras</td></tr>
         <tr><td>Roda direita (frente)</td><td>D1</td><td>GPIO5</td><td>Roda direita para frente</td></tr>
         <tr><td>Motor 2 Re</td><td>D4</td><td>GPIO2</td><td>Roda direita para tras</td></tr>
-        <tr><td>Caneta (servo 1)</td><td>D6</td><td>GPIO12</td><td>Controle da caneta</td></tr>
-        <tr><td>Braco (servo 2)</td><td>D7</td><td>GPIO13</td><td>Ajuste de posicao</td></tr>
+        <tr><td>Caneta (servo)</td><td>D6</td><td>GPIO12</td><td>Servo da caneta</td></tr>
         <tr><td>D3 (Compartilhado)</td><td>D3</td><td>GPIO0</td><td>Ultra TRIG / Linha Dir / LED Dir</td></tr>
         <tr><td>D8 (Compartilhado)</td><td>D8</td><td>GPIO15</td><td>Ultra ECHO / Linha Esq / LED Esq</td></tr>
         <tr><td>LED/Buzzer</td><td>D2</td><td>GPIO4</td><td>LED externo e buzina</td></tr>
@@ -2001,7 +2065,7 @@
 
 
     <!-- SECAO 4A -->
-    <h1 id="ligar-robo">4A. Como Ligar o Robo (Bateria + ID)</h1>
+    <h1 id="ligar-robo">5. Como Ligar o Robo (Bateria + ID)</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Acordar o Robo</div>
@@ -2092,7 +2156,7 @@
     </div>
 
     <!-- SECAO 5 -->
-    <h1 id="movimento">5. Comandos de Movimento <img class="icon-inline" src="assets_icons/dc_motor.svg" alt="Motor"></h1>
+    <h1 id="movimento">6. Comandos de Movimento <img class="icon-inline" src="assets_icons/dc_motor.svg" alt="Motor"></h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Caminho Seguro</div>
@@ -2181,7 +2245,7 @@
         <tr><td>360 graus</td><td>~880ms</td><td><code>pd 880</code> ou <code>pe 880</code></td></tr>
     </table>
 
-    <h2>Exemplos de Movimento (com pausa de proteção)</h2>
+    <h2>Exemplos de Movimento (com pausa de protecao)</h2>
 
     <h3>Quadrado seguro</h3>
     <div class="shape-diagram">+------+ 
@@ -2190,21 +2254,21 @@
 +------+</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>pf 900
+        <div class="pje-textarea"><pre>pf 1000
 t 50
-pd 200
+pd 220
 t 50
-pf 900
+pf 1000
 t 50
-pd 200
+pd 220
 t 50
-pf 900
+pf 1000
 t 50
-pd 200
+pd 220
 t 50
-pf 900
+pf 1000
 t 50
-pd 200</pre></div>
+pd 220</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -2214,17 +2278,17 @@ pd 200</pre></div>
 /____\</div>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>pf 900
+        <div class="pje-textarea"><pre>pf 1000
 t 50
-pd 300
+pd 260
 t 50
-pf 900
+pf 1000
 t 50
-pd 300
+pd 260
 t 50
-pf 900
+pf 1000
 t 50
-pd 300</pre></div>
+pd 260</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -2247,7 +2311,7 @@ pd 120</pre></div>
     </div>
 
     <!-- SECAO 6 -->
-    <h1 id="led">6. Comandos de LED (Olhos) <img class="icon-inline" src="assets_icons/led.svg" alt="LED"></h1>
+    <h1 id="led">7. Comandos de LED (Olhos) <img class="icon-inline" src="assets_icons/led.svg" alt="LED"></h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Olhos que Piscam</div>
@@ -2317,11 +2381,11 @@ pd 120</pre></div>
     </div>
 
     <!-- SECAO 7 -->
-    <h1 id="servo">7. Comandos de Servo (Caneta) <img class="icon-inline" src="assets_icons/servo.svg" alt="Servo"></h1>
+    <h1 id="servo">8. Comandos de Servo (Caneta) <img class="icon-inline" src="assets_icons/servo.svg" alt="Servo"></h1>
     <div class="mission-header">
         <div>
-            <div class="mission-name">Missao: Controle de Caneta</div>
-            <div class="mission-goal">Objetivo: Baixar e subir caneta</div>
+            <div class="mission-name">Missao: Caneta Desenhista</div>
+            <div class="mission-goal">Objetivo: Subir e baixar a caneta</div>
             <div class="mission-reward">Selo: Caneta</div>
         </div>
         <div class="mission-badges"><span class="mission-badge">Caneta</span></div>
@@ -2334,36 +2398,38 @@ pd 120</pre></div>
                 <div class="task-visual"><img src="assets_full/07_servo_botoes.png" alt="Comandos de caneta no modulo 2"></div>
             </li>
             <li>Clique em ENVIAR.</li>
-            <li>Observe a caneta baixar e subir.</li>
+            <li>Observe a caneta subir e descer.</li>
         </ol>
         <p><strong>Missao concluida:</strong> caneta respondeu ao programa digitado.</p>
     </div>
-    <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Comandos de caneta na PJE">
-    <div class="module-caption">BC = baixa caneta, SC = sobe caneta</div>
+    <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Botoes da caneta na PJE">
+    <div class="module-caption">BC = Baixa Caneta, SC = Sobe Caneta</div>
 
     <table>
         <tr><th>Comando</th><th>Descricao</th><th>Angulo</th></tr>
-        <tr><td><code>bc</code></td><td>Baixar caneta</td><td>10 graus</td></tr>
-        <tr><td><code>sc</code></td><td>Subir caneta</td><td>170 graus</td></tr>
-        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Controle fino servo 1</td><td>0-180 graus</td></tr>
-        <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Controle fino servo 2</td><td>0-180 graus</td></tr>
+        <tr><td><code>bc</code></td><td>Baixa Caneta</td><td>10 graus</td></tr>
+        <tr><td><code>sc</code></td><td>Sobe Caneta</td><td>170 graus</td></tr>
+        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Posiciona o servo em angulo especifico</td><td>0-180 graus</td></tr>
     </table>
 
-    <h3>Exemplo: Traco com caneta</h3>
+    <h3>Exemplo: Desenhar e levantar</h3>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>sc
+        <div class="pje-textarea"><pre>bc              # Baixa caneta (comeca a desenhar)
 t 50
-pf 500
+pf 1000         # Move para frente desenhando
 t 50
-bc
+sc              # Sobe caneta (para de desenhar)
 t 50
-pt 500</pre></div>
+pd 220          # Gira
+t 50
+bc              # Baixa caneta novamente
+pf 1000         # Desenha outro traco</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
     <!-- SECAO 8 -->
-    <h1 id="buzzer">8. Comando de Buzzer (Som) <img class="icon-inline" src="assets_icons/buzzer.svg" alt="Buzzer"></h1>
+    <h1 id="buzzer">9. Comando de Buzzer (Som) <img class="icon-inline" src="assets_icons/buzzer.svg" alt="Buzzer"></h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Som do Robo</div>
@@ -2393,13 +2459,13 @@ pt 500</pre></div>
     <h3>Exemplos</h3>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>bu 500
-bu</pre></div>
+        <div class="pje-textarea"><pre>bu 500          # Bipe de 0.5 segundos
+bu              # Bipe de 800ms (padrao)</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
     <!-- SECAO 9 -->
-    <h1 id="linha">9. Seguidor de Linha (segue a faixa) <img class="icon-inline" src="assets_icons/check.svg" alt="Linha"></h1>
+    <h1 id="linha">11. Seguidor de Linha (segue a faixa) <img class="icon-inline" src="assets_icons/check.svg" alt="Linha"></h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Seguir Trilhos</div>
@@ -2509,7 +2575,7 @@ bu 500</pre></div>
     </div>
 
     <!-- SECAO 10 -->
-    <h1 id="ultra">10. Sensor Ultrassonico (sensor de distancia) <img class="icon-inline" src="assets_icons/warning.svg" alt="Ultrassom"></h1>
+    <h1 id="ultra">12. Sensor Ultrassonico (sensor de distancia) <img class="icon-inline" src="assets_icons/warning.svg" alt="Ultrassom"></h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Desvio de Obstaculos</div>
@@ -2620,7 +2686,7 @@ t 500</pre></div>
     </div>
 
     <!-- SECAO 11 -->
-    <h1 id="controle">11. Estruturas de Controle</h1>
+    <h1 id="controle">10. Estruturas de Controle</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Repetir e Reagir</div>
@@ -2700,7 +2766,7 @@ sensor off</pre></div>
     </div>
 
     <!-- SECAO 12 -->
-    <h1 id="condicoes">12. Condicoes para o SE (escolhas)</h1>
+    <h1 id="condicoes">13. Condicoes para o SE (escolhas)</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Entender Condicoes</div>
@@ -2785,7 +2851,7 @@ sensor off</pre></div>
     </div>
 
     <!-- SECAO 13 -->
-    <h1 id="calibracao">13. Calibracao dos Motores</h1>
+    <h1 id="calibracao">14. Calibracao dos Motores</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Deixar Reto</div>
@@ -2819,13 +2885,13 @@ sensor off</pre></div>
     </ol>
 
     <!-- SECAO 14 -->
-    <h1 id="velocidades">14. Configuracao de Velocidades (Upgrade 5.2)</h1>
+    <h1 id="velocidades">15. Configuracao de Velocidades (Upgrade 5.2)</h1>
 
     <p>Na versao 5.1, a forma mais previsivel de reduzir a velocidade e usar <strong>tempos menores</strong> nos comandos e pausas <code>t</code> entre movimentos.</p>
-    <p>O ajuste completo de velocidades (movimento, linha e ultrassom) faz parte do <strong>Upgrade 5.2</strong>, descrito na Seção 18.</p>
+    <p>O ajuste completo de velocidades (movimento, linha e ultrassom) faz parte do <strong>Upgrade 5.2</strong>, descrito na Secao 18.</p>
 
     <!-- SECAO 15 -->
-    <h1 id="referencia">15. Tabela de Referencia Rapida</h1>
+    <h1 id="referencia">Tabela de Referencia Rapida</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Consulta Rapida</div>
@@ -2844,10 +2910,9 @@ sensor off</pre></div>
         <tr><td rowspan="3">LEDs</td><td><code>ld &lt;ms&gt;</code></td><td>LED direito</td></tr>
         <tr><td><code>le &lt;ms&gt;</code></td><td>LED esquerdo</td></tr>
         <tr><td><code>lde &lt;ms&gt;</code></td><td>Ambos LEDs</td></tr>
-        <tr><td rowspan="4">Caneta/Servo</td><td><code>bc</code></td><td>Baixar caneta</td></tr>
-        <tr><td><code>sc</code></td><td>Subir caneta</td></tr>
-        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Servo 1 (ajuste fino)</td></tr>
-        <tr><td><code>servo2 &lt;ang&gt;</code></td><td>Servo 2 (ajuste fino)</td></tr>
+        <tr><td rowspan="3">Caneta</td><td><code>bc</code></td><td>Baixa Caneta</td></tr>
+        <tr><td><code>sc</code></td><td>Sobe Caneta</td></tr>
+        <tr><td><code>servo1 &lt;ang&gt;</code></td><td>Posiciona servo</td></tr>
         <tr><td>Som</td><td><code>bu &lt;ms&gt;</code></td><td>Buzzer</td></tr>
         <tr><td>Pausa</td><td><code>t &lt;ms&gt;</code></td><td>Pausa silenciosa</td></tr>
         <tr><td rowspan="3">Sensores</td><td><code>sensor linha</code></td><td>Ativa IR</td></tr>
@@ -2875,8 +2940,406 @@ sensor off</pre></div>
         <tr><td>Tempo Giro</td><td>200ms</td></tr>
     </table>
 
+    <!-- ============================================= -->
+    <!-- SECAO PRATICAS - Codigos para testar e aprender -->
+    <!-- ============================================= -->
+
+    <h1 id="praticas-iniciante">Praticas - Nivel Iniciante</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Praticas Iniciante</div>
+            <div class="mission-goal">Objetivo: Testar comandos basicos de movimento e LEDs</div>
+            <div class="mission-reward">Selo: Primeiro Codigo</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Iniciante</span></div>
+    </div>
+
+    <div class="box box-info">
+        <p><strong>Para alunos e professores:</strong> Copie cada codigo abaixo e cole na PJE (Modulo 2 ou 4). Teste um de cada vez e observe o que o robo faz.</p>
+    </div>
+
+    <h2>Pratica 1: Primeiro movimento</h2>
+    <p>O robo anda para frente e faz um bipe. Ideal para testar se esta tudo funcionando.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>pf 1000
+bu 200</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 2: Ida e volta</h2>
+    <p>O robo vai para frente, para, e volta para tras.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>pf 1500
+t 50
+pt 1500
+bu 300</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 3: Girando no lugar</h2>
+    <p>O robo gira para a direita e depois para a esquerda.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>pd 500
+t 50
+pe 500
+bu 200</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 4: Quadrado simples</h2>
+    <p>O robo faz um quadrado: frente, gira, frente, gira... 4 vezes.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>pf 1000
+t 50
+pd 220
+t 50
+pf 1000
+t 50
+pd 220
+t 50
+pf 1000
+t 50
+pd 220
+t 50
+pf 1000
+t 50
+pd 220
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 5: Piscando os olhos</h2>
+    <p>O robo pisca os LEDs (olhos) alternando direita e esquerda. Lembre: precisa de <code>sensor off</code> antes.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+ld 500
+le 500
+ld 300
+le 300
+lde 1000
+bu 200</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 6: Movimento com feedback visual</h2>
+    <p>O robo anda e pisca os olhos para indicar o que esta fazendo.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+pf 1000
+ld 200
+t 50
+pd 300
+le 200
+t 50
+pf 1000
+lde 500
+bu 300</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <!-- PRATICAS INTERMEDIARIO -->
+    <h1 id="praticas-intermediario">Praticas - Nivel Intermediario</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Praticas Intermediario</div>
+            <div class="mission-goal">Objetivo: Usar servo, buzzer e estrutura REPITA</div>
+            <div class="mission-reward">Selo: Programador</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Intermediario</span></div>
+    </div>
+
+    <h2>Pratica 7: Usando o buzzer</h2>
+    <p>O robo faz sons curtos e longos como um codigo morse.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>bu 100
+bu 100
+bu 500
+bu 100
+bu 100
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 8: Usando a caneta (servo)</h2>
+    <p>O robo baixa a caneta, avanca desenhando, sobe a caneta e volta.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sc
+t 50
+pf 1500
+t 50
+bc
+t 50
+bu 200
+pt 1500
+t 50
+sc
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 9: Caneta com posicoes personalizadas</h2>
+    <p>Movimenta o servo da caneta em posicoes diferentes para entender os angulos.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>servo1 0
+t 50
+servo1 45
+t 50
+servo1 90
+t 50
+servo1 135
+t 50
+servo1 180
+t 50
+servo1 90
+bu 200</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 10: Quadrado com REPITA</h2>
+    <p>Faz o mesmo quadrado, mas usando apenas 4 linhas com o comando REPITA.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>repita 4
+  pf 1000
+  t 50
+  pd 220
+  t 50
+fim repita
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 11: Triangulo com REPITA</h2>
+    <p>Faz um triangulo girando 120 graus (aprox. 280ms) a cada lado.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>repita 3
+  pf 1200
+  t 50
+  pd 280
+  t 50
+fim repita
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 12: Danca do robo (REPITA + LEDs + Buzzer)</h2>
+    <p>O robo faz uma danca com movimento, LEDs e sons.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+repita 3
+  pf 500
+  ld 200
+  t 50
+  pd 300
+  le 200
+  t 50
+  pt 500
+  lde 300
+  bu 100
+  t 50
+  pe 300
+  t 50
+fim repita
+lde 1000
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 13: Estrela (5 pontas)</h2>
+    <p>Tenta desenhar uma estrela com 5 lados e giros maiores.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 2 / Modulo 4</div>
+        <div class="pje-textarea"><pre>repita 5
+  pf 1500
+  t 50
+  pd 400
+  t 50
+fim repita
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <!-- PRATICAS AVANCADO -->
+    <h1 id="praticas-avancado">Praticas - Nivel Avancado</h1>
+    <div class="mission-header">
+        <div>
+            <div class="mission-name">Praticas Avancado</div>
+            <div class="mission-goal">Objetivo: Usar sensores, condicoes SE e comportamento autonomo</div>
+            <div class="mission-reward">Selo: Mestre Robotica</div>
+        </div>
+        <div class="mission-badges"><span class="mission-badge">Avancado</span></div>
+    </div>
+
+    <div class="box box-warning">
+        <p><strong>Lembrete:</strong> Para usar sensores, conecte-os APOS o robo ligar e o LED piscar 2x (WiFi OK). Use <code>sensor linha</code> ou <code>sensor ultra</code> para ativar o sensor desejado.</p>
+    </div>
+
+    <h2>Pratica 14: Seguidor de linha basico</h2>
+    <p>O robo segue uma linha preta no chao. Coloque o robo sobre a pista antes de enviar.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor linha
+repita 200
+  seguir-linha 100
+  t 50
+fim repita
+sensor off
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 15: Seguidor de linha com LEDs nas curvas</h2>
+    <p>Igual ao anterior, mas pisca o LED do lado em que detecta a curva.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor linha
+repita 200
+  seguir-linha 100
+  t 50
+  se sensord
+    ld 100
+  fim se
+  se sensore
+    le 100
+  fim se
+fim repita
+sensor off
+lde 500
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 16: Seguidor com alerta de cruzamento</h2>
+    <p>Se o robo detecta cruzamento (ambos sensores na linha), faz bipe e pisca.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor linha
+repita 200
+  seguir-linha 80
+  t 50
+  se perdeu
+    bu 200
+    lde 300
+  fim se
+fim repita
+sensor off
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 17: Desvio de obstaculos basico</h2>
+    <p>O robo anda para frente e desvia de obstaculos usando o sensor de distancia.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor ultra
+repita 50
+  seguir-ultra 2000
+  t 50
+fim repita
+sensor off
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 18: Desvio com alerta visual e sonoro</h2>
+    <p>Quando detecta obstaculo, o robo recua, pisca os LEDs e faz bipe antes de desviar.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor ultra
+repita 40
+  se dist 20
+    bu 200
+    lde 300
+    pt 300
+    t 50
+    pd 300
+    t 50
+  fim se
+  pf 300
+  t 50
+fim repita
+sensor off
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 19: Robo guarda (patrulha e detecta)</h2>
+    <p>O robo patrulha em quadrado e se detecta algo perto, alerta com som e luz.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor ultra
+repita 8
+  pf 1000
+  t 50
+  se dist 25
+    bu 500
+    lde 500
+    pt 500
+    t 50
+  fim se
+  pd 220
+  t 50
+fim repita
+sensor off
+bu 1000</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 20: Desafio completo (Linha + Caneta + Buzzer)</h2>
+    <p>O robo segue a linha, e quando detecta cruzamento, baixa a caneta (marca o ponto) e faz bipe.</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor linha
+sc
+repita 150
+  seguir-linha 80
+  t 50
+  se perdeu
+    bu 200
+    bc
+    lde 500
+    sc
+  fim se
+fim repita
+sensor off
+bu 500</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
+    <h2>Pratica 21: REPITA dentro de REPITA (loops aninhados)</h2>
+    <p>O robo faz 3 quadrados seguidos. Demonstra loops aninhados (maximo 3 niveis).</p>
+    <div class="pje-example">
+        <div class="pje-label">Modulo 4</div>
+        <div class="pje-textarea"><pre>sensor off
+repita 3
+  repita 4
+    pf 800
+    t 50
+    pd 220
+    t 50
+  fim repita
+  lde 500
+  bu 200
+  pe 300
+  t 50
+fim repita
+bu 1000</pre></div>
+        <div class="pje-send">ENVIAR</div>
+    </div>
+
     <!-- SECAO 16 -->
-    <h1 id="exemplos">16. Exemplos Praticos Completos</h1>
+    <h1 id="exemplos">Exemplos Praticos Completos</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Programas Completos</div>
@@ -3039,18 +3502,17 @@ bu 500</pre></div>
         <p><strong>Legenda rapida:</strong> <code>distm 15</code> = distancia &gt;= 15 <strong>cm</strong> (caminho livre) | combina desvio e avance</p>
     </div>
 
-    <h2>Coletor de Objetos</h2>
+    <h2>Desenho com Caneta</h2>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>sc
+        <div class="pje-textarea"><pre>bc              # Baixa caneta (comeca a desenhar)
 t 50
-pf 1500
+pf 1500         # Desenha uma linha
 t 50
-bc
+sc              # Sobe caneta (para de desenhar)
 t 50
-pt 1500
+pt 1500         # Volta ao inicio
 t 50
-sc
 bu 500</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
@@ -3079,7 +3541,7 @@ bu 500</pre></div>
     </div>
 
     <!-- SECAO 17 -->
-    <h1 id="problemas">17. Resolucao de Problemas</h1>
+    <h1 id="problemas">Resolucao de Problemas</h1>
 
     <div class="box box-info">
         <h3>Calma, isso e normal</h3>
@@ -3145,7 +3607,7 @@ bu 500</pre></div>
     </div>
 
     <!-- SECAO 18 -->
-    <h1 id="upgrade52">18. Upgrade 5.2 - Novas Funcoes (Opcional)</h1>
+    <h1 id="upgrade52">16. Upgrade 5.2 - Novas Funcoes (Opcional)</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Recursos Extras</div>
@@ -3175,10 +3637,10 @@ bu 500</pre></div>
     </table>
     <div class="pje-example">
         <div class="pje-label">Modulo 2/4</div>
-        <div class="pje-textarea"><pre>define_vel 900
-define_vel 500
-define_vel_linha 600
-define_vel_ultra 700</pre></div>
+        <div class="pje-textarea"><pre>define_vel 900           # Movimento mais rapido
+define_vel 500           # Movimento mais lento
+define_vel_linha 600     # Linha mais lenta
+define_vel_ultra 700     # Ultra mais lento</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
@@ -3196,7 +3658,7 @@ reset_personalizado</pre>
     <p><strong>Recomendacao para professores:</strong> se o foco for labirintos avancados e navegacao autonoma mais inteligente, vale solicitar o upgrade 5.2.</p>
 
     <!-- SECAO 19 -->
-    <h1 id="glossario">19. Glossario</h1>
+    <h1 id="glossario">Glossario</h1>
     <div class="mission-header">
         <div>
             <div class="mission-name">Missao: Palavras Simples</div>
@@ -3266,6 +3728,146 @@ reset_personalizado</pre>
 
 
 <script>
+/* ===== Menu com filtro de conteudo por nivel ===== */
+(function() {
+  /* Mapa: secao id -> categoria */
+  var sectionToCategory = {
+    'mapa-jogo': 'home', 'aulas': 'home', 'glossario': 'home',
+    'intro': 'iniciante', 'hardware': 'iniciante', 'sinais': 'iniciante', 'primeiros-passos': 'iniciante',
+    'ligar-robo': 'iniciante', 'movimento': 'iniciante', 'led': 'iniciante',
+    'servo': 'intermediario', 'buzzer': 'intermediario', 'controle': 'intermediario',
+    'linha': 'avancado', 'ultra': 'avancado', 'condicoes': 'avancado', 'calibracao': 'avancado',
+    'velocidades': 'avancado', 'upgrade52': 'avancado',
+    'praticas-iniciante': 'praticas', 'praticas-intermediario': 'praticas', 'praticas-avancado': 'praticas', 'exemplos': 'praticas',
+    'referencia': 'referencias', 'problemas': 'referencias'
+  };
+
+  var activeCategory = null;
+
+  /* Mostra apenas secoes da categoria selecionada */
+  function filterSections(catName) {
+    var main = document.querySelector('main');
+    if (!main) return;
+
+    /* Banner sempre visivel */
+    var banner = main.querySelector('.header-banner');
+
+    /* Pegar todas as h1 que sao secoes */
+    var allH1s = Array.from(main.querySelectorAll('h1[id]'));
+
+    allH1s.forEach(function(h1) {
+      var sectionId = h1.id;
+      var belongsTo = sectionToCategory[sectionId];
+      var shouldShow = !catName || belongsTo === catName;
+
+      /* Esconder/mostrar o h1 */
+      h1.classList.toggle('section-hidden', !shouldShow);
+
+      /* Esconder/mostrar o lesson-content que vem logo depois (se existir) */
+      var next = h1.nextElementSibling;
+      if (next && next.classList.contains('lesson-content')) {
+        next.classList.toggle('section-hidden', !shouldShow);
+      }
+    });
+  }
+
+  /* Destacar categoria ativa no menu */
+  function setActiveCategory(catName) {
+    document.querySelectorAll('.nav-category').forEach(function(c) {
+      c.classList.toggle('active-category', c.getAttribute('data-submenu') === catName);
+    });
+  }
+
+  /* Toggle submenu + filtrar conteudo ao clicar na categoria */
+  document.querySelectorAll('.nav-category').forEach(function(cat) {
+    var targetId = 'submenu-' + cat.getAttribute('data-submenu');
+    var submenu = document.getElementById(targetId);
+    if (!submenu) return;
+
+    cat.addEventListener('click', function() {
+      var catName = cat.getAttribute('data-submenu');
+      var wasActive = activeCategory === catName;
+
+      /* Fechar todos os submenus primeiro */
+      document.querySelectorAll('.nav-category').forEach(function(c) {
+        c.classList.add('collapsed');
+      });
+      document.querySelectorAll('.nav-submenu').forEach(function(s) {
+        s.classList.add('collapsed');
+      });
+
+      if (wasActive) {
+        /* Clicou na mesma: desativa filtro, mostra tudo */
+        activeCategory = null;
+        filterSections(null);
+        setActiveCategory(null);
+      } else {
+        /* Ativa esta categoria */
+        activeCategory = catName;
+        cat.classList.remove('collapsed');
+        submenu.classList.remove('collapsed');
+        filterSections(catName);
+        setActiveCategory(catName);
+      }
+    });
+  });
+
+  /* Ao clicar num link dentro do submenu, filtra pela categoria e rola ate a secao */
+  document.querySelectorAll('.nav-submenu a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var href = link.getAttribute('href');
+      if (!href) return;
+      var targetId = href.replace('#', '');
+      var catName = sectionToCategory[targetId];
+      if (catName) {
+        activateCategoryByName(catName);
+      }
+      /* Scroll suave ate o elemento */
+      var targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        setTimeout(function() {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+      /* Atualizar hash sem disparar hashchange */
+      history.pushState(null, '', '#' + targetId);
+    });
+  });
+
+  /* Ativa uma categoria programaticamente */
+  function activateCategoryByName(catName) {
+    if (!catName) return;
+    activeCategory = catName;
+    filterSections(catName);
+    setActiveCategory(catName);
+    /* Fechar todos e abrir so o da categoria */
+    document.querySelectorAll('.nav-category').forEach(function(c) { c.classList.add('collapsed'); });
+    document.querySelectorAll('.nav-submenu').forEach(function(s) { s.classList.add('collapsed'); });
+    var submenu = document.getElementById('submenu-' + catName);
+    var cat = submenu ? submenu.previousElementSibling : null;
+    if (submenu) submenu.classList.remove('collapsed');
+    if (cat) cat.classList.remove('collapsed');
+  }
+
+  /* Ao mudar hash via navegacao, ativar a categoria correspondente */
+  function activateFromHash() {
+    var hash = window.location.hash.replace('#', '');
+    var catName = hash ? sectionToCategory[hash] : null;
+    activateCategoryByName(catName || 'home');
+  }
+  window.addEventListener('hashchange', activateFromHash);
+
+  /* Expor para ser chamado apos lesson-content wrapping */
+  window._mostrabot_activateHome = function() {
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+    activateCategoryByName('home');
+    window.scrollTo(0, 0);
+  };
+})();
+
 (function() {
   const main = document.querySelector('main');
   if (!main) return;
@@ -3345,6 +3947,9 @@ reset_personalizado</pre>
     velocidades: { name: 'Missao 6', module: 'm4', order: 6 },
     referencia: { name: 'Missao 6', module: 'm4', order: 6 },
     exemplos: { name: 'Missao 6', module: 'm4', order: 6 },
+    'praticas-iniciante': { name: 'Praticas', module: 'm1', order: 6 },
+    'praticas-intermediario': { name: 'Praticas', module: 'm2', order: 6 },
+    'praticas-avancado': { name: 'Praticas', module: 'm4', order: 6 },
     problemas: { name: 'Missao 6', module: 'm4', order: 6 },
     upgrade52: { name: 'Missao 6', module: 'm4', order: 6 },
     glossario: { name: 'Missao 6', module: 'm4', order: 6 }
@@ -3504,28 +4109,25 @@ reset_personalizado</pre>
   function openSectionFromTarget(targetEl) {
     if (!targetEl) return;
     if (targetEl.tagName === 'H1') {
+      targetEl.classList.remove('section-hidden');
       const ownContent = targetEl.nextElementSibling;
       if (ownContent && ownContent.classList.contains('lesson-content')) {
-        ownContent.classList.remove('collapsed');
-        targetEl.classList.remove('collapsed');
+        ownContent.classList.remove('section-hidden');
       }
       return;
     }
     const content = targetEl.closest('.lesson-content');
     if (!content) return;
+    content.classList.remove('section-hidden');
     const title = content.previousElementSibling;
-    if (!title || title.tagName !== 'H1') return;
-    content.classList.remove('collapsed');
-    title.classList.remove('collapsed');
+    if (title && title.tagName === 'H1') title.classList.remove('section-hidden');
   }
 
+  // Wrap content between h1s into lesson-content divs (for section filtering)
   headers.forEach((h1) => {
     if (skipIds.has(h1.id)) return;
-    if (h1.classList.contains('lesson-toggle')) return;
+    if (h1.nextElementSibling && h1.nextElementSibling.classList.contains('lesson-content')) return;
 
-    h1.classList.add('lesson-toggle');
-
-    // Collect nodes until next h1
     const content = document.createElement('div');
     content.className = 'lesson-content';
     let node = h1.nextElementSibling;
@@ -3537,34 +4139,10 @@ reset_personalizado</pre>
     h1.insertAdjacentElement('afterend', content);
   });
 
-  // Add hint after map
-  const map = document.getElementById('mapa-jogo');
-  if (map && !document.getElementById('lesson-hint')) {
-    const hint = document.createElement('div');
-    hint.id = 'lesson-hint';
-    hint.className = 'lesson-hint';
-    hint.textContent = 'Clique no título de cada seção para abrir e fechar.';
-    map.insertAdjacentElement('afterend', hint);
+  // Agora que lesson-content existe, ativar Home e ir ao topo
+  if (typeof window._mostrabot_activateHome === 'function') {
+    window._mostrabot_activateHome();
   }
-
-  // Collapse all except map, aulas e intro
-  headers.forEach((h1) => {
-    if (h1.id === 'mapa-jogo' || h1.id === 'aulas' || h1.id === 'intro') return;
-    const content = h1.nextElementSibling;
-    if (content && content.classList.contains('lesson-content')) {
-      content.classList.add('collapsed');
-      h1.classList.add('collapsed');
-    }
-  });
-
-  main.addEventListener('click', (e) => {
-    const h1 = e.target.closest('.lesson-toggle');
-    if (!h1) return;
-    const content = h1.nextElementSibling;
-    if (!content || !content.classList.contains('lesson-content')) return;
-    const isCollapsed = content.classList.toggle('collapsed');
-    h1.classList.toggle('collapsed', isCollapsed);
-  });
 
   function enhanceCodeExamples() {
     const blocks = Array.from(document.querySelectorAll('.pje-example'));
@@ -4057,13 +4635,13 @@ reset_personalizado</pre>
     if (studentStepLabel) {
       if (!readUnlocked) {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Use a seta verde ▶ para continuar';
-        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desça ate baixo para ler todas as informacoes desta etapa)';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
       } else if (isTaskStep && !sectionTaskState.finished) {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Conclua a tarefa abaixo para continuar';
-        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desça ate baixo para ler todas as informacoes desta etapa)';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
       } else {
         studentStepLabel.textContent = 'Passo ' + String(current + 1) + ' de ' + String(maxIdx + 1) + ' - Use a seta verde ▶ para continuar';
-        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desça ate baixo para ler todas as informacoes desta etapa)';
+        studentStepLabel.textContent += ' (se a seta estiver cinza ao lado, desca ate baixo para ler todas as informacoes dessa etapa)';
       }
     }
   }
