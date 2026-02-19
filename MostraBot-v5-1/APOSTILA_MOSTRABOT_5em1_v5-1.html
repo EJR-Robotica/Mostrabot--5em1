@@ -262,15 +262,16 @@
             font-weight: 700;
         }
         .shape-diagram {
-            background: #f7f9fb;
-            border: 2px dashed #b8d9f5;
-            border-radius: 8px;
-            padding: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 9pt;
-            color: #2c3e50;
-            white-space: pre;
-            margin: 10px 0;
+            background: #fff3cd;
+            border: 3px solid #f0ad4e;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12pt;
+            font-weight: 700;
+            color: #856404;
+            white-space: pre-wrap;
+            margin: 14px 0;
         }
         .header-banner {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -2443,16 +2444,12 @@ bu 300</pre></div>
         <div class="mission-task-title">Tarefa da Missao 3 (Modulo 2)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 2</strong></a>.</li>
-            <li>Digite: <code>sc</code>, <code>t 100</code>, <code>bc</code>.
-                <div class="task-visual"><img src="assets_full/07_servo_botoes.png" alt="Comandos de caneta no modulo 2"></div>
-            </li>
+            <li>Digite: <code>sc</code>, <code>t 100</code>, <code>bc</code>.</li>
             <li>Clique em ENVIAR.</li>
             <li>Observe a caneta subir e descer.</li>
         </ol>
         <p><strong>Missao concluida:</strong> caneta respondeu ao programa digitado.</p>
     </div>
-    <img class="module-img" src="assets_full/07_servo_botoes.png" alt="Botoes da caneta na PJE">
-    <div class="module-caption">BC = Baixa Caneta, SC = Sobe Caneta</div>
 
     <table>
         <tr><th>Comando</th><th>Descricao</th><th>Angulo</th></tr>
@@ -2491,15 +2488,11 @@ pf 1000</pre></div>
         <div class="mission-task-title">Tarefa extra (Modulo 2)</div>
         <ol>
             <li>Acesse o <a href="https://pje.ejrrobotica.com.br/modulo2.php" target="_blank" rel="noopener noreferrer"><strong>Modulo 2</strong></a>.</li>
-            <li>Digite <code>bu 300</code> e envie.
-                <div class="task-visual"><img src="assets_full/08_buzzer_botao.png" alt="Botao de buzzer no modulo 2"></div>
-            </li>
+            <li>Digite <code>bu 300</code> e envie.</li>
             <li>Repita com <code>bu 100</code>.</li>
         </ol>
         <p><strong>Concluido:</strong> aluno percebeu relacao entre tempo e duracao do som.</p>
     </div>
-    <img class="module-img" src="assets_full/08_buzzer_botao.png" alt="Botao BU na PJE">
-    <div class="module-caption">BU faz o bip do robo</div>
 
     <pre>bu &lt;tempo_em_ms&gt;</pre>
     <p>Frequencia: <strong>2000 Hz</strong> | Padrao: <strong>800ms</strong></p>
@@ -3279,28 +3272,7 @@ bu 1000</pre></div>
         <div class="pje-send">ENVIAR</div>
     </div>
 
-    <h2>Pratica 18: Desafio completo (Linha + Caneta + Buzzer)</h2>
-    <p>O robo segue a linha, e quando detecta cruzamento, baixa a caneta (marca o ponto) e faz bipe.</p>
-    <div class="pje-example">
-        <div class="pje-label">Modulo 4</div>
-        <div class="pje-textarea"><pre>sensor linha
-sc
-repita 150
-seguir-linha 80
-t 50
-se perdeu
-bu 200
-bc
-lde 500
-sc
-fim se
-fim repita
-sensor off
-bu 500</pre></div>
-        <div class="pje-send">ENVIAR</div>
-    </div>
-
-    <h2>Pratica 19: REPITA dentro de REPITA (loops aninhados)</h2>
+    <h2>Pratica 18: REPITA dentro de REPITA (loops aninhados)</h2>
     <p>O robo faz 3 quadrados seguidos. Demonstra loops aninhados (maximo 3 niveis).</p>
     <div class="pje-example">
         <div class="pje-label">Modulo 4</div>
